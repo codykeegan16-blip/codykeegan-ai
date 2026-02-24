@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard // The Lab</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            // Safelist ensures Tailwind CDN generates these classes even though they are injected later via JavaScript
+            safelist: ['bg-acid', 'bg-cyan', 'bg-magenta', 'text-black', 'text-white'],
+            theme: {
+                extend: {
+                    fontFamily: {
+                        loud: ['Oswald', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        acid: '#ccff00',
+                        cyan: '#00ffff',
+                        magenta: '#ff00ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background-color: #ccff00; color: #000; }
+        .chaos-grid {
+            background-image: radial-gradient(#333 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .tool-card:hover {
+            box-shadow: 10px 10px 0px #ccff00;
+            transform: translate(-5px, -5px);
+        }
+        /* Custom scrollbar for idea boxes if content gets long */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #111; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00ffff; }
+    </style>
+</head>
+<body class="font-mono antialiased chaos-grid selection:bg-acid selection:text-black min-h-screen flex flex-col">
+
+    <!-- ================= HEADER ================= -->
+    <header class="border-b-4 border-white bg-black sticky top-0 z-50">
+        <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <div class="w-16 h-16 border-2 border-acid overflow-hidden bg-gray-800">
+                    <img src="IMAGE.jpg" alt="Cody Keegan" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all">
+                </div>
+                <div>
+                    <h1 class="font-loud text-2xl md:text-4xl uppercase tracking-tighter">The <span class="text-acid">Dashboard</span></h1>
+                    <p class="text-xs text-gray-500 hidden md:block uppercase tracking-widest">Operator: Cody Keegan // Access: Level_01</p>
+                </div>
+            </div>
+            <a href="index.html" class="font-mono text-sm border-2 border-white px-4 py-2 hover:bg-white hover:text-black transition-all">LOGOUT_</a>
+        </div>
+    </header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="max-w-[1600px] mx-auto px-6 py-12 flex-grow w-full">
+        
+        <div class="mb-20">
+            <h2 class="font-loud text-5xl md:text-7xl uppercase leading-none mb-4">Connection <span class="text-cyan">Established</span>.</h2>
+            <p class="text-xl text-gray-400 max-w-2xl">The tools below are the current building blocks of the automated commerce machines. Break them, stack them, or ignore them.</p>
+        </div>
+
+        <!-- SECTION 1: DYNAMIC TOOLS GRID -->
+        <section class="mb-32">
+            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-8">
+                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Active Stack</span></h2>
+                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: tools.json</span>
+            </div>
+            
+            <!-- Tools get injected here by Javascript -->
+            <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p class="text-gray-500 animate-pulse">Fetching tool data...</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: DYNAMIC IDEA FRAMEWORKS -->
+        <section class="mb-32">
+            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-8">
+                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Frameworks</span></h2>
+                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: ideas.json</span>
+            </div>
+
+            <!-- Ideas get injected here by Javascript -->
+            <div id="ideas-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <p class="text-gray-500 animate-pulse">Fetching framework configurations...</p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SUBMIT YOUR IDEA (STATIC FORM) -->
+        <section class="mb-16">
+            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-8">
+                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">03 // <span class="text-magenta">Transmit</span></h2>
+                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Status: Listening</span>
+            </div>
+
+            <div class="max-w-4xl border-4 border-white bg-black relative p-8 md:p-12">
+                <!-- Decorative terminal tag -->
+                <div class="absolute -top-4 left-8 bg-black px-4 border border-white font-mono text-magenta text-sm tracking-widest">
+                    INPUT_REQUIRED
+                </div>
+
+                <form onsubmit="submitIdea(event)" class="space-y-8 mt-4">
+                    <div>
+                        <label for="ideaTitle" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Protocol Name // Title</label>
+                        <input type="text" id="ideaTitle" required placeholder="e.g., Automated Newsletter Agent" 
+                               class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
+                    </div>
+                    
+                    <div>
+                        <label for="ideaDesc" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Hypothesis // Description</label>
+                        <textarea id="ideaDesc" required rows="4" placeholder="What does it do? How do the tools connect?" 
+                                  class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all custom-scrollbar"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="ideaLinks" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Reference Data // Links (Optional)</label>
+                        <input type="text" id="ideaLinks" placeholder="https://..." 
+                               class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
+                    </div>
+                    
+                    <button type="submit" class="bg-white text-black font-loud uppercase text-3xl px-8 py-4 hover:bg-magenta hover:text-white transition-colors w-full md:w-auto border-2 border-transparent hover:border-white">
+                        Transmit Data ->
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="border-t-2 border-gray-900 bg-black py-10 px-6 text-center mt-auto">
+        <p class="text-gray-600 text-xs uppercase tracking-[0.3em] mb-4">CodyKeegan.AI // Build the weird things.</p>
+        <div class="flex justify-center gap-6 font-mono text-xs text-gray-500 uppercase tracking-widest">
+            <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate</a>
+            <a href="terms.html" class="hover:text-cyan transition-colors">Terms</a>
+            <a href="privacy.html" class="hover:text-magenta transition-colors">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTools();
+            loadIdeas();
+        });
+
+        // Fetch and Render Section 1: Tools
+        async function loadTools() {
+            const container = document.getElementById('tools-container');
+            try {
+                const response = await fetch('tools.json');
+                if (!response.ok) throw new Error('File not found');
+                
+                const tools = await response.json();
+                
+                container.innerHTML = tools.map(tool => `
+                    <div class="tool-card border-4 border-white p-6 bg-black transition-all duration-200 flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="flex items-center gap-4">
+                                <img src="${tool.logoUrl}" alt="${tool.name} Logo" class="w-12 h-12 object-cover border-2 border-gray-700 bg-gray-900" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'40\\' height=\\'40\\'><rect width=\\'40\\' height=\\'40\\' fill=\\'%23222\\'/><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23666\\' font-family=\\'monospace\\' font-size=\\'10\\' text-anchor=\\'middle\\' dy=\\'.3em\\'>IMG</text></svg>'">
+                                <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-xs font-bold px-2 py-1 uppercase tracking-widest">${tool.status}</span>
+                            </div>
+                            <span class="text-gray-600 font-bold font-mono text-sm">#${tool.id}</span>
+                        </div>
+                        <h3 class="font-loud text-3xl uppercase mb-2">
+                            <a href="${tool.url}" target="_blank" class="hover:text-acid transition-colors">${tool.name}</a>
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-8 flex-grow leading-relaxed">${tool.description}</p>
+                        <a href="${tool.url}" target="_blank" class="text-acid hover:underline font-bold uppercase tracking-widest text-sm mt-auto w-max">Open Docs -></a>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error("Error loading tools.json:", error);
+                container.innerHTML = `
+                    <div class="border-2 border-dashed border-red-900 bg-red-900/10 p-6 text-red-500 col-span-full">
+                        > ERROR: Failed to load tools.json. Please ensure the file exists in the root directory.
+                    </div>
+                `;
+            }
+        }
+
+        // Fetch and Render Section 2: Ideas
+        async function loadIdeas() {
+            const container = document.getElementById('ideas-container');
+            try {
+                const response = await fetch('ideas.json');
+                if (!response.ok) throw new Error('File not found');
+                
+                const ideas = await response.json();
+                
+                container.innerHTML = ideas.map(idea => `
+                    <div class="border-2 border-dashed border-gray-700 p-8 bg-black hover:border-cyan hover:bg-gray-900/30 transition-all duration-300 flex flex-col h-full relative group">
+                        
+                        <!-- Decorative Terminal Element -->
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-cyan text-xs font-mono animate-pulse">SYS_READY</span>
+                        </div>
+
+                        <h3 class="font-mono font-bold text-2xl text-cyan mb-4">_${idea.title}</h3>
+                        <p class="text-gray-400 font-mono text-sm leading-loose mb-8 flex-grow">${idea.description}</p>
+                        
+                        <div class="border-t border-dashed border-gray-800 pt-6 mt-auto">
+                            <p class="text-xs text-gray-600 uppercase tracking-[0.2em] mb-4">Required_Stack:</p>
+                            <div class="flex flex-wrap gap-3">
+                                ${idea.tools.map(t => `
+                                    <a href="${t.url}" target="_blank" class="text-xs font-mono text-gray-300 bg-gray-900 border border-gray-700 px-3 py-1.5 hover:border-cyan hover:text-cyan transition-colors">
+                                        ${t.name}
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error("Error loading ideas.json:", error);
+                container.innerHTML = `
+                    <div class="border-2 border-dashed border-red-900 bg-red-900/10 p-6 text-red-500 col-span-full">
+                        > ERROR: Failed to load ideas.json. Please ensure the file exists in the root directory.
+                    </div>
+                `;
+            }
+        }
+
+        // Handle Section 3: Form Submission
+        function submitIdea(e) {
+            e.preventDefault();
+            const title = document.getElementById('ideaTitle').value;
+            const desc = document.getElementById('ideaDesc').value;
+            const links = document.getElementById('ideaLinks').value;
+            
+            // Console Logging for local testing
+            console.log("=== NEW IDEA TRANSMISSION ===");
+            console.log("Title:", title);
+            console.log("Description:", desc);
+            console.log("Links:", links);
+
+            // Trigger mailto client
+            const subject = encodeURIComponent(`Lab Submission: ${title}`);
+            const body = encodeURIComponent(`New concept submitted from the dashboard.\n\n--- Title ---\n${title}\n\n--- Description ---\n${desc}\n\n--- Links ---\n${links || 'None provided'}`);
+            
+            window.location.href = `mailto:hello@codykeegan.ai?subject=${subject}&body=${body}`;
+            
+            // Optional: reset form after submission
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

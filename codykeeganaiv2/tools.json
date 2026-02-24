@@ -1,0 +1,29 @@
+[
+  {
+    "id": "001",
+    "name": "Zapier",
+    "url": "https://zapier.com",
+    "logoUrl": "https://logo.clearbit.com/zapier.com",
+    "status": "ACTIVE",
+    "statusColor": "acid",
+    "description": "Automation glue. Connects apps like a nervous system. Wild use: build a 'lead-to-cash' conveyor belt that auto-qualifies, follows up, invoices, and books calls while you sleep."
+  },
+  {
+    "id": "002",
+    "name": "Notion",
+    "url": "https://notion.so",
+    "logoUrl": "https://logo.clearbit.com/notion.so",
+    "status": "STABLE",
+    "statusColor": "cyan",
+    "description": "Your ops brain in one place. Docs, databases, dashboards. Wild use: turn it into a client-facing 'command center' that makes you look like a 20-person team."
+  },
+  {
+    "id": "003",
+    "name": "Cloudflare Pages",
+    "url": "https://pages.cloudflare.com",
+    "logoUrl": "https://logo.clearbit.com/cloudflare.com",
+    "status": "DEPLOYED",
+    "statusColor": "magenta",
+    "description": "Static hosting at warp speed. Wild use: ship micro-sites for every offer angle you test, then kill the losers and scale the winners in hours."
+  }
+]

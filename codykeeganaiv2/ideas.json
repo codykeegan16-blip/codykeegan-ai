@@ -1,0 +1,29 @@
+[
+  {
+    "title": "The One-Person Agency Machine",
+    "description": "A wireframe for leverage: capture intent → qualify automatically → deliver an irresistible artifact → route humans only at the money step. The goal is not more work. The goal is more closing power with less surface area.",
+    "tools": [
+      { "name": "Zapier", "url": "https://zapier.com" },
+      { "name": "Google Sheets", "url": "https://sheets.google.com" },
+      { "name": "Calendly", "url": "https://calendly.com" }
+    ]
+  },
+  {
+    "title": "Content-to-Cash Conveyor",
+    "description": "Abstract flow: publish signal → harvest attention → route into a simple offer → auto-follow-up until they buy or die. Everything is modular. Nothing is sacred. Kill friction everywhere.",
+    "tools": [
+      { "name": "Kit (ConvertKit)", "url": "https://kit.com" },
+      { "name": "Canva", "url": "https://canva.com" },
+      { "name": "Stripe", "url": "https://stripe.com" }
+    ]
+  },
+  {
+    "title": "Affiliate War Room",
+    "description": "A simple mental model: pick one audience + one pain + one outcome. Build a single page that sells the transformation, not the product. Then deploy variations like probes until one bites hard.",
+    "tools": [
+      { "name": "Cloudflare Pages", "url": "https://pages.cloudflare.com" },
+      { "name": "Google Analytics", "url": "https://analytics.google.com" },
+      { "name": "Ahrefs", "url": "https://ahrefs.com" }
+    ]
+  }
+]
