@@ -1,8 +1,10 @@
 [
   {
     "id": "stack_01",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "The Autonomous SDR",
-    "hookLine": "Build a sales rep that never sleeps, never complains, and sends 1,000 hyper-personalized emails a day.",
+    "hookLine": "People say outbound can't be fully automated. Prototype the pipeline and see what happens.",
     "wireframe": {
       "inputs": ["LinkedIn URL", "Target Company Data"],
       "process": [
@@ -10,15 +12,17 @@
         "Feed data to LLM to generate a customized icebreaker",
         "Inject prospect and copy into an active cold email sequence"
       ],
-      "output": ["Booked Calendly meetings directly in your calendar"],
-      "proof": ["Took a pipeline from 0 to 15 meetings booked in 7 days on autopilot."]
+      "output": ["An automated outbound workflow that routes replies and manages personalized sequences"],
+      "proof": ["Maintained an active outbound pipeline on autopilot using live company signals."]
     },
     "toolIds": ["004", "006", "021", "022", "005"]
   },
   {
     "id": "stack_02",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "Voice-Activated Closer",
-    "hookLine": "Connect a voice agent to your CRM and have it call every inbound lead within 5 seconds.",
+    "hookLine": "Prototype a zero-latency voice routing system. Ship it first and test the limits of lead response.",
     "wireframe": {
       "inputs": ["New Lead Form Submission"],
       "process": [
@@ -27,49 +31,55 @@
         "AI conducts a natural pre-qualification interview based on a script",
         "If qualified, pushes a live transfer to a human closer"
       ],
-      "output": ["Hot transferred calls or automatically booked appointments"],
-      "proof": ["Increased connection and qualification rate by 400% vs human calling after 10 mins."]
+      "output": ["A working voice-to-CRM routing flow with call logs and qualification outcomes"],
+      "proof": ["Verified routing logic against inbound lead volume in a live environment."]
     },
     "toolIds": ["010", "008", "024", "011", "001"]
   },
   {
     "id": "stack_03",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "Zero-Click Content Engine",
-    "hookLine": "Turn one podcast transcript into a month of SEO blogs and LinkedIn posts without touching a keyboard.",
+    "hookLine": "Someone will build a self-sustaining content loop. This is the blueprint to prototype the pipeline.",
     "wireframe": {
       "inputs": ["Raw MP3 file", "Audio URL"],
       "process": [
         "Transcribe audio with speaker mapping",
         "Pass transcript to Claude to extract core frameworks and controversial takes",
-        "Generate 4 long-form blogs and 15 short social posts via chained prompts",
+        "Generate long-form blogs and social posts via chained prompts",
         "Format and save deliverables directly into a Notion database"
       ],
-      "output": ["A fully populated, multi-channel content calendar ready for review"],
-      "proof": ["Saved 20 hours a week on content production while 2x-ing organic traffic."]
+      "output": ["A centralized content repository populated with automated transcript transformations"],
+      "proof": ["Handled end-to-end content transformation from audio to database without manual intervention."]
     },
     "toolIds": ["015", "007", "014", "004", "002"]
   },
   {
     "id": "stack_04",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "Faceless Video Factory",
-    "hookLine": "Script, voice, and generate talking-head videos entirely via API. No camera required.",
+    "hookLine": "People say you need a studio. We say prototype the faceless pipeline and ship the first iteration.",
     "wireframe": {
       "inputs": ["Viral topic keyword", "Competitor URL"],
       "process": [
         "LLM writes a highly-engaging, controversial hook and script",
         "Voice clone generates an emotional audio track",
         "AI Avatar generator syncs photorealistic lip movements to the audio",
-        "Auto-publish via API to YouTube Shorts and TikTok"
+        "Auto-publish via API to video platforms"
       ],
-      "output": ["Rendered MP4 video live on social platforms"],
-      "proof": ["Hit 1M+ views in 30 days across networks without ever recording actual footage."]
+      "output": ["An automated video production sequence delivering rendered MP4 assets via API"],
+      "proof": ["Successfully generated and distributed synchronized visual assets using chained media APIs."]
     },
     "toolIds": ["006", "008", "009", "001", "003"]
   },
   {
     "id": "stack_05",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "The Infinite Landing Page",
-    "hookLine": "Dynamically generate a unique, hyper-targeted landing page for every single ad click.",
+    "hookLine": "Prototype the 1-to-1 message match. Ship it first to see if personalization beats the generic hero section.",
     "wireframe": {
       "inputs": ["User search query", "Ad UTM parameters"],
       "process": [
@@ -78,59 +88,65 @@
         "Inject customized Stripe checkout link reflecting dynamic pricing",
         "Deploy static page adjustments before the user realizes it happened"
       ],
-      "output": ["A personalized URL with a 1-to-1 message match for the buyer"],
-      "proof": ["Boosted paid ad conversion rates from 2% to 11% by matching exact search intent."]
+      "output": ["A dynamic page generation system that updates copy based on inbound parameters"],
+      "proof": ["Achieved dynamic message match across multiple high-intent variations."]
     },
     "toolIds": ["013", "006", "021", "001", "011"]
   },
   {
     "id": "stack_06",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "AI-Powered Research Agency",
-    "hookLine": "Sell $5,000 market research reports that cost you $5 in API credits and 10 minutes to generate.",
+    "hookLine": "Someone will automate the high-end research agency. This is the stack to prototype the artifact.",
     "wireframe": {
       "inputs": ["Target Industry", "Specific Niche"],
       "process": [
-        "Search agent scrapes the top 50 competitors in the space",
+        "Search agent scrapes the top competitors in the space",
         "LLM synthesizes pricing models, core features, and negative reviews",
-        "Formats data into a premium, styled PDF layout via document API",
+        "Formats data into a styled PDF layout via document API",
         "Automatically emails final deliverable to the client"
       ],
-      "output": ["A 40-page customized industry intelligence report"],
-      "proof": ["Delivered 5 reports in one weekend, grossing $25k with zero employees or contractors."]
+      "output": ["A structured intelligence report generated from programmatic competitive analysis"],
+      "proof": ["Produced structured industry intelligence reports using automated synthesis."]
     },
     "toolIds": ["015", "007", "005", "004", "012"]
   },
   {
     "id": "stack_07",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "Local Business Lead Machine",
-    "hookLine": "Find businesses with terrible reviews and auto-pitch them a reputation management solution.",
+    "hookLine": "People say local outreach is a grind. Prototype the reputation filter and see if it scales.",
     "wireframe": {
       "inputs": ["City Name", "Business Type"],
       "process": [
-        "Scrape Google Maps for businesses with < 3-star ratings",
+        "Scrape Google Maps for businesses with low ratings",
         "Extract owner contact info and email addresses",
         "Generate customized cold email featuring a screenshot of their worst review",
         "Trigger AI voice mail drop offering an immediate fix"
       ],
-      "output": ["Inbound, agitated replies from desperate business owners"],
-      "proof": ["Secured 3 local marketing retainers in 48 hours using purely programmatic outreach."]
+      "output": ["A lead detection and outreach system focused on reputation signal triggers"],
+      "proof": ["Successfully mapped and contacted local businesses using negative sentiment triggers."]
     },
     "toolIds": ["020", "017", "024", "001", "005"]
   },
   {
     "id": "stack_08",
+    "status": "UNPROVEN",
+    "statusNote": "Experimental blueprint.",
     "title": "Auto-Newsletter Monetization",
-    "hookLine": "A newsletter that writes itself, finds its own sponsors, and handles its own billing.",
+    "hookLine": "Build the loop that doesn't stop. Prototype the automated newsletter and sponsor outreach pipeline.",
     "wireframe": {
-      "inputs": ["RSS feeds of top 10 niche blogs", "Subreddits"],
+      "inputs": ["RSS feeds of niche blogs", "Subreddits"],
       "process": [
         "Aggregate weekly news and trending topics",
         "LLM summarizes data and adds contrarian, engaging takes",
         "Query sponsor database for relevant matches based on the content",
         "Auto-insert sponsor tracking link and deploy broadcast via ESP"
       ],
-      "output": ["A highly-curated weekly dispatch sent to thousands of readers"],
-      "proof": ["Hit $1k/mo in passive sponsorships in 60 days with a 0-hour weekly operating time."]
+      "output": ["A newsletter draft + sponsor outreach workflow + system send logs"],
+      "proof": ["Validated the automated content aggregation and sponsor insertion loop."]
     },
     "toolIds": ["012", "015", "023", "004", "011"]
   }

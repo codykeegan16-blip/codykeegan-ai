@@ -16,260 +16,133 @@
                 'border-acid', 'border-cyan', 'border-magenta',
                 'hover:border-acid', 'hover:text-acid', 'hover:bg-acid/10',
                 'hover:border-cyan', 'hover:text-cyan', 'hover:bg-cyan/10',
-                'hover:border-magenta', 'hover:text-magenta', 'hover:bg-magenta/10',
-                'group-hover:text-acid', 'group-hover:border-acid', 
-                'group-hover:text-cyan', 'group-hover:border-cyan', 
-                'group-hover:text-magenta', 'group-hover:border-magenta'
+                'hover:border-magenta', 'hover:text-magenta', 'hover:bg-magenta/10'
             ],
             theme: {
                 extend: {
-                    fontFamily: {
-                        loud: ['Oswald', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
-                    },
-                    colors: {
-                        acid: '#ccff00',
-                        cyan: '#00ffff',
-                        magenta: '#ff00ff',
-                    }
+                    fontFamily: { loud: ['Oswald', 'sans-serif'], mono: ['Space Mono', 'monospace'] },
+                    colors: { acid: '#ccff00', cyan: '#00ffff', magenta: '#ff00ff' }
                 }
             }
         }
     </script>
     <style>
         ::selection { background-color: #ccff00; color: #000; }
-        .chaos-grid {
-            background-image: radial-gradient(#333 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+        .chaos-grid { background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px; }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #111; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00ffff; }
-        
-        select option { background: #000; color: #fff; }
-        
-        /* Details/Summary overrides for Collapsible Stacks */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
+        .sticky-bar { top: 100px; }
+        @media (max-width: 768px) { .sticky-bar { top: 80px; } }
     </style>
 </head>
 <body id="top" class="font-mono antialiased chaos-grid selection:bg-acid selection:text-black min-h-screen flex flex-col">
 
     <!-- ================= HEADER ================= -->
-    <header class="border-b-4 border-white bg-black sticky top-0 z-50 h-[100px] box-border">
+    <header class="border-b-4 border-white bg-black sticky top-0 z-50 h-[80px] md:h-[100px] box-border">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center h-full">
-            <div class="flex items-center gap-6">
-                <div class="w-16 h-16 border-2 border-acid overflow-hidden bg-gray-800">
+            <div class="flex items-center gap-4 md:gap-6">
+                <div class="w-12 h-12 md:w-16 h-16 border-2 border-acid overflow-hidden bg-gray-800">
                     <img src="IMAGE.png" alt="Cody Keegan" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all">
                 </div>
                 <div>
-                    <h1 class="font-loud text-2xl md:text-4xl uppercase tracking-tighter">The <span class="text-acid">Dashboard</span></h1>
-                    <p class="text-xs text-gray-500 hidden md:block uppercase tracking-widest">Operator: Cody Keegan // Access: Level_01</p>
+                    <h1 class="font-loud text-xl md:text-4xl uppercase tracking-tighter leading-none">The <span class="text-acid">Dashboard</span></h1>
+                    <p class="text-[10px] text-gray-500 hidden md:block uppercase tracking-widest mt-1">Operator: Cody Keegan // Access: Level_01</p>
                 </div>
             </div>
-            <a href="index.html" class="font-mono text-sm border-2 border-white px-4 py-2 hover:bg-white hover:text-black transition-all">LOGOUT_</a>
+            <a href="index.html" class="font-mono text-xs border-2 border-white px-3 py-1.5 md:px-4 md:py-2 hover:bg-white hover:text-black transition-all">LOGOUT_</a>
         </div>
     </header>
 
     <!-- ================= MAIN CONTENT ================= -->
-    <main class="max-w-[1600px] mx-auto px-6 py-12 flex-grow w-full relative">
+    <main class="max-w-[1600px] mx-auto px-4 md:px-6 py-8 flex-grow w-full">
         
-        <div class="mb-12">
-            <h2 class="font-loud text-5xl md:text-7xl uppercase leading-none mb-4">Connection <span class="text-cyan">Established</span>.</h2>
-            <p class="text-xl text-gray-400 max-w-2xl font-mono">People say it can't be done. Someone will. Who ships first?</p>
+        <div class="mb-8 md:mb-12">
+            <h2 class="font-loud text-4xl md:text-7xl uppercase leading-none mb-4">Connection <span class="text-cyan">Established</span>.</h2>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl font-mono leading-tight">Everything is an experiment. Some work, some burn. Choose your tools wisely.</p>
         </div>
 
-        <!-- ================= COMMAND BAR (STICKY) ================= -->
-        <div class="sticky top-[100px] z-40 bg-black/95 border-y-4 border-gray-800 py-6 mb-16 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                <span class="font-loud text-acid text-2xl uppercase tracking-widest">COMMAND_BAR</span>
-                <div class="flex flex-wrap gap-4 font-mono text-sm uppercase tracking-widest bg-gray-900/50 px-4 py-2 border border-gray-800">
-                    <a href="#tools" class="hover:text-acid transition-colors">[TOOLS]</a>
-                    <a href="#stacks" class="hover:text-cyan transition-colors">[STACKS]</a>
-                    <a href="#transmit" class="hover:text-magenta transition-colors">[TRANSMIT]</a>
-                    <a href="#top" class="hover:text-white transition-colors">[TOP]</a>
+        <!-- ================= STICKY FILTER BAR ================= -->
+        <div class="sticky sticky-bar z-40 bg-black/95 border-y-2 md:border-y-4 border-gray-800 py-4 md:py-6 mb-8 md:mb-16 backdrop-blur-md">
+            <div class="flex flex-col xl:flex-row gap-4 items-stretch">
+                <!-- Search Input -->
+                <div class="flex-grow flex items-center gap-3 bg-gray-900/50 border border-gray-800 px-4 py-2">
+                    <span class="text-acid font-mono font-bold">></span>
+                    <input type="text" id="globalSearch" placeholder="SEARCH SYSTEM..." class="bg-transparent border-none text-white font-mono text-sm md:text-lg focus:outline-none w-full placeholder-gray-600">
                 </div>
-            </div>
-            
-            <div class="flex flex-col xl:flex-row gap-4 items-stretch xl:items-center">
-                <div class="flex-grow flex items-center gap-3 border-b-2 xl:border-b-0 xl:border-r-2 border-gray-800 pb-4 xl:pb-0 xl:pr-4">
-                    <span class="text-acid font-mono">></span>
-                    <input type="text" id="globalSearch" placeholder="SEARCH TOOLS AND STACKS..." class="bg-transparent border-none text-white font-mono text-lg focus:outline-none w-full placeholder-gray-600">
-                </div>
-                <div class="flex flex-wrap md:flex-nowrap gap-4">
-                    <select id="globalCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-3 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer transition-colors">
+                
+                <!-- Dropdowns -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+                    <select id="globalCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-3 focus:border-acid focus:outline-none cursor-pointer transition-colors uppercase">
                         <option value="all">CATEGORY: ALL</option>
                     </select>
-                    <select id="globalStack" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-3 focus:border-cyan focus:outline-none flex-grow md:flex-grow-0 cursor-pointer transition-colors">
-                        <option value="all">STACK: ALL</option>
+                    <select id="globalStack" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-3 focus:border-cyan focus:outline-none cursor-pointer transition-colors uppercase">
+                        <option value="all">FILTER BY STACK</option>
                     </select>
-                    <select id="globalSort" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-3 focus:border-magenta focus:outline-none flex-grow md:flex-grow-0 cursor-pointer transition-colors">
-                        <option value="used">SORT: MOST USED</option>
+                    <select id="globalSort" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-3 focus:border-magenta focus:outline-none cursor-pointer transition-colors uppercase">
                         <option value="az">SORT: A-Z</option>
-                        <option value="cat">SORT: CATEGORY</option>
+                        <option value="za">SORT: Z-A</option>
+                        <option value="status">SORT: STATUS</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 1: DYNAMIC TOOLS GRID -->
-        <section id="tools" class="mb-32 scroll-mt-[250px]">
-            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-4">
-                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Active Stack</span></h2>
-                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: tools.json</span>
+        <!-- SECTION 1: TOOLS GRID -->
+        <section id="tools" class="mb-24 scroll-mt-[200px]">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-gray-800 pb-4 mb-6">
+                <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Tool Inventory</span></h2>
+                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-2 md:mt-0">
+                    Disclosure: Some links are affiliate links. No extra cost to you.
+                </p>
             </div>
-            
-            <p class="mb-6 text-gray-500 font-mono text-xs uppercase tracking-widest">
-                Disclosure: Some links may be affiliate links. If you choose to use them, I may earn a commission at no extra cost to you.
-            </p>
 
-            <!-- Tools get injected here by Javascript -->
-            <div id="tools-container">
-                <p class="text-gray-500 font-mono animate-pulse">> FETCHING TOOL DATA...</p>
+            <!-- Grid Container -->
+            <div id="tools-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                <p class="col-span-full text-gray-500 font-mono animate-pulse">> ACCESSING DATABASE...</p>
             </div>
         </section>
 
-        <!-- SECTION 2: DYNAMIC CHALLENGE STACKS -->
-        <section id="stacks" class="mb-32 scroll-mt-[250px]">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-gray-800 pb-4 mb-4 gap-4">
-                <div class="flex items-baseline gap-4">
-                    <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Challenge Stacks</span></h2>
-                    <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: challenge-stacks.json</span>
-                </div>
-                <button id="toggleStacksBtn" data-state="collapsed" onclick="toggleAllStacks()" class="text-xs font-mono text-cyan uppercase tracking-widest border border-cyan/30 bg-cyan/10 px-4 py-2 hover:bg-cyan/20 transition-colors w-full sm:w-auto text-center sm:text-left">
-                    > EXPAND ALL STACKS
+        <!-- SECTION 2: CHALLENGE STACKS -->
+        <section id="stacks" class="mb-24 scroll-mt-[200px]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-gray-800 pb-4 mb-6 gap-4">
+                <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Challenge Stacks</span></h2>
+                <button id="toggleStacksBtn" data-state="collapsed" onclick="toggleAllStacks()" class="text-[10px] font-mono text-cyan uppercase tracking-widest border border-cyan/30 bg-cyan/10 px-4 py-2 hover:bg-cyan/20 transition-colors">
+                    > EXPAND ALL
                 </button>
             </div>
 
-            <p class="mb-6 text-gray-500 font-mono text-xs uppercase tracking-widest">
-                Disclosure: Some links may be affiliate links. If you choose to use them, I may earn a commission at no extra cost to you.
-            </p>
-
-            <!-- Stacks get injected here by Javascript -->
-            <div id="challenge-stacks-container">
-                <p class="text-gray-500 font-mono animate-pulse">> FETCHING CHALLENGE STACKS...</p>
+            <div id="challenge-stacks-container" class="space-y-4">
+                <p class="text-gray-500 font-mono animate-pulse">> LOADING BLUEPRINTS...</p>
             </div>
-        </section>
-
-        <!-- SECTION 3: SUBMIT YOUR IDEA OR PROOF (TWO-MODE FORM) -->
-        <section id="transmit" class="mb-16 scroll-mt-[250px]">
-            <details class="group outline-none">
-                <summary class="cursor-pointer flex items-center justify-between outline-none pb-4 border-b-2 border-gray-800">
-                    <div class="flex items-center gap-4">
-                        <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">03 // <span class="text-magenta">Transmit</span></h2>
-                        <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Status: Listening</span>
-                    </div>
-                    <span class="text-xs font-mono text-magenta uppercase tracking-widest border border-magenta/30 bg-magenta/10 px-4 py-2 group-open:bg-magenta group-open:text-black transition-all select-none">
-                        <span class="group-open:hidden">> OPEN TRANSMIT</span>
-                        <span class="hidden group-open:block">CLOSE [X]</span>
-                    </span>
-                </summary>
-                
-                <div class="pt-8">
-                    <div class="max-w-4xl border-4 border-white bg-black relative p-8 md:p-12">
-                        <!-- Decorative terminal tag -->
-                        <div class="absolute -top-4 left-8 bg-black px-4 border border-white font-mono text-magenta text-sm tracking-widest">
-                            INPUT_REQUIRED
-                        </div>
-
-                        <form onsubmit="submitIdea(event)" class="space-y-8 mt-4">
-                            
-                            <!-- MODE SELECTOR -->
-                            <div>
-                                <label for="submissionType" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Transmission Mode // Select</label>
-                                <select id="submissionType" onchange="toggleFormMode()" 
-                                        class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all cursor-pointer">
-                                    <option value="idea">Idea for a new challenge</option>
-                                    <option value="proof">Completed build / proof</option>
-                                </select>
-                            </div>
-
-                            <!-- MODE 1: IDEA FIELDS -->
-                            <div id="ideaModeFields" class="space-y-8">
-                                <div>
-                                    <label for="ideaTitle" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Protocol Name // Title</label>
-                                    <input type="text" id="ideaTitle" required placeholder="e.g., Automated Newsletter Agent" 
-                                           class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
-                                </div>
-                                
-                                <div>
-                                    <label for="ideaDesc" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Hypothesis // Description</label>
-                                    <textarea id="ideaDesc" required rows="4" placeholder="What does it do? How do the tools connect?" 
-                                              class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all custom-scrollbar"></textarea>
-                                </div>
-                                
-                                <div>
-                                    <label for="ideaLinks" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Reference Data // Links (Optional)</label>
-                                    <input type="text" id="ideaLinks" placeholder="https://..." 
-                                           class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
-                                </div>
-                            </div>
-
-                            <!-- MODE 2: PROOF FIELDS -->
-                            <div id="proofModeFields" class="space-y-8 hidden">
-                                <div>
-                                    <label for="completedStack" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Challenge Selection // Stack</label>
-                                    <select id="completedStack" 
-                                            class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all cursor-pointer">
-                                        <option value="" disabled selected>Select the stack you built...</option>
-                                        <option value="The Autonomous SDR">The Autonomous SDR</option>
-                                        <option value="Voice-Activated Closer">Voice-Activated Closer</option>
-                                        <option value="Zero-Click Content Engine">Zero-Click Content Engine</option>
-                                        <option value="Faceless Video Factory">Faceless Video Factory</option>
-                                        <option value="The Infinite Landing Page">The Infinite Landing Page</option>
-                                        <option value="AI-Powered Research Agency">AI-Powered Research Agency</option>
-                                        <option value="Local Business Lead Machine">Local Business Lead Machine</option>
-                                        <option value="Auto-Newsletter Monetization">Auto-Newsletter Monetization</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="proofLink" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Proof of Work // URL</label>
-                                    <input type="url" id="proofLink" placeholder="https://..." 
-                                           class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
-                                </div>
-
-                                <div>
-                                    <label for="completionNotes" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Field Notes // Optional</label>
-                                    <textarea id="completionNotes" rows="4" placeholder="How long did it take? What broke? Did it work?" 
-                                              class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all custom-scrollbar"></textarea>
-                                </div>
-                            </div>
-                            
-                            <button type="submit" class="bg-white text-black font-loud uppercase text-3xl px-8 py-4 hover:bg-magenta hover:text-white transition-colors w-full md:w-auto border-2 border-transparent hover:border-white">
-                                Transmit Data ->
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </details>
         </section>
 
     </main>
 
     <!-- ================= FOOTER ================= -->
     <footer class="border-t-2 border-gray-900 bg-black py-10 px-6 text-center mt-auto">
-        <p class="text-gray-600 text-xs uppercase tracking-[0.3em] mb-4">CodyKeegan.AI // Build the weird things.</p>
-        <div class="flex justify-center gap-6 font-mono text-xs text-gray-500 uppercase tracking-widest">
+        <p class="text-gray-600 text-[10px] uppercase tracking-[0.3em] mb-4">CodyKeegan.AI // Build the weird things.</p>
+        <div class="flex flex-wrap justify-center gap-6 font-mono text-[10px] text-gray-500 uppercase tracking-widest">
+            <a href="about.html" class="hover:text-white transition-colors">About</a>
             <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate</a>
             <a href="terms.html" class="hover:text-cyan transition-colors">Terms</a>
             <a href="privacy.html" class="hover:text-magenta transition-colors">Privacy</a>
+            <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
         </div>
     </footer>
 
-    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <!-- ================= JAVASCRIPT ================= -->
     <script>
-        // Data stores
         let globalTools = [];
         let globalStacks = [];
-        let isShowingAllTools = false;
 
-        // Manual category mapping
         const toolCategoryMap = {
             "Zapier": "Automation", "Make": "Automation", "Instantly": "Automation",
             "OpenAI": "Agents", "Anthropic": "Agents", "Claude": "Agents", "Vapi": "Agents", "Retell AI": "Agents", "Bland AI": "Agents",
-            "ElevenLabs": "Video", "HeyGen": "Video", "Midjourney": "Video",
+            "ElevenLabs": "Media", "HeyGen": "Media", "Midjourney": "Media",
             "Perplexity": "Research",
             "Cloudflare Pages": "Infra", "Stripe": "Infra", "Kit": "Infra", "Twilio": "Infra",
             "Webflow": "Design", "Framer": "Design", "Bubble": "Design",
@@ -277,19 +150,16 @@
             "GitHub": "Dev"
         };
 
-        // Icon SVG Factory
         function getCategoryIcon(category) {
             const icons = {
-                'Automation': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>',
-                'Agents': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>',
-                'Video': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><polygon points="18 10 22 8 22 16 18 14"></polygon></svg>',
-                'Research': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>',
-                'Infra': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>',
-                'Design': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>',
-                'Data': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>',
-                'Dev': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>'
+                'Automation': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>',
+                'Agents': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 15h.01M16 15h.01"/></svg>',
+                'Media': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>',
+                'Research': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+                'Infra': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>',
+                'Data': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>'
             };
-            return icons[category] || '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+            return icons[category] || '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
@@ -302,37 +172,23 @@
                 if (toolsRes.ok) globalTools = await toolsRes.json();
                 if (stacksRes.ok) globalStacks = await stacksRes.json();
                 
-                // Enrich tools with computed category and fix usedIn ties
                 globalTools.forEach(t => {
                     t.category = toolCategoryMap[t.name] || "Dev";
                     t.usedIn = t.usedIn || [];
                 });
 
-                // Compute any missing usedIn relations dynamically from stacks
-                globalStacks.forEach(stack => {
-                    stack.toolIds.forEach(id => {
-                        const tool = globalTools.find(t => t.id === id);
-                        if (tool && !tool.usedIn.includes(stack.id)) {
-                            tool.usedIn.push(stack.id);
-                        }
-                    });
-                });
-
                 populateDropdowns();
-                handleFilterChange();
+                renderAll();
 
-                // Setup Listeners for Command Bar
-                document.getElementById('globalSearch').addEventListener('input', handleFilterChange);
-                document.getElementById('globalCategory').addEventListener('change', handleFilterChange);
-                document.getElementById('globalStack').addEventListener('change', handleFilterChange);
-                document.getElementById('globalSort').addEventListener('change', handleFilterChange);
+                document.getElementById('globalSearch').addEventListener('input', renderAll);
+                document.getElementById('globalCategory').addEventListener('change', renderAll);
+                document.getElementById('globalStack').addEventListener('change', renderAll);
+                document.getElementById('globalSort').addEventListener('change', renderAll);
 
             } catch (e) {
                 console.error("Initialization Error:", e);
-                document.getElementById('tools-container').innerHTML = `> ERROR: FAILED TO LOAD SYSTEM DATA.`;
+                document.getElementById('tools-container').innerHTML = `> ERROR: SYSTEM_OFFLINE`;
             }
-            
-            toggleFormMode();
         });
 
         function populateDropdowns() {
@@ -341,7 +197,7 @@
             categories.forEach(c => {
                 const opt = document.createElement('option');
                 opt.value = c;
-                opt.textContent = `CATEGORY: ${c.toUpperCase()}`;
+                opt.textContent = `CAT: ${c.toUpperCase()}`;
                 catSelect.appendChild(opt);
             });
 
@@ -349,61 +205,62 @@
             globalStacks.forEach(s => {
                 const opt = document.createElement('option');
                 opt.value = s.id;
-                opt.textContent = `STACK: ${s.title.toUpperCase()}`;
+                opt.textContent = `STK: ${s.title.toUpperCase()}`;
                 stackSelect.appendChild(opt);
             });
         }
 
-        function handleFilterChange() {
+        function renderAll() {
             renderTools();
             renderStacks();
         }
 
-        function toggleToolsMode() {
-            isShowingAllTools = !isShowingAllTools;
-            renderTools();
-        }
-
-        function toggleAllStacks() {
-            const detailsElements = document.querySelectorAll('#challenge-stacks-container details');
-            const btn = document.getElementById('toggleStacksBtn');
-            const isExpanding = btn.dataset.state === 'collapsed';
-            
-            detailsElements.forEach(el => {
-                if (isExpanding) el.setAttribute('open', '');
-                else el.removeAttribute('open');
-            });
-            
-            btn.dataset.state = isExpanding ? 'expanded' : 'collapsed';
-            btn.innerHTML = isExpanding ? '> COLLAPSE ALL STACKS' : '> EXPAND ALL STACKS';
+        function setStackFilter(stackId) {
+            document.getElementById('globalStack').value = stackId;
+            renderAll();
+            document.getElementById('tools').scrollIntoView();
         }
 
         function generateToolCard(tool) {
-            const stackTitles = tool.usedIn.map(id => {
+            const stackChips = tool.usedIn.map(id => {
                 const s = globalStacks.find(x => x.id === id);
-                return s ? s.title : id;
-            });
-            const stackChips = stackTitles.map(t => `<span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest truncate max-w-[150px] inline-block align-bottom">${t}</span>`).join('');
-            const usedInHtml = stackChips.length > 0 ? `<div class="flex flex-wrap gap-2 items-center mt-3"><span class="text-[10px] text-gray-600 uppercase tracking-widest">Used in:</span>${stackChips}</div>` : '';
+                return s ? `<button onclick="setStackFilter('${id}')" class="bg-gray-900 border border-gray-700 text-[8px] text-gray-500 px-1 hover:text-cyan hover:border-cyan truncate max-w-full">${s.title}</button>` : '';
+            }).join('');
 
             return `
-            <div class="tool-card group border-2 border-gray-800 hover:border-${tool.statusColor} p-4 bg-black transition-all duration-200 flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-center w-full">
-                <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center border-2 border-gray-800 text-gray-500 group-hover:text-${tool.statusColor} group-hover:border-${tool.statusColor} transition-colors">
-                    ${getCategoryIcon(tool.category)}
-                </div>
-                
-                <div class="flex-grow min-w-0">
-                    <div class="flex flex-wrap items-center gap-3 mb-1">
-                        <h3 class="font-loud text-2xl uppercase tracking-wide truncate group-hover:text-${tool.statusColor} transition-colors">${tool.name}</h3>
-                        <span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest">${tool.category}</span>
-                        <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[10px] font-bold px-1.5 py-0.5 uppercase tracking-widest">${tool.status}</span>
+            <div class="group relative border-2 border-gray-800 bg-black p-4 flex flex-col h-full hover:border-${tool.statusColor} transition-all duration-300 shadow-xl">
+                <!-- Icon Area -->
+                <div class="w-full aspect-square bg-gray-900 border border-gray-800 flex items-center justify-center mb-4 overflow-hidden relative">
+                    ${tool.logoUrl ? 
+                        `<img src="${tool.logoUrl}" alt="${tool.name}" class="w-1/2 h-1/2 object-contain grayscale group-hover:grayscale-0 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-1/2 h-1/2 text-gray-600 group-hover:text-${tool.statusColor}\'>${getCategoryIcon(tool.category)}</div>'">` : 
+                        `<div class="w-1/2 h-1/2 text-gray-600 group-hover:text-${tool.statusColor} transition-colors">${getCategoryIcon(tool.category)}</div>`
+                    }
+                    <div class="absolute top-2 right-2 flex items-center gap-1">
+                        <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[8px] font-bold px-1 uppercase tracking-tighter">${tool.status}</span>
                     </div>
-                    <p class="text-gray-400 text-sm font-mono leading-relaxed truncate md:whitespace-normal pr-4">${tool.description}</p>
-                    ${usedInHtml}
                 </div>
 
-                <div class="flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
-                    <a href="${tool.url}" target="_blank" class="block text-center border-2 border-gray-800 group-hover:border-${tool.statusColor} group-hover:text-${tool.statusColor} hover:bg-${tool.statusColor}/10 text-gray-400 font-mono text-xs uppercase px-6 py-3 transition-all tracking-widest">Open -></a>
+                <!-- Info -->
+                <div class="flex-grow min-w-0">
+                    <h3 class="font-loud text-lg md:text-xl uppercase truncate group-hover:text-${tool.statusColor} transition-colors">${tool.name}</h3>
+                    <p class="text-[10px] text-gray-600 font-mono mb-2 uppercase tracking-widest">${tool.category}</p>
+                    <p class="text-[11px] text-gray-400 font-mono leading-tight line-clamp-2 mb-4 group-hover:text-gray-200 transition-colors">${tool.description}</p>
+                </div>
+
+                <!-- Stacks Tagging -->
+                <div class="flex flex-wrap gap-1 mb-4 h-10 overflow-hidden content-start">
+                    ${stackChips}
+                </div>
+
+                <!-- Action & Disclosure -->
+                <div class="mt-auto pt-4 border-t border-gray-900">
+                    <div class="flex flex-col gap-2">
+                        <a href="${tool.url}" target="_blank" class="block w-full text-center border border-gray-700 py-2 font-mono text-[10px] uppercase tracking-widest hover:bg-${tool.statusColor} hover:text-black hover:border-${tool.statusColor} transition-all">Open Tool -></a>
+                        ${tool.docs ? `<a href="${tool.docs}" target="_blank" class="block w-full text-center border border-gray-800 py-1 font-mono text-[9px] uppercase tracking-widest text-gray-500 hover:text-white transition-all">Documentation</a>` : ''}
+                    </div>
+                    <p class="text-[7px] text-gray-700 font-mono mt-3 uppercase tracking-tighter leading-none">
+                        Note: Link may be affiliate. No extra cost.
+                    </p>
                 </div>
             </div>
             `;
@@ -415,223 +272,83 @@
             const stackFilter = document.getElementById('globalStack').value;
             const sort = document.getElementById('globalSort').value;
 
-            // Filter
             let filtered = globalTools.filter(t => {
                 const matchSearch = t.name.toLowerCase().includes(search) || t.description.toLowerCase().includes(search);
                 const matchCat = cat === 'all' || t.category === cat;
-                const matchStack = stackFilter === 'all' || (t.usedIn && t.usedIn.includes(stackFilter));
+                const matchStack = stackFilter === 'all' || t.usedIn.includes(stackFilter);
                 return matchSearch && matchCat && matchStack;
+            });
+
+            // Sorting
+            filtered.sort((a, b) => {
+                if (sort === 'az') return a.name.localeCompare(b.name);
+                if (sort === 'za') return b.name.localeCompare(a.name);
+                if (sort === 'status') return a.status.localeCompare(b.status);
+                return 0;
             });
 
             const container = document.getElementById('tools-container');
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="p-8 border-2 border-dashed border-gray-800 text-gray-500 font-mono text-center uppercase tracking-widest">> No tools found matching criteria.</div>`;
-                return;
-            }
-
-            if (!isShowingAllTools) {
-                // DEFAULT MODE: TOP 10 (respecting current filters, defaulting to mostly used logic)
-                let topTools = [...filtered].sort((a,b) => {
-                    if (sort === 'used') return (b.usedIn?.length || 0) - (a.usedIn?.length || 0);
-                    if (sort === 'az') return a.name.localeCompare(b.name);
-                    if (sort === 'cat') return a.category.localeCompare(b.category);
-                    return 0;
-                }).slice(0, 10);
-
-                let html = `<div class="space-y-4">` + topTools.map(t => generateToolCard(t)).join('') + `</div>`;
-                
-                if (filtered.length > topTools.length || filtered.length === topTools.length) {
-                     html += `
-                     <div class="mt-8 text-center">
-                         <button onclick="toggleToolsMode()" class="bg-gray-900 border-2 border-gray-700 hover:border-acid hover:text-acid text-gray-300 font-mono text-sm uppercase tracking-widest px-8 py-4 transition-all">
-                             > SHOW ALL TOOLS GROUPED BY CATEGORY
-                         </button>
-                     </div>`;
-                }
-                container.innerHTML = html;
+                container.innerHTML = `<div class="col-span-full p-12 border-2 border-dashed border-gray-800 text-gray-600 font-mono text-center uppercase tracking-widest">> ZERO_RESULTS_FOUND</div>`;
             } else {
-                // EXPANDED MODE: GROUPED BY CATEGORY
-                const grouped = {};
-                filtered.forEach(t => {
-                    if(!grouped[t.category]) grouped[t.category] = [];
-                    grouped[t.category].push(t);
-                });
-                
-                const sortedCats = Object.keys(grouped).sort();
-                let html = '';
-                
-                sortedCats.forEach(c => {
-                    let toolsInCat = grouped[c];
-                    toolsInCat.sort((a, b) => {
-                        if (sort === 'used') return (b.usedIn?.length || 0) - (a.usedIn?.length || 0);
-                        if (sort === 'az') return a.name.localeCompare(b.name);
-                        return 0; 
-                    });
-
-                    html += `
-                    <details open class="mb-4 group border-2 border-gray-800 bg-black">
-                        <summary class="cursor-pointer p-4 bg-gray-900/40 hover:bg-gray-800 font-loud text-2xl uppercase tracking-widest text-white outline-none flex justify-between items-center transition-colors">
-                            <div class="flex items-center gap-4">
-                                <span class="text-acid">${getCategoryIcon(c)}</span>
-                                CATEGORY: ${c} <span class="text-gray-500 font-mono text-sm tracking-normal">(${toolsInCat.length})</span>
-                            </div>
-                            <span class="text-acid font-mono text-xl group-open:rotate-90 transition-transform">></span>
-                        </summary>
-                        <div class="p-4 space-y-4 border-t-2 border-gray-800">
-                            ${toolsInCat.map(t => generateToolCard(t)).join('')}
-                        </div>
-                    </details>`;
-                });
-
-                html += `
-                <div class="mt-8 text-center">
-                    <button onclick="toggleToolsMode()" class="bg-gray-900 border-2 border-gray-700 hover:border-acid hover:text-acid text-gray-300 font-mono text-sm uppercase tracking-widest px-8 py-4 transition-all">
-                        > COLLAPSE TO TOP 10
-                    </button>
-                </div>`;
-                container.innerHTML = html;
+                container.innerHTML = filtered.map(t => generateToolCard(t)).join('');
             }
         }
 
         function renderStacks() {
-            const search = document.getElementById('globalSearch').value.toLowerCase();
-            const cat = document.getElementById('globalCategory').value;
-            const stackFilter = document.getElementById('globalStack').value;
-
-            let filteredStacks = globalStacks.filter(s => {
-                const searchStr = `${s.title} ${s.hookLine} ${s.wireframe.inputs.join(' ')} ${s.wireframe.process.join(' ')} ${s.wireframe.output.join(' ')} ${s.wireframe.proof.join(' ')}`.toLowerCase();
-                const matchSearch = searchStr.includes(search);
-                const matchStack = stackFilter === 'all' || s.id === stackFilter;
-                
-                let matchCat = cat === 'all';
-                if (!matchCat) {
-                    matchCat = s.toolIds.some(toolId => {
-                        const t = globalTools.find(x => x.id === toolId);
-                        return t && t.category === cat;
-                    });
-                }
-                return matchSearch && matchStack && matchCat;
-            });
-
             const container = document.getElementById('challenge-stacks-container');
-            if (filteredStacks.length === 0) {
-                container.innerHTML = `<div class="p-8 border-2 border-dashed border-gray-800 text-gray-500 font-mono text-center uppercase tracking-widest">> No stacks found matching criteria.</div>`;
-                return;
-            }
-
-            container.innerHTML = `<div class="space-y-4">` + filteredStacks.map(stack => {
+            container.innerHTML = globalStacks.map(stack => {
                 const stackTools = stack.toolIds
                     .map(id => globalTools.find(t => t.id === id))
                     .filter(Boolean);
 
                 return `
-                <details class="group border-2 border-dashed border-gray-700 bg-black hover:border-cyan transition-all duration-300">
-                    <summary class="cursor-pointer p-6 flex flex-row items-center justify-between outline-none">
-                        <div class="pr-6">
-                            <h3 class="font-mono font-bold text-xl text-cyan mb-1 group-hover:underline transition-all">_${stack.title}</h3>
-                            <p class="font-loud text-2xl md:text-3xl text-white uppercase tracking-tighter leading-tight">"${stack.hookLine}"</p>
+                <details class="group border border-gray-800 bg-black hover:border-cyan/40 transition-all">
+                    <summary class="cursor-pointer p-4 md:p-6 flex items-center justify-between outline-none">
+                        <div>
+                            <h3 class="font-mono text-cyan text-xs mb-1">_STACK_ID: ${stack.id}</h3>
+                            <p class="font-loud text-xl md:text-3xl text-white uppercase tracking-tighter">${stack.title}</p>
                         </div>
-                        <div class="flex-shrink-0 text-cyan flex flex-col items-center justify-center font-mono text-xs group-open:text-gray-500 transition-colors bg-cyan/10 group-open:bg-transparent px-3 py-2 border border-cyan/30 group-open:border-transparent select-none w-20">
-                            <span class="group-open:hidden uppercase tracking-widest font-bold">EXPAND</span>
-                            <span class="hidden group-open:block rotate-90 text-lg">></span>
-                        </div>
+                        <span class="text-cyan font-mono group-open:rotate-90 transition-transform">></span>
                     </summary>
-                    <div class="p-6 pt-0 border-t border-gray-800 mt-2">
-                        <div class="space-y-4 mb-8 pt-6">
+                    <div class="p-4 md:p-6 border-t border-gray-900 bg-gray-900/10">
+                        <p class="font-mono text-gray-400 mb-6 italic border-l-2 border-cyan pl-4">"${stack.hookLine}"</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                             <div>
-                                <span class="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-1">Inputs:</span>
-                                <div class="font-mono text-sm text-gray-300 bg-gray-900/50 p-3 border border-gray-800">
-                                    > ${stack.wireframe.inputs.join(' + ')}
-                                </div>
-                            </div>
-                            <div>
-                                <span class="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-1">Process:</span>
-                                <ul class="font-mono text-sm text-gray-300 space-y-2 bg-gray-900/50 p-3 border border-gray-800">
-                                    ${stack.wireframe.process.map(step => `<li><span class="text-magenta">></span> ${step}</li>`).join('')}
+                                <h4 class="text-[10px] text-gray-600 uppercase tracking-widest mb-2 font-bold">Process:</h4>
+                                <ul class="space-y-2 text-xs font-mono">
+                                    ${stack.wireframe.process.map(p => `<li class="flex gap-2"><span class="text-cyan">»</span> ${p}</li>`).join('')}
                                 </ul>
                             </div>
                             <div>
-                                <span class="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-1">Output:</span>
-                                <div class="font-mono text-sm text-gray-300 bg-gray-900/50 p-3 border border-gray-800 border-l-2 border-l-acid">
-                                    > ${stack.wireframe.output.join(', ')}
+                                <h4 class="text-[10px] text-gray-600 uppercase tracking-widest mb-2 font-bold">Output:</h4>
+                                <div class="bg-black border border-gray-800 p-3 text-xs font-mono text-acid">
+                                    ${stack.wireframe.output.join(', ')}
                                 </div>
-                            </div>
-                            <div>
-                                <span class="text-xs text-cyan uppercase tracking-[0.2em] block mb-1">Proof:</span>
-                                <div class="font-mono text-sm text-cyan bg-cyan/10 p-3 border border-cyan/20">
+                                <h4 class="text-[10px] text-gray-600 uppercase tracking-widest mb-2 mt-4 font-bold">Proof:</h4>
+                                <div class="text-[11px] font-mono text-gray-400">
                                     ${stack.wireframe.proof.join(' ')}
                                 </div>
                             </div>
                         </div>
 
-                        <div class="border-t border-dashed border-gray-800 pt-6">
-                            <p class="text-xs text-gray-600 uppercase tracking-[0.2em] mb-4">Required_Stack:</p>
-                            <div class="flex flex-wrap gap-3">
-                                ${stackTools.map(t => `
-                                    <a href="${t.url}" target="_blank" class="flex items-center gap-2 text-xs font-mono text-gray-300 bg-gray-900 border border-gray-700 px-3 py-1.5 hover:border-${t.statusColor} hover:text-${t.statusColor} transition-colors">
-                                        <span class="text-gray-500 group-hover:text-${t.statusColor}">${getCategoryIcon(t.category)}</span>
-                                        ${t.name}
-                                    </a>
-                                `).join('')}
-                            </div>
+                        <div class="pt-4 border-t border-gray-900 flex flex-wrap gap-2">
+                            ${stackTools.map(t => `<span class="bg-gray-900 text-gray-500 border border-gray-800 px-2 py-1 text-[9px] font-mono">${t.name}</span>`).join('')}
                         </div>
                     </div>
                 </details>
                 `;
-            }).join('') + `</div>`;
+            }).join('');
         }
 
-        // Form mode toggling
-        function toggleFormMode() {
-            const mode = document.getElementById('submissionType').value;
-            const ideaFields = document.getElementById('ideaModeFields');
-            const proofFields = document.getElementById('proofModeFields');
-            const ideaTitle = document.getElementById('ideaTitle');
-            const ideaDesc = document.getElementById('ideaDesc');
-            const completedStack = document.getElementById('completedStack');
-            const proofLink = document.getElementById('proofLink');
-
-            if (mode === 'idea') {
-                ideaFields.classList.remove('hidden');
-                proofFields.classList.add('hidden');
-                ideaTitle.setAttribute('required', 'required');
-                ideaDesc.setAttribute('required', 'required');
-                completedStack.removeAttribute('required');
-                proofLink.removeAttribute('required');
-            } else {
-                ideaFields.classList.add('hidden');
-                proofFields.classList.remove('hidden');
-                ideaTitle.removeAttribute('required');
-                ideaDesc.removeAttribute('required');
-                completedStack.setAttribute('required', 'required');
-                proofLink.setAttribute('required', 'required');
-            }
-        }
-
-        // Handle Section 3: Form Submission
-        function submitIdea(e) {
-            e.preventDefault();
-            const mode = document.getElementById('submissionType').value;
-            let subject = '';
-            let body = '';
-            
-            if (mode === 'idea') {
-                const title = document.getElementById('ideaTitle').value;
-                const desc = document.getElementById('ideaDesc').value;
-                const links = document.getElementById('ideaLinks').value;
-                subject = encodeURIComponent(`Lab Idea: ${title}`);
-                body = encodeURIComponent(`New challenge idea submitted from the dashboard.\n\n--- Title ---\n${title}\n\n--- Description ---\n${desc}\n\n--- Links ---\n${links || 'None provided'}`);
-            } else {
-                const stack = document.getElementById('completedStack').value;
-                const proof = document.getElementById('proofLink').value;
-                const notes = document.getElementById('completionNotes').value;
-                subject = encodeURIComponent(`Lab Proof: ${stack}`);
-                body = encodeURIComponent(`New proof of work submitted from the dashboard.\n\n--- Completed Stack ---\n${stack}\n\n--- Proof URL ---\n${proof}\n\n--- Field Notes ---\n${notes || 'None provided'}`);
-            }
-
-            window.location.href = `mailto:terminal@codykeegan.ai?subject=${subject}&body=${body}`;
-            e.target.reset();
-            toggleFormMode();
+        function toggleAllStacks() {
+            const details = document.querySelectorAll('#challenge-stacks-container details');
+            const btn = document.getElementById('toggleStacksBtn');
+            const isExpanding = btn.dataset.state === 'collapsed';
+            details.forEach(el => isExpanding ? el.setAttribute('open', '') : el.removeAttribute('open'));
+            btn.dataset.state = isExpanding ? 'expanded' : 'collapsed';
+            btn.innerHTML = isExpanding ? '> COLLAPSE ALL' : '> EXPAND ALL';
         }
     </script>
 </body>
