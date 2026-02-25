@@ -35,8 +35,8 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00ffff; }
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
-        .sticky-bar { top: 100px; }
-        @media (max-width: 768px) { .sticky-bar { top: 80px; } }
+        .sticky-bar { top: 80px; }
+        @media (min-width: 768px) { .sticky-bar { top: 100px; } }
     </style>
 </head>
 <body id="top" class="font-mono antialiased chaos-grid selection:bg-acid selection:text-black min-h-screen flex flex-col">
@@ -45,7 +45,7 @@
     <header class="border-b-4 border-white bg-black sticky top-0 z-50 h-[80px] md:h-[100px] box-border">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center h-full">
             <div class="flex items-center gap-4 md:gap-6">
-                <div class="w-12 h-12 md:w-16 h-16 border-2 border-acid overflow-hidden bg-gray-800">
+                <div class="w-10 h-10 md:w-14 h-14 border-2 border-acid overflow-hidden bg-gray-800">
                     <img src="IMAGE.png" alt="Cody Keegan" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all">
                 </div>
                 <div>
@@ -53,7 +53,7 @@
                     <p class="text-[10px] text-gray-500 hidden md:block uppercase tracking-widest mt-1">Operator: Cody Keegan // Access: Level_01</p>
                 </div>
             </div>
-            <a href="index.html" class="font-mono text-xs border-2 border-white px-3 py-1.5 md:px-4 md:py-2 hover:bg-white hover:text-black transition-all">LOGOUT_</a>
+            <a href="index.html" class="font-mono text-[10px] md:text-xs border-2 border-white px-3 py-1.5 hover:bg-white hover:text-black transition-all">LOGOUT_</a>
         </div>
     </header>
 
@@ -62,27 +62,27 @@
         
         <div class="mb-8 md:mb-12">
             <h2 class="font-loud text-4xl md:text-7xl uppercase leading-none mb-4">Connection <span class="text-cyan">Established</span>.</h2>
-            <p class="text-lg md:text-xl text-gray-400 max-w-2xl font-mono leading-tight">Everything is an experiment. Some work, some burn. Choose your tools wisely.</p>
+            <p class="text-base md:text-xl text-gray-400 max-w-2xl font-mono leading-tight">Everything is an experiment. Choose your tools wisely.</p>
         </div>
 
         <!-- ================= STICKY FILTER BAR ================= -->
-        <div class="sticky sticky-bar z-40 bg-black/95 border-y-2 md:border-y-4 border-gray-800 py-4 md:py-6 mb-8 md:mb-16 backdrop-blur-md">
+        <div class="sticky sticky-bar z-40 bg-black/95 border-y-2 border-gray-800 py-4 mb-12 backdrop-blur-md">
             <div class="flex flex-col xl:flex-row gap-4 items-stretch">
                 <!-- Search Input -->
-                <div class="flex-grow flex items-center gap-3 bg-gray-900/50 border border-gray-800 px-4 py-2">
+                <div class="flex-grow flex items-center gap-3 bg-gray-900 border border-gray-800 px-4 py-2">
                     <span class="text-acid font-mono font-bold">></span>
-                    <input type="text" id="globalSearch" placeholder="SEARCH SYSTEM..." class="bg-transparent border-none text-white font-mono text-sm md:text-lg focus:outline-none w-full placeholder-gray-600">
+                    <input type="text" id="globalSearch" placeholder="SEARCH SYSTEM..." class="bg-transparent border-none text-white font-mono text-sm md:text-base focus:outline-none w-full placeholder-gray-600">
                 </div>
                 
                 <!-- Dropdowns -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-                    <select id="globalCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-3 focus:border-acid focus:outline-none cursor-pointer transition-colors uppercase">
+                    <select id="globalCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-2.5 focus:border-acid focus:outline-none cursor-pointer uppercase">
                         <option value="all">CATEGORY: ALL</option>
                     </select>
-                    <select id="globalStack" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-3 focus:border-cyan focus:outline-none cursor-pointer transition-colors uppercase">
+                    <select id="globalStack" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-2.5 focus:border-cyan focus:outline-none cursor-pointer uppercase">
                         <option value="all">FILTER BY STACK</option>
                     </select>
-                    <select id="globalSort" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-3 focus:border-magenta focus:outline-none cursor-pointer transition-colors uppercase">
+                    <select id="globalSort" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-2.5 focus:border-magenta focus:outline-none cursor-pointer uppercase">
                         <option value="az">SORT: A-Z</option>
                         <option value="za">SORT: Z-A</option>
                         <option value="status">SORT: STATUS</option>
@@ -92,25 +92,23 @@
         </div>
 
         <!-- SECTION 1: TOOLS GRID -->
-        <section id="tools" class="mb-24 scroll-mt-[200px]">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-gray-800 pb-4 mb-6">
-                <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Tool Inventory</span></h2>
-                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-2 md:mt-0">
-                    Disclosure: Some links are affiliate links. No extra cost to you.
-                </p>
+        <section id="tools" class="mb-24 scroll-mt-[180px]">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-gray-800 pb-4 mb-8">
+                <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Inventory</span></h2>
+                <p class="text-[9px] font-mono text-gray-500 uppercase tracking-widest mt-2 md:mt-0">Affiliate Links Active. No extra cost to user.</p>
             </div>
 
-            <!-- Grid Container -->
-            <div id="tools-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <!-- Grid Container: Clean Responsive Grid -->
+            <div id="tools-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <p class="col-span-full text-gray-500 font-mono animate-pulse">> ACCESSING DATABASE...</p>
             </div>
         </section>
 
         <!-- SECTION 2: CHALLENGE STACKS -->
-        <section id="stacks" class="mb-24 scroll-mt-[200px]">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-gray-800 pb-4 mb-6 gap-4">
-                <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Challenge Stacks</span></h2>
-                <button id="toggleStacksBtn" data-state="collapsed" onclick="toggleAllStacks()" class="text-[10px] font-mono text-cyan uppercase tracking-widest border border-cyan/30 bg-cyan/10 px-4 py-2 hover:bg-cyan/20 transition-colors">
+        <section id="stacks" class="mb-24 scroll-mt-[180px]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-gray-800 pb-4 mb-8 gap-4">
+                <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Stacks</span></h2>
+                <button id="toggleStacksBtn" data-state="collapsed" onclick="toggleAllStacks()" class="text-[9px] font-mono text-cyan uppercase tracking-widest border border-cyan/30 bg-cyan/10 px-4 py-2 hover:bg-cyan/20 transition-colors">
                     > EXPAND ALL
                 </button>
             </div>
@@ -187,7 +185,7 @@
 
             } catch (e) {
                 console.error("Initialization Error:", e);
-                document.getElementById('tools-container').innerHTML = `> ERROR: SYSTEM_OFFLINE`;
+                document.getElementById('tools-container').innerHTML = `> ERROR: DATABASE_CONNECTION_FAILED`;
             }
         });
 
@@ -228,39 +226,42 @@
             }).join('');
 
             return `
-            <div class="group relative border-2 border-gray-800 bg-black p-4 flex flex-col h-full hover:border-${tool.statusColor} transition-all duration-300 shadow-xl">
-                <!-- Icon Area -->
-                <div class="w-full aspect-square bg-gray-900 border border-gray-800 flex items-center justify-center mb-4 overflow-hidden relative">
+            <div class="group border-2 border-gray-800 bg-black flex flex-col h-full hover:border-${tool.statusColor} transition-all duration-300">
+                <!-- Header: Logo Area (Constrained) -->
+                <div class="h-24 md:h-32 bg-gray-900/40 border-b border-gray-800 relative flex items-center justify-center p-6">
                     ${tool.logoUrl ? 
-                        `<img src="${tool.logoUrl}" alt="${tool.name}" class="w-1/2 h-1/2 object-contain grayscale group-hover:grayscale-0 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-1/2 h-1/2 text-gray-600 group-hover:text-${tool.statusColor}\'>${getCategoryIcon(tool.category)}</div>'">` : 
-                        `<div class="w-1/2 h-1/2 text-gray-600 group-hover:text-${tool.statusColor} transition-colors">${getCategoryIcon(tool.category)}</div>`
+                        `<img src="${tool.logoUrl}" alt="${tool.name}" class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-12 h-12 text-gray-700 group-hover:text-${tool.statusColor}\'>${getCategoryIcon(tool.category)}</div>'">` : 
+                        `<div class="w-12 h-12 text-gray-700 group-hover:text-${tool.statusColor} transition-colors">${getCategoryIcon(tool.category)}</div>`
                     }
-                    <div class="absolute top-2 right-2 flex items-center gap-1">
-                        <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[8px] font-bold px-1 uppercase tracking-tighter">${tool.status}</span>
+                    <div class="absolute top-2 right-2">
+                        <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[8px] font-bold px-1.5 py-0.5 uppercase tracking-tighter">${tool.status}</span>
                     </div>
                 </div>
 
-                <!-- Info -->
-                <div class="flex-grow min-w-0">
-                    <h3 class="font-loud text-lg md:text-xl uppercase truncate group-hover:text-${tool.statusColor} transition-colors">${tool.name}</h3>
-                    <p class="text-[10px] text-gray-600 font-mono mb-2 uppercase tracking-widest">${tool.category}</p>
-                    <p class="text-[11px] text-gray-400 font-mono leading-tight line-clamp-2 mb-4 group-hover:text-gray-200 transition-colors">${tool.description}</p>
-                </div>
+                <!-- Info Body -->
+                <div class="p-4 flex flex-col flex-grow">
+                    <div class="mb-3">
+                        <h3 class="font-loud text-xl uppercase truncate group-hover:text-${tool.statusColor} transition-colors leading-none mb-1">${tool.name}</h3>
+                        <p class="text-[9px] text-gray-600 font-mono uppercase tracking-widest">${tool.category}</p>
+                    </div>
 
-                <!-- Stacks Tagging -->
-                <div class="flex flex-wrap gap-1 mb-4 h-10 overflow-hidden content-start">
-                    ${stackChips}
-                </div>
+                    <p class="text-[11px] text-gray-400 font-mono leading-tight line-clamp-2 mb-4 group-hover:text-gray-200 transition-colors">
+                        ${tool.description}
+                    </p>
 
-                <!-- Action & Disclosure -->
-                <div class="mt-auto pt-4 border-t border-gray-900">
-                    <div class="flex flex-col gap-2">
+                    <div class="flex flex-wrap gap-1 mb-4 mt-auto">
+                        ${stackChips}
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="pt-4 border-t border-gray-900 space-y-1.5">
                         <a href="${tool.url}" target="_blank" class="block w-full text-center border border-gray-700 py-2 font-mono text-[10px] uppercase tracking-widest hover:bg-${tool.statusColor} hover:text-black hover:border-${tool.statusColor} transition-all">Open Tool -></a>
                         ${tool.docs ? `<a href="${tool.docs}" target="_blank" class="block w-full text-center border border-gray-800 py-1 font-mono text-[9px] uppercase tracking-widest text-gray-500 hover:text-white transition-all">Documentation</a>` : ''}
+                        
+                        <p class="text-[7px] text-gray-700 font-mono text-center uppercase tracking-tighter mt-2 leading-none">
+                            Disclosure: Link may be affiliate.
+                        </p>
                     </div>
-                    <p class="text-[7px] text-gray-700 font-mono mt-3 uppercase tracking-tighter leading-none">
-                        Note: Link may be affiliate. No extra cost.
-                    </p>
                 </div>
             </div>
             `;
@@ -289,7 +290,7 @@
 
             const container = document.getElementById('tools-container');
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="col-span-full p-12 border-2 border-dashed border-gray-800 text-gray-600 font-mono text-center uppercase tracking-widest">> ZERO_RESULTS_FOUND</div>`;
+                container.innerHTML = `<div class="col-span-full py-16 border-2 border-dashed border-gray-800 text-gray-600 font-mono text-center uppercase tracking-widest">> ZERO_RESULTS_FOUND</div>`;
             } else {
                 container.innerHTML = filtered.map(t => generateToolCard(t)).join('');
             }
@@ -303,31 +304,31 @@
                     .filter(Boolean);
 
                 return `
-                <details class="group border border-gray-800 bg-black hover:border-cyan/40 transition-all">
+                <details class="group border border-gray-800 bg-black hover:border-cyan transition-all">
                     <summary class="cursor-pointer p-4 md:p-6 flex items-center justify-between outline-none">
                         <div>
-                            <h3 class="font-mono text-cyan text-xs mb-1">_STACK_ID: ${stack.id}</h3>
+                            <h3 class="font-mono text-cyan text-[10px] mb-1">ID: ${stack.id}</h3>
                             <p class="font-loud text-xl md:text-3xl text-white uppercase tracking-tighter">${stack.title}</p>
                         </div>
                         <span class="text-cyan font-mono group-open:rotate-90 transition-transform">></span>
                     </summary>
                     <div class="p-4 md:p-6 border-t border-gray-900 bg-gray-900/10">
-                        <p class="font-mono text-gray-400 mb-6 italic border-l-2 border-cyan pl-4">"${stack.hookLine}"</p>
+                        <p class="font-mono text-gray-400 mb-6 italic border-l-2 border-cyan pl-4 text-sm">"${stack.hookLine}"</p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                             <div>
-                                <h4 class="text-[10px] text-gray-600 uppercase tracking-widest mb-2 font-bold">Process:</h4>
-                                <ul class="space-y-2 text-xs font-mono">
-                                    ${stack.wireframe.process.map(p => `<li class="flex gap-2"><span class="text-cyan">»</span> ${p}</li>`).join('')}
+                                <h4 class="text-[9px] text-gray-600 uppercase tracking-widest mb-2 font-bold">Process Logic:</h4>
+                                <ul class="space-y-2 text-[11px] font-mono">
+                                    ${stack.wireframe.process.map(p => `<li class="flex gap-2 text-gray-300"><span class="text-cyan">»</span> ${p}</li>`).join('')}
                                 </ul>
                             </div>
                             <div>
-                                <h4 class="text-[10px] text-gray-600 uppercase tracking-widest mb-2 font-bold">Output:</h4>
-                                <div class="bg-black border border-gray-800 p-3 text-xs font-mono text-acid">
+                                <h4 class="text-[9px] text-gray-600 uppercase tracking-widest mb-2 font-bold">Projected Output:</h4>
+                                <div class="bg-black border border-gray-800 p-3 text-[11px] font-mono text-acid mb-4">
                                     ${stack.wireframe.output.join(', ')}
                                 </div>
-                                <h4 class="text-[10px] text-gray-600 uppercase tracking-widest mb-2 mt-4 font-bold">Proof:</h4>
-                                <div class="text-[11px] font-mono text-gray-400">
+                                <h4 class="text-[9px] text-gray-600 uppercase tracking-widest mb-2 font-bold">Validation Proof:</h4>
+                                <div class="text-[11px] font-mono text-gray-500 italic">
                                     ${stack.wireframe.proof.join(' ')}
                                 </div>
                             </div>
