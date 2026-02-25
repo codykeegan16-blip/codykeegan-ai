@@ -54,11 +54,11 @@
         details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
-<body class="font-mono antialiased chaos-grid selection:bg-acid selection:text-black min-h-screen flex flex-col">
+<body id="top" class="font-mono antialiased chaos-grid selection:bg-acid selection:text-black min-h-screen flex flex-col">
 
     <!-- ================= HEADER ================= -->
-    <header class="border-b-4 border-white bg-black sticky top-0 z-50">
-        <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+    <header class="border-b-4 border-white bg-black sticky top-0 z-50 h-[100px] box-border">
+        <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center h-full">
             <div class="flex items-center gap-6">
                 <div class="w-16 h-16 border-2 border-acid overflow-hidden bg-gray-800">
                     <img src="IMAGE.png" alt="Cody Keegan" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all">
@@ -73,151 +73,177 @@
     </header>
 
     <!-- ================= MAIN CONTENT ================= -->
-    <main class="max-w-[1600px] mx-auto px-6 py-12 flex-grow w-full">
+    <main class="max-w-[1600px] mx-auto px-6 py-12 flex-grow w-full relative">
         
-        <div class="mb-20">
+        <div class="mb-12">
             <h2 class="font-loud text-5xl md:text-7xl uppercase leading-none mb-4">Connection <span class="text-cyan">Established</span>.</h2>
             <p class="text-xl text-gray-400 max-w-2xl font-mono">People say it can't be done. Someone will. Who ships first?</p>
         </div>
 
-        <!-- SECTION 1: DYNAMIC TOOLS GRID -->
-        <section class="mb-32">
-            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-4">
-                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Active Stack</span></h2>
-                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: tools.json</span>
+        <!-- ================= COMMAND BAR (STICKY) ================= -->
+        <div class="sticky top-[100px] z-40 bg-black/95 border-y-4 border-gray-800 py-6 mb-16 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                <span class="font-loud text-acid text-2xl uppercase tracking-widest">COMMAND_BAR</span>
+                <div class="flex flex-wrap gap-4 font-mono text-sm uppercase tracking-widest bg-gray-900/50 px-4 py-2 border border-gray-800">
+                    <a href="#tools" class="hover:text-acid transition-colors">[TOOLS]</a>
+                    <a href="#stacks" class="hover:text-cyan transition-colors">[STACKS]</a>
+                    <a href="#transmit" class="hover:text-magenta transition-colors">[TRANSMIT]</a>
+                    <a href="#top" class="hover:text-white transition-colors">[TOP]</a>
+                </div>
             </div>
             
-            <div class="mb-8 p-4 border-l-4 border-acid bg-acid/10 text-acid font-mono text-sm uppercase tracking-widest">
-                Disclosure: Some links may be affiliate links. If you choose to use them, I may earn a commission at no extra cost to you.
-            </div>
-
-            <!-- CONTROL PANEL -->
-            <div class="flex flex-col xl:flex-row gap-4 mb-8 p-4 border-2 border-gray-800 bg-black/80 items-stretch xl:items-center backdrop-blur-sm">
+            <div class="flex flex-col xl:flex-row gap-4 items-stretch xl:items-center">
                 <div class="flex-grow flex items-center gap-3 border-b-2 xl:border-b-0 xl:border-r-2 border-gray-800 pb-4 xl:pb-0 xl:pr-4">
                     <span class="text-acid font-mono">></span>
-                    <input type="text" id="toolSearch" placeholder="SEARCH TOOLS..." class="bg-transparent border-none text-white font-mono text-sm focus:outline-none w-full placeholder-gray-600">
+                    <input type="text" id="globalSearch" placeholder="SEARCH TOOLS AND STACKS..." class="bg-transparent border-none text-white font-mono text-lg focus:outline-none w-full placeholder-gray-600">
                 </div>
                 <div class="flex flex-wrap md:flex-nowrap gap-4">
-                    <select id="toolCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-2 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer">
+                    <select id="globalCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-3 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer transition-colors">
                         <option value="all">CATEGORY: ALL</option>
                     </select>
-                    <select id="toolStack" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-2 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer">
+                    <select id="globalStack" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-3 focus:border-cyan focus:outline-none flex-grow md:flex-grow-0 cursor-pointer transition-colors">
                         <option value="all">STACK: ALL</option>
                     </select>
-                    <select id="toolSort" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-2 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer">
+                    <select id="globalSort" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-3 focus:border-magenta focus:outline-none flex-grow md:flex-grow-0 cursor-pointer transition-colors">
                         <option value="used">SORT: MOST USED</option>
                         <option value="az">SORT: A-Z</option>
                         <option value="cat">SORT: CATEGORY</option>
                     </select>
                 </div>
             </div>
+        </div>
+
+        <!-- SECTION 1: DYNAMIC TOOLS GRID -->
+        <section id="tools" class="mb-32 scroll-mt-[250px]">
+            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-4">
+                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Active Stack</span></h2>
+                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: tools.json</span>
+            </div>
             
+            <p class="mb-6 text-gray-500 font-mono text-xs uppercase tracking-widest">
+                Disclosure: Some links may be affiliate links. If you choose to use them, I may earn a commission at no extra cost to you.
+            </p>
+
             <!-- Tools get injected here by Javascript -->
-            <div id="tools-container" class="space-y-4">
+            <div id="tools-container">
                 <p class="text-gray-500 font-mono animate-pulse">> FETCHING TOOL DATA...</p>
             </div>
         </section>
 
         <!-- SECTION 2: DYNAMIC CHALLENGE STACKS -->
-        <section class="mb-32">
-            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-4">
-                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Challenge Stacks</span></h2>
-                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: challenge-stacks.json</span>
+        <section id="stacks" class="mb-32 scroll-mt-[250px]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-gray-800 pb-4 mb-4 gap-4">
+                <div class="flex items-baseline gap-4">
+                    <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Challenge Stacks</span></h2>
+                    <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: challenge-stacks.json</span>
+                </div>
+                <button id="toggleStacksBtn" data-state="collapsed" onclick="toggleAllStacks()" class="text-xs font-mono text-cyan uppercase tracking-widest border border-cyan/30 bg-cyan/10 px-4 py-2 hover:bg-cyan/20 transition-colors w-full sm:w-auto text-center sm:text-left">
+                    > EXPAND ALL STACKS
+                </button>
             </div>
 
-            <div class="mb-8 p-4 border-l-4 border-cyan bg-cyan/10 text-cyan font-mono text-sm uppercase tracking-widest">
+            <p class="mb-6 text-gray-500 font-mono text-xs uppercase tracking-widest">
                 Disclosure: Some links may be affiliate links. If you choose to use them, I may earn a commission at no extra cost to you.
-            </div>
+            </p>
 
             <!-- Stacks get injected here by Javascript -->
-            <div id="challenge-stacks-container" class="space-y-4">
+            <div id="challenge-stacks-container">
                 <p class="text-gray-500 font-mono animate-pulse">> FETCHING CHALLENGE STACKS...</p>
             </div>
         </section>
 
         <!-- SECTION 3: SUBMIT YOUR IDEA OR PROOF (TWO-MODE FORM) -->
-        <section class="mb-16">
-            <div class="flex items-center justify-between border-b-2 border-gray-800 pb-4 mb-8">
-                <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">03 // <span class="text-magenta">Transmit</span></h2>
-                <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Status: Listening</span>
-            </div>
+        <section id="transmit" class="mb-16 scroll-mt-[250px]">
+            <details class="group outline-none">
+                <summary class="cursor-pointer flex items-center justify-between outline-none pb-4 border-b-2 border-gray-800">
+                    <div class="flex items-center gap-4">
+                        <h2 class="font-loud text-4xl md:text-5xl uppercase tracking-tighter">03 // <span class="text-magenta">Transmit</span></h2>
+                        <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Status: Listening</span>
+                    </div>
+                    <span class="text-xs font-mono text-magenta uppercase tracking-widest border border-magenta/30 bg-magenta/10 px-4 py-2 group-open:bg-magenta group-open:text-black transition-all select-none">
+                        <span class="group-open:hidden">> OPEN TRANSMIT</span>
+                        <span class="hidden group-open:block">CLOSE [X]</span>
+                    </span>
+                </summary>
+                
+                <div class="pt-8">
+                    <div class="max-w-4xl border-4 border-white bg-black relative p-8 md:p-12">
+                        <!-- Decorative terminal tag -->
+                        <div class="absolute -top-4 left-8 bg-black px-4 border border-white font-mono text-magenta text-sm tracking-widest">
+                            INPUT_REQUIRED
+                        </div>
 
-            <div class="max-w-4xl border-4 border-white bg-black relative p-8 md:p-12">
-                <!-- Decorative terminal tag -->
-                <div class="absolute -top-4 left-8 bg-black px-4 border border-white font-mono text-magenta text-sm tracking-widest">
-                    INPUT_REQUIRED
+                        <form onsubmit="submitIdea(event)" class="space-y-8 mt-4">
+                            
+                            <!-- MODE SELECTOR -->
+                            <div>
+                                <label for="submissionType" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Transmission Mode // Select</label>
+                                <select id="submissionType" onchange="toggleFormMode()" 
+                                        class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all cursor-pointer">
+                                    <option value="idea">Idea for a new challenge</option>
+                                    <option value="proof">Completed build / proof</option>
+                                </select>
+                            </div>
+
+                            <!-- MODE 1: IDEA FIELDS -->
+                            <div id="ideaModeFields" class="space-y-8">
+                                <div>
+                                    <label for="ideaTitle" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Protocol Name // Title</label>
+                                    <input type="text" id="ideaTitle" required placeholder="e.g., Automated Newsletter Agent" 
+                                           class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
+                                </div>
+                                
+                                <div>
+                                    <label for="ideaDesc" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Hypothesis // Description</label>
+                                    <textarea id="ideaDesc" required rows="4" placeholder="What does it do? How do the tools connect?" 
+                                              class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all custom-scrollbar"></textarea>
+                                </div>
+                                
+                                <div>
+                                    <label for="ideaLinks" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Reference Data // Links (Optional)</label>
+                                    <input type="text" id="ideaLinks" placeholder="https://..." 
+                                           class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
+                                </div>
+                            </div>
+
+                            <!-- MODE 2: PROOF FIELDS -->
+                            <div id="proofModeFields" class="space-y-8 hidden">
+                                <div>
+                                    <label for="completedStack" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Challenge Selection // Stack</label>
+                                    <select id="completedStack" 
+                                            class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all cursor-pointer">
+                                        <option value="" disabled selected>Select the stack you built...</option>
+                                        <option value="The Autonomous SDR">The Autonomous SDR</option>
+                                        <option value="Voice-Activated Closer">Voice-Activated Closer</option>
+                                        <option value="Zero-Click Content Engine">Zero-Click Content Engine</option>
+                                        <option value="Faceless Video Factory">Faceless Video Factory</option>
+                                        <option value="The Infinite Landing Page">The Infinite Landing Page</option>
+                                        <option value="AI-Powered Research Agency">AI-Powered Research Agency</option>
+                                        <option value="Local Business Lead Machine">Local Business Lead Machine</option>
+                                        <option value="Auto-Newsletter Monetization">Auto-Newsletter Monetization</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="proofLink" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Proof of Work // URL</label>
+                                    <input type="url" id="proofLink" placeholder="https://..." 
+                                           class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
+                                </div>
+
+                                <div>
+                                    <label for="completionNotes" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Field Notes // Optional</label>
+                                    <textarea id="completionNotes" rows="4" placeholder="How long did it take? What broke? Did it work?" 
+                                              class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all custom-scrollbar"></textarea>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="bg-white text-black font-loud uppercase text-3xl px-8 py-4 hover:bg-magenta hover:text-white transition-colors w-full md:w-auto border-2 border-transparent hover:border-white">
+                                Transmit Data ->
+                            </button>
+                        </form>
+                    </div>
                 </div>
-
-                <form onsubmit="submitIdea(event)" class="space-y-8 mt-4">
-                    
-                    <!-- MODE SELECTOR -->
-                    <div>
-                        <label for="submissionType" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Transmission Mode // Select</label>
-                        <select id="submissionType" onchange="toggleFormMode()" 
-                                class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all cursor-pointer">
-                            <option value="idea">Idea for a new challenge</option>
-                            <option value="proof">Completed build / proof</option>
-                        </select>
-                    </div>
-
-                    <!-- MODE 1: IDEA FIELDS -->
-                    <div id="ideaModeFields" class="space-y-8">
-                        <div>
-                            <label for="ideaTitle" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Protocol Name // Title</label>
-                            <input type="text" id="ideaTitle" required placeholder="e.g., Automated Newsletter Agent" 
-                                   class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
-                        </div>
-                        
-                        <div>
-                            <label for="ideaDesc" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Hypothesis // Description</label>
-                            <textarea id="ideaDesc" required rows="4" placeholder="What does it do? How do the tools connect?" 
-                                      class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all custom-scrollbar"></textarea>
-                        </div>
-                        
-                        <div>
-                            <label for="ideaLinks" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Reference Data // Links (Optional)</label>
-                            <input type="text" id="ideaLinks" placeholder="https://..." 
-                                   class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
-                        </div>
-                    </div>
-
-                    <!-- MODE 2: PROOF FIELDS -->
-                    <div id="proofModeFields" class="space-y-8 hidden">
-                        <div>
-                            <label for="completedStack" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Challenge Selection // Stack</label>
-                            <select id="completedStack" 
-                                    class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all cursor-pointer">
-                                <option value="" disabled selected>Select the stack you built...</option>
-                                <!-- Populated dynamically by JS if desired, or kept static -->
-                                <option value="The Autonomous SDR">The Autonomous SDR</option>
-                                <option value="Voice-Activated Closer">Voice-Activated Closer</option>
-                                <option value="Zero-Click Content Engine">Zero-Click Content Engine</option>
-                                <option value="Faceless Video Factory">Faceless Video Factory</option>
-                                <option value="The Infinite Landing Page">The Infinite Landing Page</option>
-                                <option value="AI-Powered Research Agency">AI-Powered Research Agency</option>
-                                <option value="Local Business Lead Machine">Local Business Lead Machine</option>
-                                <option value="Auto-Newsletter Monetization">Auto-Newsletter Monetization</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="proofLink" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Proof of Work // URL</label>
-                            <input type="url" id="proofLink" placeholder="https://..." 
-                                   class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all">
-                        </div>
-
-                        <div>
-                            <label for="completionNotes" class="block font-mono text-sm text-gray-400 mb-2 uppercase tracking-widest">Field Notes // Optional</label>
-                            <textarea id="completionNotes" rows="4" placeholder="How long did it take? What broke? Did it work?" 
-                                      class="w-full bg-transparent border-2 border-gray-800 text-white font-mono p-4 placeholder-gray-700 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all custom-scrollbar"></textarea>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="bg-white text-black font-loud uppercase text-3xl px-8 py-4 hover:bg-magenta hover:text-white transition-colors w-full md:w-auto border-2 border-transparent hover:border-white">
-                        Transmit Data ->
-                    </button>
-                </form>
-            </div>
+            </details>
         </section>
 
     </main>
@@ -237,8 +263,9 @@
         // Data stores
         let globalTools = [];
         let globalStacks = [];
+        let isShowingAllTools = false;
 
-        // Manual category mapping since it's not in tools.json
+        // Manual category mapping
         const toolCategoryMap = {
             "Zapier": "Automation", "Make": "Automation", "Instantly": "Automation",
             "OpenAI": "Agents", "Anthropic": "Agents", "Claude": "Agents", "Vapi": "Agents", "Retell AI": "Agents", "Bland AI": "Agents",
@@ -267,7 +294,6 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // Fetch JSON asynchronously
                 const [toolsRes, stacksRes] = await Promise.all([
                     fetch('tools.json').catch(() => ({ ok: false })),
                     fetch('challenge-stacks.json').catch(() => ({ ok: false }))
@@ -293,14 +319,13 @@
                 });
 
                 populateDropdowns();
-                renderTools();
-                renderStacks();
+                handleFilterChange();
 
-                // Setup Filter Listeners
-                document.getElementById('toolSearch').addEventListener('input', renderTools);
-                document.getElementById('toolCategory').addEventListener('change', renderTools);
-                document.getElementById('toolStack').addEventListener('change', renderTools);
-                document.getElementById('toolSort').addEventListener('change', renderTools);
+                // Setup Listeners for Command Bar
+                document.getElementById('globalSearch').addEventListener('input', handleFilterChange);
+                document.getElementById('globalCategory').addEventListener('change', handleFilterChange);
+                document.getElementById('globalStack').addEventListener('change', handleFilterChange);
+                document.getElementById('globalSort').addEventListener('change', handleFilterChange);
 
             } catch (e) {
                 console.error("Initialization Error:", e);
@@ -311,7 +336,7 @@
         });
 
         function populateDropdowns() {
-            const catSelect = document.getElementById('toolCategory');
+            const catSelect = document.getElementById('globalCategory');
             const categories = [...new Set(globalTools.map(t => t.category))].sort();
             categories.forEach(c => {
                 const opt = document.createElement('option');
@@ -320,7 +345,7 @@
                 catSelect.appendChild(opt);
             });
 
-            const stackSelect = document.getElementById('toolStack');
+            const stackSelect = document.getElementById('globalStack');
             globalStacks.forEach(s => {
                 const opt = document.createElement('option');
                 opt.value = s.id;
@@ -329,11 +354,66 @@
             });
         }
 
+        function handleFilterChange() {
+            renderTools();
+            renderStacks();
+        }
+
+        function toggleToolsMode() {
+            isShowingAllTools = !isShowingAllTools;
+            renderTools();
+        }
+
+        function toggleAllStacks() {
+            const detailsElements = document.querySelectorAll('#challenge-stacks-container details');
+            const btn = document.getElementById('toggleStacksBtn');
+            const isExpanding = btn.dataset.state === 'collapsed';
+            
+            detailsElements.forEach(el => {
+                if (isExpanding) el.setAttribute('open', '');
+                else el.removeAttribute('open');
+            });
+            
+            btn.dataset.state = isExpanding ? 'expanded' : 'collapsed';
+            btn.innerHTML = isExpanding ? '> COLLAPSE ALL STACKS' : '> EXPAND ALL STACKS';
+        }
+
+        function generateToolCard(tool) {
+            const stackTitles = tool.usedIn.map(id => {
+                const s = globalStacks.find(x => x.id === id);
+                return s ? s.title : id;
+            });
+            const stackChips = stackTitles.map(t => `<span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest truncate max-w-[150px] inline-block align-bottom">${t}</span>`).join('');
+            const usedInHtml = stackChips.length > 0 ? `<div class="flex flex-wrap gap-2 items-center mt-3"><span class="text-[10px] text-gray-600 uppercase tracking-widest">Used in:</span>${stackChips}</div>` : '';
+
+            return `
+            <div class="tool-card group border-2 border-gray-800 hover:border-${tool.statusColor} p-4 bg-black transition-all duration-200 flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-center w-full">
+                <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center border-2 border-gray-800 text-gray-500 group-hover:text-${tool.statusColor} group-hover:border-${tool.statusColor} transition-colors">
+                    ${getCategoryIcon(tool.category)}
+                </div>
+                
+                <div class="flex-grow min-w-0">
+                    <div class="flex flex-wrap items-center gap-3 mb-1">
+                        <h3 class="font-loud text-2xl uppercase tracking-wide truncate group-hover:text-${tool.statusColor} transition-colors">${tool.name}</h3>
+                        <span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest">${tool.category}</span>
+                        <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[10px] font-bold px-1.5 py-0.5 uppercase tracking-widest">${tool.status}</span>
+                    </div>
+                    <p class="text-gray-400 text-sm font-mono leading-relaxed truncate md:whitespace-normal pr-4">${tool.description}</p>
+                    ${usedInHtml}
+                </div>
+
+                <div class="flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
+                    <a href="${tool.url}" target="_blank" class="block text-center border-2 border-gray-800 group-hover:border-${tool.statusColor} group-hover:text-${tool.statusColor} hover:bg-${tool.statusColor}/10 text-gray-400 font-mono text-xs uppercase px-6 py-3 transition-all tracking-widest">Open -></a>
+                </div>
+            </div>
+            `;
+        }
+
         function renderTools() {
-            const search = document.getElementById('toolSearch').value.toLowerCase();
-            const cat = document.getElementById('toolCategory').value;
-            const stackFilter = document.getElementById('toolStack').value;
-            const sort = document.getElementById('toolSort').value;
+            const search = document.getElementById('globalSearch').value.toLowerCase();
+            const cat = document.getElementById('globalCategory').value;
+            const stackFilter = document.getElementById('globalStack').value;
+            const sort = document.getElementById('globalSort').value;
 
             // Filter
             let filtered = globalTools.filter(t => {
@@ -343,65 +423,103 @@
                 return matchSearch && matchCat && matchStack;
             });
 
-            // Sort
-            filtered.sort((a, b) => {
-                if (sort === 'used') {
-                    return (b.usedIn ? b.usedIn.length : 0) - (a.usedIn ? a.usedIn.length : 0);
-                } else if (sort === 'az') {
-                    return a.name.localeCompare(b.name);
-                } else if (sort === 'cat') {
-                    return a.category.localeCompare(b.category);
-                }
-                return 0;
-            });
-
             const container = document.getElementById('tools-container');
             if (filtered.length === 0) {
                 container.innerHTML = `<div class="p-8 border-2 border-dashed border-gray-800 text-gray-500 font-mono text-center uppercase tracking-widest">> No tools found matching criteria.</div>`;
                 return;
             }
 
-            container.innerHTML = filtered.map(tool => {
-                const stackTitles = tool.usedIn.map(id => {
-                    const s = globalStacks.find(x => x.id === id);
-                    return s ? s.title : id;
+            if (!isShowingAllTools) {
+                // DEFAULT MODE: TOP 10 (respecting current filters, defaulting to mostly used logic)
+                let topTools = [...filtered].sort((a,b) => {
+                    if (sort === 'used') return (b.usedIn?.length || 0) - (a.usedIn?.length || 0);
+                    if (sort === 'az') return a.name.localeCompare(b.name);
+                    if (sort === 'cat') return a.category.localeCompare(b.category);
+                    return 0;
+                }).slice(0, 10);
+
+                let html = `<div class="space-y-4">` + topTools.map(t => generateToolCard(t)).join('') + `</div>`;
+                
+                if (filtered.length > topTools.length || filtered.length === topTools.length) {
+                     html += `
+                     <div class="mt-8 text-center">
+                         <button onclick="toggleToolsMode()" class="bg-gray-900 border-2 border-gray-700 hover:border-acid hover:text-acid text-gray-300 font-mono text-sm uppercase tracking-widest px-8 py-4 transition-all">
+                             > SHOW ALL TOOLS GROUPED BY CATEGORY
+                         </button>
+                     </div>`;
+                }
+                container.innerHTML = html;
+            } else {
+                // EXPANDED MODE: GROUPED BY CATEGORY
+                const grouped = {};
+                filtered.forEach(t => {
+                    if(!grouped[t.category]) grouped[t.category] = [];
+                    grouped[t.category].push(t);
                 });
-                const stackChips = stackTitles.map(t => `<span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest">${t}</span>`).join('');
-                const usedInHtml = stackChips.length > 0 ? `<div class="flex flex-wrap gap-2 items-center mt-3"><span class="text-[10px] text-gray-600 uppercase tracking-widest">Used in:</span>${stackChips}</div>` : '';
+                
+                const sortedCats = Object.keys(grouped).sort();
+                let html = '';
+                
+                sortedCats.forEach(c => {
+                    let toolsInCat = grouped[c];
+                    toolsInCat.sort((a, b) => {
+                        if (sort === 'used') return (b.usedIn?.length || 0) - (a.usedIn?.length || 0);
+                        if (sort === 'az') return a.name.localeCompare(b.name);
+                        return 0; 
+                    });
 
-                return `
-                <div class="tool-card group border-2 border-gray-800 hover:border-${tool.statusColor} p-4 bg-black transition-all duration-200 flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-center w-full">
-                    
-                    <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center border-2 border-gray-800 text-gray-500 group-hover:text-${tool.statusColor} group-hover:border-${tool.statusColor} transition-colors">
-                        ${getCategoryIcon(tool.category)}
-                    </div>
-                    
-                    <div class="flex-grow min-w-0">
-                        <div class="flex flex-wrap items-center gap-3 mb-1">
-                            <h3 class="font-loud text-2xl uppercase tracking-wide truncate group-hover:text-${tool.statusColor} transition-colors">${tool.name}</h3>
-                            <span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest">${tool.category}</span>
-                            <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[10px] font-bold px-1.5 py-0.5 uppercase tracking-widest">${tool.status}</span>
+                    html += `
+                    <details open class="mb-4 group border-2 border-gray-800 bg-black">
+                        <summary class="cursor-pointer p-4 bg-gray-900/40 hover:bg-gray-800 font-loud text-2xl uppercase tracking-widest text-white outline-none flex justify-between items-center transition-colors">
+                            <div class="flex items-center gap-4">
+                                <span class="text-acid">${getCategoryIcon(c)}</span>
+                                CATEGORY: ${c} <span class="text-gray-500 font-mono text-sm tracking-normal">(${toolsInCat.length})</span>
+                            </div>
+                            <span class="text-acid font-mono text-xl group-open:rotate-90 transition-transform">></span>
+                        </summary>
+                        <div class="p-4 space-y-4 border-t-2 border-gray-800">
+                            ${toolsInCat.map(t => generateToolCard(t)).join('')}
                         </div>
-                        <p class="text-gray-400 text-sm font-mono leading-relaxed truncate md:whitespace-normal pr-4">${tool.description}</p>
-                        ${usedInHtml}
-                    </div>
+                    </details>`;
+                });
 
-                    <div class="flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
-                        <a href="${tool.url}" target="_blank" class="block text-center border-2 border-gray-800 group-hover:border-${tool.statusColor} group-hover:text-${tool.statusColor} hover:bg-${tool.statusColor}/10 text-gray-400 font-mono text-xs uppercase px-6 py-3 transition-all tracking-widest">Open -></a>
-                    </div>
-                </div>
-                `;
-            }).join('');
+                html += `
+                <div class="mt-8 text-center">
+                    <button onclick="toggleToolsMode()" class="bg-gray-900 border-2 border-gray-700 hover:border-acid hover:text-acid text-gray-300 font-mono text-sm uppercase tracking-widest px-8 py-4 transition-all">
+                        > COLLAPSE TO TOP 10
+                    </button>
+                </div>`;
+                container.innerHTML = html;
+            }
         }
 
         function renderStacks() {
+            const search = document.getElementById('globalSearch').value.toLowerCase();
+            const cat = document.getElementById('globalCategory').value;
+            const stackFilter = document.getElementById('globalStack').value;
+
+            let filteredStacks = globalStacks.filter(s => {
+                const searchStr = `${s.title} ${s.hookLine} ${s.wireframe.inputs.join(' ')} ${s.wireframe.process.join(' ')} ${s.wireframe.output.join(' ')} ${s.wireframe.proof.join(' ')}`.toLowerCase();
+                const matchSearch = searchStr.includes(search);
+                const matchStack = stackFilter === 'all' || s.id === stackFilter;
+                
+                let matchCat = cat === 'all';
+                if (!matchCat) {
+                    matchCat = s.toolIds.some(toolId => {
+                        const t = globalTools.find(x => x.id === toolId);
+                        return t && t.category === cat;
+                    });
+                }
+                return matchSearch && matchStack && matchCat;
+            });
+
             const container = document.getElementById('challenge-stacks-container');
-            if (globalStacks.length === 0) {
-                container.innerHTML = `<div class="p-8 border-2 border-dashed border-gray-800 text-gray-500 font-mono text-center uppercase tracking-widest">> No stacks loaded.</div>`;
+            if (filteredStacks.length === 0) {
+                container.innerHTML = `<div class="p-8 border-2 border-dashed border-gray-800 text-gray-500 font-mono text-center uppercase tracking-widest">> No stacks found matching criteria.</div>`;
                 return;
             }
 
-            container.innerHTML = globalStacks.map(stack => {
+            container.innerHTML = `<div class="space-y-4">` + filteredStacks.map(stack => {
                 const stackTools = stack.toolIds
                     .map(id => globalTools.find(t => t.id === id))
                     .filter(Boolean);
@@ -410,11 +528,12 @@
                 <details class="group border-2 border-dashed border-gray-700 bg-black hover:border-cyan transition-all duration-300">
                     <summary class="cursor-pointer p-6 flex flex-row items-center justify-between outline-none">
                         <div class="pr-6">
-                            <h3 class="font-mono font-bold text-xl text-cyan mb-1 hover:underline">_${stack.title}</h3>
+                            <h3 class="font-mono font-bold text-xl text-cyan mb-1 group-hover:underline transition-all">_${stack.title}</h3>
                             <p class="font-loud text-2xl md:text-3xl text-white uppercase tracking-tighter leading-tight">"${stack.hookLine}"</p>
                         </div>
-                        <div class="flex-shrink-0 w-8 h-8 border-2 border-cyan text-cyan flex items-center justify-center font-mono text-xl group-open:rotate-90 transition-transform bg-cyan/10 select-none">
-                            >
+                        <div class="flex-shrink-0 text-cyan flex flex-col items-center justify-center font-mono text-xs group-open:text-gray-500 transition-colors bg-cyan/10 group-open:bg-transparent px-3 py-2 border border-cyan/30 group-open:border-transparent select-none w-20">
+                            <span class="group-open:hidden uppercase tracking-widest font-bold">EXPAND</span>
+                            <span class="hidden group-open:block rotate-90 text-lg">></span>
                         </div>
                     </summary>
                     <div class="p-6 pt-0 border-t border-gray-800 mt-2">
@@ -459,7 +578,7 @@
                     </div>
                 </details>
                 `;
-            }).join('');
+            }).join('') + `</div>`;
         }
 
         // Form mode toggling
