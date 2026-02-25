@@ -37,11 +37,13 @@
         details > summary::-webkit-details-marker { display: none; }
         .sticky-bar { top: 80px; }
         @media (min-width: 768px) { .sticky-bar { top: 100px; } }
+        
+        /* Fix for broken grid layouts */
+        .tool-card { min-height: 450px; display: flex; flex-direction: column; }
     </style>
 </head>
 <body id="top" class="font-mono antialiased chaos-grid selection:bg-acid selection:text-black min-h-screen flex flex-col">
 
-    <!-- ================= HEADER ================= -->
     <header class="border-b-4 border-white bg-black sticky top-0 z-50 h-[80px] md:h-[100px] box-border">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center h-full">
             <div class="flex items-center gap-4 md:gap-6">
@@ -57,7 +59,6 @@
         </div>
     </header>
 
-    <!-- ================= MAIN CONTENT ================= -->
     <main class="max-w-[1600px] mx-auto px-4 md:px-6 py-8 flex-grow w-full">
         
         <div class="mb-8 md:mb-12">
@@ -65,16 +66,13 @@
             <p class="text-base md:text-xl text-gray-400 max-w-2xl font-mono leading-tight">Everything is an experiment. Choose your tools wisely.</p>
         </div>
 
-        <!-- ================= STICKY FILTER BAR ================= -->
         <div class="sticky sticky-bar z-40 bg-black/95 border-y-2 border-gray-800 py-4 mb-12 backdrop-blur-md">
             <div class="flex flex-col xl:flex-row gap-4 items-stretch">
-                <!-- Search Input -->
                 <div class="flex-grow flex items-center gap-3 bg-gray-900 border border-gray-800 px-4 py-2">
                     <span class="text-acid font-mono font-bold">></span>
                     <input type="text" id="globalSearch" placeholder="SEARCH SYSTEM..." class="bg-transparent border-none text-white font-mono text-sm md:text-base focus:outline-none w-full placeholder-gray-600">
                 </div>
                 
-                <!-- Dropdowns -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
                     <select id="globalCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-[10px] md:text-xs px-3 py-2.5 focus:border-acid focus:outline-none cursor-pointer uppercase">
                         <option value="all">CATEGORY: ALL</option>
@@ -91,20 +89,17 @@
             </div>
         </div>
 
-        <!-- SECTION 1: TOOLS GRID -->
         <section id="tools" class="mb-24 scroll-mt-[180px]">
             <div class="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-gray-800 pb-4 mb-8">
                 <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">01 // <span class="text-acid">Inventory</span></h2>
                 <p class="text-[9px] font-mono text-gray-500 uppercase tracking-widest mt-2 md:mt-0">Affiliate Links Active. No extra cost to user.</p>
             </div>
 
-            <!-- Grid Container: Clean Responsive Grid -->
-            <div id="tools-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div id="tools-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[400px]">
                 <p class="col-span-full text-gray-500 font-mono animate-pulse">> ACCESSING DATABASE...</p>
             </div>
         </section>
 
-        <!-- SECTION 2: CHALLENGE STACKS -->
         <section id="stacks" class="mb-24 scroll-mt-[180px]">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-gray-800 pb-4 mb-8 gap-4">
                 <h2 class="font-loud text-3xl md:text-5xl uppercase tracking-tighter">02 // <span class="text-cyan">Stacks</span></h2>
@@ -120,7 +115,6 @@
 
     </main>
 
-    <!-- ================= FOOTER ================= -->
     <footer class="border-t-2 border-gray-900 bg-black py-10 px-6 text-center mt-auto">
         <p class="text-gray-600 text-[10px] uppercase tracking-[0.3em] mb-4">CodyKeegan.AI // Build the weird things.</p>
         <div class="flex flex-wrap justify-center gap-6 font-mono text-[10px] text-gray-500 uppercase tracking-widest">
@@ -132,7 +126,6 @@
         </div>
     </footer>
 
-    <!-- ================= JAVASCRIPT ================= -->
     <script>
         let globalTools = [];
         let globalStacks = [];
@@ -150,14 +143,14 @@
 
         function getCategoryIcon(category) {
             const icons = {
-                'Automation': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>',
-                'Agents': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 15h.01M16 15h.01"/></svg>',
-                'Media': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>',
-                'Research': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-                'Infra': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>',
-                'Data': '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>'
+                'Automation': '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>',
+                'Agents': '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 15h.01M16 15h.01"/></svg>',
+                'Media': '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>',
+                'Research': '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+                'Infra': '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>',
+                'Data': '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>'
             };
-            return icons[category] || '<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
+            return icons[category] || '<svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
@@ -222,45 +215,43 @@
         function generateToolCard(tool) {
             const stackChips = tool.usedIn.map(id => {
                 const s = globalStacks.find(x => x.id === id);
-                return s ? `<button onclick="setStackFilter('${id}')" class="bg-gray-900 border border-gray-700 text-[8px] text-gray-500 px-1 hover:text-cyan hover:border-cyan truncate max-w-full">${s.title}</button>` : '';
+                return s ? `<button onclick="setStackFilter('${id}')" class="bg-gray-900 border border-gray-700 text-[8px] text-gray-500 px-1 hover:text-cyan hover:border-cyan truncate max-w-full block text-left">${s.title}</button>` : '';
             }).join('');
 
+            const statusClass = tool.statusColor === 'magenta' ? 'text-white' : 'text-black';
+
             return `
-            <div class="group border-2 border-gray-800 bg-black flex flex-col h-full hover:border-${tool.statusColor} transition-all duration-300">
-                <!-- Header: Logo Area (Constrained) -->
-                <div class="h-24 md:h-32 bg-gray-900/40 border-b border-gray-800 relative flex items-center justify-center p-6">
-                    ${tool.logoUrl ? 
-                        `<img src="${tool.logoUrl}" alt="${tool.name}" class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-12 h-12 text-gray-700 group-hover:text-${tool.statusColor}\'>${getCategoryIcon(tool.category)}</div>'">` : 
-                        `<div class="w-12 h-12 text-gray-700 group-hover:text-${tool.statusColor} transition-colors">${getCategoryIcon(tool.category)}</div>`
-                    }
+            <div class="tool-card group border-2 border-gray-800 bg-black hover:border-${tool.statusColor} transition-all duration-300">
+                <div class="h-32 bg-gray-900/40 border-b border-gray-800 relative flex items-center justify-center p-6 shrink-0">
+                    <div class="w-16 h-16 text-gray-700 group-hover:text-${tool.statusColor} transition-colors flex items-center justify-center">
+                        ${getCategoryIcon(tool.category)}
+                    </div>
                     <div class="absolute top-2 right-2">
-                        <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[8px] font-bold px-1.5 py-0.5 uppercase tracking-tighter">${tool.status}</span>
+                        <span class="bg-${tool.statusColor} ${statusClass} text-[8px] font-bold px-1.5 py-0.5 uppercase tracking-tighter">${tool.status}</span>
                     </div>
                 </div>
 
-                <!-- Info Body -->
-                <div class="p-4 flex flex-col flex-grow">
+                <div class="p-4 flex flex-col flex-grow overflow-hidden">
                     <div class="mb-3">
                         <h3 class="font-loud text-xl uppercase truncate group-hover:text-${tool.statusColor} transition-colors leading-none mb-1">${tool.name}</h3>
                         <p class="text-[9px] text-gray-600 font-mono uppercase tracking-widest">${tool.category}</p>
                     </div>
 
-                    <p class="text-[11px] text-gray-400 font-mono leading-tight line-clamp-2 mb-4 group-hover:text-gray-200 transition-colors">
+                    <p class="text-[11px] text-gray-400 font-mono leading-tight line-clamp-3 mb-4 group-hover:text-gray-200 transition-colors">
                         ${tool.description}
                     </p>
 
-                    <div class="flex flex-wrap gap-1 mb-4 mt-auto">
-                        ${stackChips}
+                    <div class="flex flex-col gap-1 mb-4 mt-auto">
+                        <p class="text-[7px] text-gray-700 uppercase tracking-widest font-bold">Used In:</p>
+                        <div class="flex flex-wrap gap-1">
+                            ${stackChips || '<span class="text-[8px] text-gray-800 italic">No Stacks Defined</span>'}
+                        </div>
                     </div>
 
-                    <!-- Actions -->
                     <div class="pt-4 border-t border-gray-900 space-y-1.5">
                         <a href="${tool.url}" target="_blank" class="block w-full text-center border border-gray-700 py-2 font-mono text-[10px] uppercase tracking-widest hover:bg-${tool.statusColor} hover:text-black hover:border-${tool.statusColor} transition-all">Open Tool -></a>
                         ${tool.docs ? `<a href="${tool.docs}" target="_blank" class="block w-full text-center border border-gray-800 py-1 font-mono text-[9px] uppercase tracking-widest text-gray-500 hover:text-white transition-all">Documentation</a>` : ''}
-                        
-                        <p class="text-[7px] text-gray-700 font-mono text-center uppercase tracking-tighter mt-2 leading-none">
-                            Disclosure: Link may be affiliate.
-                        </p>
+                        <p class="text-[7px] text-gray-700 font-mono text-center uppercase tracking-tighter mt-2 leading-none">Link may be affiliate.</p>
                     </div>
                 </div>
             </div>
@@ -280,7 +271,6 @@
                 return matchSearch && matchCat && matchStack;
             });
 
-            // Sorting
             filtered.sort((a, b) => {
                 if (sort === 'az') return a.name.localeCompare(b.name);
                 if (sort === 'za') return b.name.localeCompare(a.name);
@@ -298,6 +288,7 @@
 
         function renderStacks() {
             const container = document.getElementById('challenge-stacks-container');
+            if (globalStacks.length === 0) return;
             container.innerHTML = globalStacks.map(stack => {
                 const stackTools = stack.toolIds
                     .map(id => globalTools.find(t => t.id === id))
