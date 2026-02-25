@@ -23,10 +23,15 @@
         .text-stroke { -webkit-text-stroke: 1px #fff; color: transparent; }
         .text-stroke:hover { color: #fff; -webkit-text-stroke: 0px; cursor: crosshair; }
         .chaos-grid { background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px; }
+        @keyframes typeIn { from { width: 0; } to { width: 100%; } }
+        .type-line { overflow: hidden; white-space: nowrap; border-right: 2px solid #ccff00; width: 0; }
+        .type-line.active { animation: typeIn 0.6s steps(30) forwards; }
+        .type-line.done { border-right: none; width: 100%; }
     </style>
 </head>
 <body class="font-mono antialiased overflow-x-hidden chaos-grid selection:bg-acid selection:text-black flex flex-col min-h-screen">
 
+    <!-- Marquee Banner -->
     <div class="w-full bg-acid text-black font-loud font-black uppercase text-xl md:text-3xl py-2 overflow-hidden border-b-4 border-black relative">
         <div class="flex whitespace-nowrap">
             <div class="animate-marquee flex-shrink-0">
@@ -39,45 +44,168 @@
     </div>
 
     <main class="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-16 pt-24 pb-20 flex-grow">
-        <div class="mb-32 text-center md:text-left">
+        
+        <!-- Hero -->
+        <div class="mb-32">
             <h1 class="font-loud font-black text-6xl sm:text-8xl md:text-[140px] leading-[0.85] tracking-tighter uppercase mb-12">
                 I can't stop<br>
                 <span class="text-stroke transition-all duration-300">thinking</span><br>
                 about this.
             </h1>
+            <p class="font-mono text-2xl md:text-4xl max-w-4xl leading-tight text-gray-300">
+                What if you wired an image generator to a mechanical claw?
+            </p>
         </div>
 
+        <!-- Access Terminal -->
         <div class="max-w-6xl mx-auto border-4 border-white p-6 md:p-16 relative bg-black">
             <div class="absolute top-0 right-0 w-16 h-16 border-b-4 border-l-4 border-acid"></div>
             <div class="absolute -top-3 left-10 bg-black px-4 font-mono text-sm text-gray-500 tracking-widest uppercase">Access_Terminal</div>
 
             <div class="text-center mb-16">
-                <h2 class="font-loud text-6xl md:text-9xl uppercase tracking-tighter mb-6 leading-[0.8]">The <span class="text-acid">Dashboard</span>.</h2>
-                <p class="font-mono text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">Access the raw, unpolished AI blueprints. 99% of people will stare at this and do nothing. The 1% will take these tools and build a monster.</p>
+                <h2 class="font-loud text-6xl md:text-9xl uppercase tracking-tighter mb-6 leading-[0.8]">
+                    The <span class="text-acid">Dashboard</span>.
+                </h2>
+                <p class="font-mono text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+                    Access the raw, unpolished AI blueprints. 99% of people will stare at this and do nothing. The 1% will take these tools and build a monster.
+                </p>
             </div>
 
-            <form action="https://app.kit.com/forms/8114380a48/subscriptions" method="post" data-sv-form="8114380a48" id="chaosForm" class="flex flex-col lg:flex-row gap-0 group relative z-20">
-                <input type="email" name="email_address" required placeholder="ENTER EMAIL // ACCESS VAULT" class="w-full lg:w-2/3 bg-transparent border-4 border-white text-white font-mono text-xl md:text-3xl p-6 md:p-8 placeholder-gray-600 focus:outline-none focus:border-acid focus:bg-white/5 transition-all">
-                <button type="submit" class="w-full lg:w-1/3 bg-white text-black font-loud uppercase text-4xl md:text-5xl px-8 py-6 tracking-tighter hover:bg-acid transition-colors border-4 border-white lg:border-l-0 whitespace-nowrap flex items-center justify-center gap-4">
+            <!-- Kit Form — Terminal Design (AJAX headless submission) -->
+            <form id="chaosForm" class="flex flex-col lg:flex-row gap-0 group relative z-20" novalidate>
+                <input type="email" 
+                       id="emailInput"
+                       name="email_address" 
+                       required 
+                       placeholder="ENTER EMAIL // ACCESS VAULT" 
+                       class="w-full lg:w-2/3 bg-transparent border-4 border-white text-white font-mono text-xl md:text-3xl p-6 md:p-8 placeholder-gray-600 focus:outline-none focus:border-acid focus:bg-white/5 transition-all">
+                
+                <button type="submit" 
+                        id="submitBtn"
+                        class="w-full lg:w-1/3 bg-white text-black font-loud uppercase text-4xl md:text-5xl px-8 py-6 tracking-tighter hover:bg-acid transition-colors border-4 border-white lg:border-l-0 whitespace-nowrap flex items-center justify-center gap-4">
                     LET ME IN <span class="animate-pulse-fast">_</span>
                 </button>
             </form>
 
-            <div id="terminalSuccess" class="hidden mt-8 p-6 border-2 border-dashed border-acid bg-acid/10 text-acid font-mono text-xl text-left">
-                > CONNECTION ESTABLISHED.<br>> SECURING ACCESS...<br>> REDIRECTING TO MISSION HUB...
+            <!-- Terminal Success Animation -->
+            <div id="terminalSuccess" class="hidden mt-8 p-6 border-2 border-dashed border-acid bg-acid/10 text-acid font-mono text-lg md:text-xl text-left space-y-2">
+                <div id="line1" class="type-line">> CONNECTION ESTABLISHED.</div>
+                <div id="line2" class="type-line">> SECURING ACCESS...</div>
+                <div id="line3" class="type-line">> REDIRECTING TO MISSION HUB...</div>
+            </div>
+
+            <!-- Error state -->
+            <div id="terminalError" class="hidden mt-8 p-6 border-2 border-dashed border-magenta bg-magenta/10 text-magenta font-mono text-lg text-left">
+                > ERROR: TRANSMISSION_FAILED. Check your email and try again.
             </div>
         </div>
     </main>
 
-    <script async data-uid="8114380a48" src="https://cody-keegan-ai.kit.com/8114380a48/index.js"></script>
+    <!-- Footer -->
+    <footer class="w-full border-t-2 border-gray-800 bg-black py-12 px-4 sm:px-8 mt-auto">
+        <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="space-y-2">
+                <p class="font-mono text-sm text-gray-500 uppercase tracking-widest">&copy; 2026 CodyKeegan.AI // Build the weird things.</p>
+            </div>
+            <div class="flex gap-6 font-mono text-sm text-gray-400 uppercase tracking-widest">
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate</a>
+                <a href="terms.html" class="hover:text-cyan transition-colors">Terms</a>
+                <a href="privacy.html" class="hover:text-magenta transition-colors">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        document.getElementById('chaosForm').addEventListener('submit', function() {
-            this.style.opacity = '0.3';
-            this.style.pointerEvents = 'none';
-            document.getElementById('terminalSuccess').classList.remove('hidden');
-            // Redirect after a brief moment to allow Kit to process
-            setTimeout(() => { window.location.href = 'dashboard.html'; }, 2500);
+    /* =========================================================
+       HEADLESS KIT FORM SUBMISSION
+       Sends email via fetch() to Kit's API. No page navigation.
+       Shows terminal animation, then redirects to dashboard.
+       ========================================================= */
+    const KIT_FORM_UID = 'dbac4b59a7';
+    const KIT_ENDPOINT = `https://app.kit.com/forms/${KIT_FORM_UID}/subscriptions`;
+
+    const form = document.getElementById('chaosForm');
+    const emailInput = document.getElementById('emailInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const successEl = document.getElementById('terminalSuccess');
+    const errorEl = document.getElementById('terminalError');
+
+    // Simple email validation
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // Typewriter animation sequence
+    function runTerminalAnimation() {
+        successEl.classList.remove('hidden');
+        errorEl.classList.add('hidden');
+
+        const lines = [
+            document.getElementById('line1'),
+            document.getElementById('line2'),
+            document.getElementById('line3')
+        ];
+
+        lines.forEach((l, i) => {
+            setTimeout(() => {
+                l.classList.add('active');
+                // Remove cursor from previous line
+                if (i > 0) lines[i-1].classList.add('done');
+            }, i * 700);
         });
+
+        // Redirect after animation completes
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 2800);
+    }
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault(); // Prevent native form POST — this is the critical fix
+
+        const email = emailInput.value.trim();
+
+        // Validate
+        if (!email || !isValidEmail(email)) {
+            emailInput.style.borderColor = '#ff00ff';
+            emailInput.focus();
+            setTimeout(() => { emailInput.style.borderColor = '#fff'; }, 1500);
+            return;
+        }
+
+        // Disable form
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'TRANSMITTING...';
+        form.style.opacity = '0.4';
+        form.style.pointerEvents = 'none';
+
+        // Send to Kit via fetch (headless)
+        try {
+            const formData = new FormData();
+            formData.append('email_address', email);
+
+            await fetch(KIT_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' // Kit doesn't send CORS headers for form submissions
+            });
+
+            // With mode: 'no-cors', we can't read the response, 
+            // but the request IS sent. This is standard for Kit headless.
+            runTerminalAnimation();
+
+        } catch (err) {
+            console.error('Kit submission failed:', err);
+            // Show error state
+            errorEl.classList.remove('hidden');
+            form.style.opacity = '1';
+            form.style.pointerEvents = 'auto';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'LET ME IN <span class="animate-pulse-fast">_</span>';
+        }
+    });
     </script>
+
 </body>
 </html>
