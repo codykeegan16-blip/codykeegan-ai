@@ -39,13 +39,12 @@
     </div>
 
     <main class="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-16 pt-24 pb-20 flex-grow">
-        <div class="mb-32">
+        <div class="mb-32 text-center md:text-left">
             <h1 class="font-loud font-black text-6xl sm:text-8xl md:text-[140px] leading-[0.85] tracking-tighter uppercase mb-12">
                 I can't stop<br>
                 <span class="text-stroke transition-all duration-300">thinking</span><br>
                 about this.
             </h1>
-            <p class="font-mono text-2xl md:text-4xl max-w-4xl leading-tight text-gray-300">What if you wired an image generator to a mechanical claw?</p>
         </div>
 
         <div class="max-w-6xl mx-auto border-4 border-white p-6 md:p-16 relative bg-black">
@@ -65,7 +64,7 @@
             </form>
 
             <div id="terminalSuccess" class="hidden mt-8 p-6 border-2 border-dashed border-acid bg-acid/10 text-acid font-mono text-xl text-left">
-                > CONNECTION ESTABLISHED.<br>> SECURING ACCESS...<br>> REDIRECTING TO DASHBOARD...
+                > CONNECTION ESTABLISHED.<br>> SECURING ACCESS...<br>> REDIRECTING TO MISSION HUB...
             </div>
         </div>
     </main>
@@ -76,7 +75,8 @@
             this.style.opacity = '0.3';
             this.style.pointerEvents = 'none';
             document.getElementById('terminalSuccess').classList.remove('hidden');
-            setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+            // Redirect after a brief moment to allow Kit to process
+            setTimeout(() => { window.location.href = 'dashboard.html'; }, 2500);
         });
     </script>
 </body>

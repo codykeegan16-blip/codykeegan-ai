@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard // The Lab</title>
+    <title>Dashboard // Mission Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script>
@@ -29,49 +29,37 @@
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center h-full">
             <div class="flex items-center gap-4">
                 <h1 class="font-loud text-2xl md:text-4xl uppercase tracking-tighter">The <span class="text-acid">Dashboard</span></h1>
-                <div class="hidden md:block h-8 w-px bg-gray-800 ml-4"></div>
-                <p class="hidden md:block text-[10px] text-gray-500 uppercase tracking-[0.2em] ml-4">Access_Level: 01 // System_Online</p>
+                <p class="hidden md:block text-[10px] text-gray-500 uppercase tracking-widest ml-4 font-bold border-l border-gray-800 pl-4">Access_Level: 01 // System_Online</p>
             </div>
             <a href="index.html" class="border-2 border-white px-4 py-2 hover:bg-white hover:text-black transition-all text-xs font-bold uppercase">Logout_</a>
         </div>
     </header>
 
     <div class="flex flex-grow max-w-[1600px] mx-auto w-full relative">
-        
         <aside class="hidden lg:flex flex-col w-64 border-r border-gray-800 sticky top-[80px] h-[calc(100vh-80px)] p-6 gap-8 bg-black/50 backdrop-blur-md">
             <nav class="space-y-6">
                 <div>
-                    <p class="text-[9px] text-gray-600 uppercase tracking-widest mb-4">Navigation</p>
+                    <p class="text-[9px] text-gray-600 uppercase tracking-widest mb-4">Jump To</p>
                     <ul class="space-y-4">
-                        <li><a href="#vault" class="flex items-center gap-3 text-acid hover:text-white transition-colors uppercase font-bold text-sm"><span class="w-2 h-2 bg-acid"></span> The Tool Vault</a></li>
-                        <li><a href="#blueprints" class="flex items-center gap-3 text-cyan hover:text-white transition-colors uppercase font-bold text-sm"><span class="w-2 h-2 bg-cyan"></span> Exec Blueprints</a></li>
+                        <li><a href="#vault" class="flex items-center gap-3 text-acid hover:text-white transition-colors font-bold text-sm uppercase">Tool Vault</a></li>
+                        <li><a href="#blueprints" class="flex items-center gap-3 text-cyan hover:text-white transition-colors font-bold text-sm uppercase">Blueprints</a></li>
                     </ul>
-                </div>
-                <div class="pt-8 border-t border-gray-900">
-                    <p class="text-[9px] text-gray-600 uppercase tracking-widest mb-4">Quick Filters</p>
-                    <div class="space-y-2">
-                        <button onclick="filterByCat('Intelligence')" class="text-[10px] text-gray-500 hover:text-magenta block uppercase tracking-tighter transition-colors">> Intelligence Models</button>
-                        <button onclick="filterByCat('Automation')" class="text-[10px] text-gray-500 hover:text-acid block uppercase tracking-tighter transition-colors">> Automation Glue</button>
-                        <button onclick="filterByCat('Voice')" class="text-[10px] text-gray-500 hover:text-cyan block uppercase tracking-tighter transition-colors">> Voice/Comms</button>
-                    </div>
                 </div>
             </nav>
         </aside>
 
-        <main class="flex-grow p-6 lg:p-12 overflow-x-hidden">
-            
+        <main class="flex-grow p-6 lg:p-12">
             <section id="vault" class="mb-32 scroll-mt-24">
                 <div class="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-gray-800 pb-6 mb-12 gap-4">
                     <div>
-                        <h2 class="font-loud text-5xl md:text-7xl uppercase tracking-tighter">01 // <span class="text-acid">Tool Vault</span></h2>
-                        <p class="text-gray-500 mt-2 max-w-xl">Curated components for building automated commerce machines. Ready for integration.</p>
+                        <h2 class="font-loud text-5xl md:text-7xl uppercase tracking-tighter">01 // <span class="text-acid">The Tool Vault</span></h2>
+                        <p class="text-gray-500 mt-2">Core components for automated commerce machines.</p>
                     </div>
                     <div class="flex items-center gap-3 bg-gray-900 border border-gray-800 px-4 py-2 min-w-[300px]">
                         <span class="text-acid">></span>
                         <input type="text" id="globalSearch" placeholder="SEARCH VAULT..." class="bg-transparent border-none text-white text-xs focus:outline-none w-full">
                     </div>
                 </div>
-
                 <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     </div>
             </section>
@@ -79,7 +67,7 @@
             <section id="blueprints" class="mb-32 scroll-mt-24">
                 <div class="border-b-2 border-gray-800 pb-6 mb-12">
                     <h2 class="font-loud text-5xl md:text-7xl uppercase tracking-tighter">02 // <span class="text-cyan">Execution Blueprints</span></h2>
-                    <p class="text-gray-500 mt-2">Proven workflows that connect the tools. Choose a mission to begin.</p>
+                    <p class="text-gray-500 mt-2">Proven workflows and automated mission files.</p>
                 </div>
                 <div id="blueprints-container" class="space-y-12">
                     </div>
@@ -93,22 +81,25 @@
 
         async function loadData() {
             try {
-                const [toolsRes, stacksRes] = await Promise.all([fetch('tools.json'), fetch('challenge-stacks.json')]);
+                const [toolsRes, stacksRes] = await Promise.all([
+                    fetch('tools.json'),
+                    fetch('challenge-stacks.json')
+                ]);
+                
+                if (!toolsRes.ok || !stacksRes.ok) throw new Error("JSON files missing or inaccessible.");
+
                 globalTools = await toolsRes.json();
                 globalStacks = await stacksRes.json();
                 renderAll();
-            } catch (e) { console.error("Database error", e); }
-        }
-
-        function filterByCat(cat) {
-            document.getElementById('globalSearch').value = cat;
-            renderAll();
+            } catch (e) { 
+                console.error(e);
+                document.getElementById('tools-container').innerHTML = `<div class="col-span-full border-2 border-magenta p-4 text-magenta font-mono uppercase">> ERROR: DATA_FETCH_FAILED. Run a local server.</div>`;
+            }
         }
 
         function renderAll() {
             const search = document.getElementById('globalSearch').value.toLowerCase();
             
-            // Render Vault Tools
             const filteredTools = globalTools.filter(t => t.name.toLowerCase().includes(search) || t.description.toLowerCase().includes(search));
             document.getElementById('tools-container').innerHTML = filteredTools.map(t => `
                 <div class="border-2 border-gray-800 bg-black p-6 hover:border-${t.statusColor} transition-all group">
@@ -118,52 +109,35 @@
                         </div>
                         <span class="bg-${t.statusColor} text-black text-[9px] font-black px-2 py-0.5 uppercase tracking-tighter">${t.status}</span>
                     </div>
-                    <h3 class="font-loud text-3xl uppercase group-hover:text-${t.statusColor} transition-colors mb-2">${t.name}</h3>
+                    <h3 class="font-loud text-3xl uppercase group-hover:text-${t.statusColor} mb-2">${t.name}</h3>
                     <p class="text-xs text-gray-500 font-mono leading-relaxed mb-6 h-12 overflow-hidden">${t.description}</p>
                     <a href="${t.url}" target="_blank" class="block w-full text-center border-2 border-gray-800 py-3 font-bold text-[10px] uppercase hover:bg-${t.statusColor} hover:text-black transition-all">Launch Connection</a>
                 </div>
             `).join('');
 
-            // Render Execution Blueprints
             document.getElementById('blueprints-container').innerHTML = globalStacks.map(s => `
                 <div class="blueprint-card border-2 border-gray-800 p-8 hover:border-cyan transition-all relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan/5 -rotate-45 translate-x-16 -translate-y-16"></div>
                     <div class="flex flex-col lg:flex-row justify-between gap-8 relative z-10">
                         <div class="flex-grow">
-                            <span class="text-cyan font-mono text-[10px] uppercase tracking-widest">Blueprint ID: ${s.id}</span>
+                            <span class="text-cyan font-mono text-[10px] uppercase tracking-widest">Blueprint: ${s.id}</span>
                             <h3 class="font-loud text-4xl uppercase text-white mt-1 mb-4">${s.title}</h3>
                             <p class="text-gray-400 font-mono italic text-sm border-l-2 border-cyan pl-4 mb-6">"${s.hookLine}"</p>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Process Logic</p>
-                                    <ul class="space-y-1 text-[11px] text-gray-500">
-                                        ${s.wireframe.process.map(p => `<li>> ${p}</li>`).join('')}
-                                    </ul>
+                                    <ul class="text-[11px] text-gray-500 space-y-1">${s.wireframe.process.map(p => `<li>> ${p}</li>`).join('')}</ul>
                                 </div>
                                 <div>
-                                    <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Validated Proof</p>
-                                    <p class="text-[11px] text-acid font-mono italic">${s.wireframe.proof}</p>
-                                </div>
-                                <div>
-                                    <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Component Stack</p>
+                                    <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Stack Components</p>
                                     <div class="flex flex-wrap gap-2">
-                                        ${s.toolIds.map(tid => `<span class="bg-gray-900 text-gray-500 text-[9px] px-2 py-1 font-mono">${globalTools.find(t => t.id === tid)?.name || 'Tool'}</span>`).join('')}
+                                        ${s.toolIds.map(tid => `<span class="bg-gray-900 text-gray-400 text-[9px] px-2 py-1 font-mono">${globalTools.find(t => t.id === tid)?.name || tid}</span>`).join('')}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="lg:w-48 flex flex-col justify-end">
-                            <button onclick="copyLink('${s.id}')" class="text-cyan border border-cyan/30 px-4 py-3 text-[10px] font-bold hover:bg-cyan/10 uppercase transition-all">Copy Mission File</button>
-                        </div>
                     </div>
                 </div>
             `).join('');
-        }
-
-        function copyLink(id) {
-            const url = window.location.href.split('#')[0] + '#' + id;
-            navigator.clipboard.writeText(url).then(() => { alert("Mission file link copied to clipboard."); });
         }
 
         document.getElementById('globalSearch').addEventListener('input', renderAll);
