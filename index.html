@@ -16,11 +16,7 @@
                         loud: ['Oswald', 'sans-serif'],
                         mono: ['Space Mono', 'monospace'],
                     },
-                    colors: {
-                        acid: '#ccff00',
-                        cyan: '#00ffff',
-                        magenta: '#ff00ff',
-                    },
+                    colors: { acid: '#ccff00', cyan: '#00ffff', magenta: '#ff00ff', },
                     animation: {
                         'marquee': 'marquee 30s linear infinite',
                         'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -43,8 +39,18 @@
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 40px 40px;
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* NUCLEAR HIDE: This ensures the extra Kit box is deleted from the view
+           while allowing the script to process your main form.
+        */
+        .formkit-form, .formkit-sticky-bar, .formkit-modal, .formkit-slide-in, .formkit-overlay, [data-formkit-wrapper], .formkit-powered-by-convertkit-container { 
+            display: none !important; 
+            visibility: hidden !important; 
+            opacity: 0 !important; 
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
     </style>
 </head>
 <body class="font-mono antialiased overflow-x-hidden chaos-grid selection:bg-acid selection:text-black flex flex-col min-h-screen">
@@ -109,21 +115,21 @@
         <div class="max-w-6xl mx-auto border-4 border-white p-6 md:p-16 relative bg-black">
             <div class="absolute top-0 right-0 w-16 h-16 border-b-4 border-l-4 border-acid"></div>
             <div class="absolute bottom-0 left-0 w-16 h-16 border-t-4 border-r-4 border-cyan"></div>
-            <div class="absolute -top-3 left-10 bg-black px-4 font-mono text-sm text-gray-500 tracking-widest">ACCESS_TERMINAL</div>
+            <div class="absolute -top-3 left-10 bg-black px-4 font-mono text-sm text-gray-500 tracking-widest uppercase">ACCESS_TERMINAL</div>
 
             <div class="text-center mb-16">
                 <h2 class="font-loud text-6xl md:text-9xl uppercase tracking-tighter mb-6 leading-[0.8]">
                     The <span class="text-acid">Dashboard</span>.
                 </h2>
                 <p class="font-mono text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
-                    It's a living, breathing, messy list of every AI tool I'm currently obsessing over. Links, API docs, and raw experiments. It's an open playground.
+                    Access the raw, unpolished AI blueprints. 99% of people will stare at this and do nothing. The 1% will take these tools and build a monster.
                 </p>
             </div>
 
             <form id="chaosForm" 
-                  action="https://app.kit.com/forms/dbac4b59a7/subscriptions" 
+                  action="https://app.kit.com/forms/9134934/subscriptions" 
                   method="post" 
-                  data-sv-form="dbac4b59a7" 
+                  data-sv-form="9134934"
                   class="flex flex-col lg:flex-row gap-0 group relative z-20">
                 
                 <input type="email" 
@@ -141,7 +147,6 @@
 
             <div id="terminalSuccess" class="hidden mt-8 p-6 border-2 border-dashed border-acid bg-acid/10 text-acid font-mono text-xl text-left">
                 > CONNECTION ESTABLISHED.<br>
-                > LINK DISPATCHED TO INBOX.<br>
                 > AUTHORIZING DASHBOARD ACCESS...
             </div>
         </div>
@@ -150,57 +155,44 @@
             <p class="font-mono text-gray-600 text-sm md:text-base uppercase tracking-[0.2em]">One idea leads to ten more.</p>
             <p class="font-loud text-3xl md:text-5xl text-gray-800 uppercase tracking-tighter">Open your laptop.</p>
         </div>
-
     </main>
 
     <footer class="w-full border-t-2 border-gray-800 bg-black py-12 px-4 sm:px-8 mt-auto">
         <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div class="space-y-2 max-w-2xl">
+            <div class="space-y-4 max-w-2xl">
                 <p class="font-mono text-sm text-gray-500 uppercase tracking-widest">&copy; 2026 CodyKeegan.AI // All Rights Reserved.</p>
-                <p class="font-mono text-xs text-gray-600">
-                    <span class="text-acid font-bold">FTC DISCLOSURE:</span> Some links on this site may be affiliate links. If you click them and buy something, I might make a commission at no extra cost to you. I only link to tools I actually test and use in the lab.
+                <p class="font-mono text-xs text-white leading-relaxed uppercase">
+                    <span class="text-acid font-bold">FTC DISCLOSURE:</span> SOME LINKS ON THIS SITE MAY BE AFFILIATE LINKS. IF YOU CLICK THEM AND BUY SOMETHING, I MIGHT MAKE A COMMISSION AT NO EXTRA COST TO YOU. I ONLY LINK TO TOOLS I ACTUALLY TEST AND USE IN THE LAB.
                 </p>
             </div>
             <div class="flex gap-6 font-mono text-sm text-gray-400 uppercase tracking-widest">
-                <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate Disclaimer</a>
-                <a href="terms.html" class="hover:text-cyan transition-colors">Terms of Service</a>
-                <a href="privacy.html" class="hover:text-magenta transition-colors">Privacy Policy</a>
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate</a>
+                <a href="terms.html" class="hover:text-cyan transition-colors">Terms</a>
+                <a href="privacy.html" class="hover:text-magenta transition-colors">Privacy</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
             </div>
         </div>
     </footer>
 
-    <script async data-uid="dbac4b59a7" src="https://cody-keegan-ai.kit.com/dbac4b59a7/index.js"></script>
+    <script async data-uid="9134934" src="https://cody-keegan-ai.kit.com/9134934/index.js"></script>
 
     <script>
         document.getElementById('chaosForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const form = this;
-            
             if(email) {
-                // UI feedback
                 form.style.opacity = '0.3';
                 form.style.pointerEvents = 'none';
                 document.getElementById('terminalSuccess').classList.remove('hidden');
                 
-                const convertKitUrl = form.action;
                 const formData = new FormData();
                 formData.append('email_address', email);
 
-                // Send data to Kit
-                fetch(convertKitUrl, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors' 
-                })
-                .then(() => {
-                    // Slight delay for the user to read the terminal message
-                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
-                })
-                .catch(error => {
-                    // Fail gracefully and redirect anyway
-                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
-                });
+                fetch(form.action, { method: 'POST', body: formData, mode: 'no-cors' })
+                .then(() => { setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000); })
+                .catch(() => { setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000); });
             }
         });
     </script>
