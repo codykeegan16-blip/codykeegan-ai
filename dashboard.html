@@ -20,116 +20,129 @@
         ::selection { background-color: #ccff00; color: #000; }
         .chaos-grid { background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px; }
         .blueprint-card { background: linear-gradient(180deg, rgba(0,255,255,0.04) 0%, rgba(0,0,0,1) 100%); }
-        .cx-bar { display: flex; gap: 3px; }
-        .cx-seg { width: 16px; height: 4px; background: #1f2937; transition: background 0.2s; }
-        .cx-seg.active-acid    { background: #ccff00; }
-        .cx-seg.active-cyan    { background: #00ffff; }
-        .cx-seg.active-magenta { background: #ff00ff; }
+
+        /* Complexity bar */
+        .cx-bar { display: flex; gap: 4px; align-items: center; }
+        .cx-seg { width: 22px; height: 7px; background: #1f2937; }
+        .cx-seg.on-acid    { background: #ccff00; }
+        .cx-seg.on-cyan    { background: #00ffff; }
+        .cx-seg.on-magenta { background: #ff00ff; }
+
+        /* Tool card hover */
         .tool-card { transition: border-color 0.2s, transform 0.15s; }
         .tool-card:hover { transform: translateY(-2px); }
-        @keyframes termPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+        /* Accordion slide */
+        .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1); }
+        .acc-body.open { max-height: 8000px; transition: max-height 0.6s ease-in; }
+
+        /* Accordion chevron */
+        .acc-chev { transition: transform 0.3s; }
+        .acc-chev.rot { transform: rotate(90deg); }
+
+        /* Mobile quick-jump pill */
+        .qj-pill { border: 1px solid #444; padding: 8px 18px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; transition: all 0.15s; white-space: nowrap; }
+        .qj-pill:hover, .qj-pill:active { background: #ccff00; color: #000; border-color: #ccff00; }
+
+        /* Loading pulse */
+        @keyframes termPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
         .term-pulse { animation: termPulse 1.2s ease-in-out infinite; }
-        .wild-use { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .tool-card:hover .wild-use { max-height: 80px; }
-        .quick-jump-pill { border: 1px solid #333; padding: 6px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.15s; }
-        .quick-jump-pill:hover { background: #ccff00; color: #000; border-color: #ccff00; }
     </style>
 </head>
 <body class="font-mono antialiased chaos-grid flex flex-col min-h-screen">
 
-    <!-- ================= STICKY HEADER ================= -->
+    <!-- ============ STICKY HEADER ============ -->
     <header class="border-b-4 border-white bg-black sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
             <div class="flex items-center gap-3 md:gap-4">
-                <h1 class="font-loud text-xl md:text-4xl uppercase tracking-tighter">The <span class="text-acid">Dashboard</span></h1>
-                <p class="hidden md:block text-[10px] text-gray-500 uppercase tracking-widest font-bold border-l border-gray-800 pl-4">Access_Level: 01 // System_Online</p>
+                <h1 class="font-loud text-2xl md:text-4xl uppercase tracking-tighter">The <span class="text-acid">Dashboard</span></h1>
+                <p class="hidden md:block text-xs text-gray-400 uppercase tracking-widest font-bold border-l border-gray-800 pl-4">System_Online</p>
             </div>
-            <a href="index.html" class="border-2 border-white px-3 py-1.5 md:px-4 md:py-2 hover:bg-white hover:text-black transition-all text-[10px] md:text-xs font-bold uppercase">Logout_</a>
+            <a href="index.html" class="border-2 border-white px-4 py-2 hover:bg-white hover:text-black transition-all text-xs font-bold uppercase">Logout_</a>
         </div>
-        <!-- Mobile Quick-Jump Nav -->
-        <div class="lg:hidden border-t border-gray-800 px-4 py-2 flex items-center gap-3 overflow-x-auto bg-black/80 backdrop-blur-sm">
-            <span class="text-[9px] text-gray-600 uppercase tracking-widest flex-shrink-0">Jump:</span>
-            <a href="#vault" class="quick-jump-pill text-acid flex-shrink-0">Tool Vault</a>
-            <a href="#blueprints" class="quick-jump-pill text-cyan flex-shrink-0">Blueprints</a>
-            <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="quick-jump-pill text-gray-500 flex-shrink-0 ml-auto">Top &uarr;</a>
+        <!-- Mobile Quick-Jump -->
+        <div class="lg:hidden border-t border-gray-800 px-4 py-2 flex items-center gap-3 overflow-x-auto bg-black/90 backdrop-blur-sm">
+            <span class="text-xs text-gray-400 uppercase tracking-widest flex-shrink-0">Jump:</span>
+            <a href="#vault" class="qj-pill text-acid flex-shrink-0">Tool Vault</a>
+            <a href="#blueprints" class="qj-pill text-cyan flex-shrink-0">Blueprints</a>
+            <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="qj-pill text-gray-400 flex-shrink-0 ml-auto">Top &uarr;</a>
         </div>
     </header>
 
-    <!-- ================= LAYOUT ================= -->
+    <!-- ============ LAYOUT ============ -->
     <div class="flex flex-grow max-w-[1600px] mx-auto w-full relative">
 
-        <!-- ===== DESKTOP SIDEBAR ===== -->
+        <!-- Desktop Sidebar -->
         <aside class="hidden lg:flex flex-col w-64 border-r border-gray-800 sticky top-[80px] h-[calc(100vh-80px)] p-6 gap-6 bg-black/50 backdrop-blur-md z-40">
-            <div class="flex items-center gap-2 bg-gray-900 border border-gray-800 px-3 py-2">
-                <span class="text-acid text-xs">></span>
-                <input type="text" id="sidebarSearch" placeholder="SEARCH ALL..." class="bg-transparent border-none text-white text-[11px] focus:outline-none w-full font-mono">
+            <div class="flex items-center gap-2 bg-gray-900 border border-gray-700 px-3 py-3">
+                <span class="text-acid text-sm font-bold">></span>
+                <input type="text" id="sidebarSearch" placeholder="SEARCH ALL..." class="bg-transparent border-none text-white text-sm focus:outline-none w-full font-mono placeholder-gray-500">
             </div>
             <nav>
-                <p class="text-[9px] text-gray-600 uppercase tracking-widest mb-3">Jump To</p>
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-3 font-bold">Jump To</p>
                 <ul class="space-y-3">
-                    <li><a href="#vault" class="flex items-center justify-between text-acid hover:text-white transition-colors font-bold text-sm uppercase">Tool Vault <span id="sidebarToolCount" class="text-[9px] text-gray-600 font-mono">&mdash;</span></a></li>
-                    <li><a href="#blueprints" class="flex items-center justify-between text-cyan hover:text-white transition-colors font-bold text-sm uppercase">Blueprints <span id="sidebarBpCount" class="text-[9px] text-gray-600 font-mono">&mdash;</span></a></li>
+                    <li><a href="#vault" class="flex items-center justify-between text-acid hover:text-white transition-colors font-bold text-sm uppercase">Tool Vault <span id="sidebarToolCount" class="text-xs text-gray-400 font-mono">&mdash;</span></a></li>
+                    <li><a href="#blueprints" class="flex items-center justify-between text-cyan hover:text-white transition-colors font-bold text-sm uppercase">Blueprints <span id="sidebarBpCount" class="text-xs text-gray-400 font-mono">&mdash;</span></a></li>
                 </ul>
             </nav>
-            <div id="activeFilter" class="hidden border border-gray-800 bg-gray-900 p-3">
-                <p class="text-[9px] text-gray-600 uppercase mb-1">Active Filter</p>
+            <div id="activeFilter" class="hidden border border-gray-700 bg-gray-900 p-3">
+                <p class="text-xs text-gray-400 uppercase mb-1 font-bold">Active Filter</p>
                 <div class="flex items-center justify-between">
-                    <span id="activeFilterText" class="text-acid text-xs font-bold uppercase truncate"></span>
-                    <button id="clearFilter" class="text-gray-600 hover:text-white text-[10px] ml-2 flex-shrink-0" title="Clear">&times;</button>
+                    <span id="activeFilterText" class="text-acid text-sm font-bold uppercase truncate"></span>
+                    <button id="clearFilter" class="text-gray-400 hover:text-white text-lg ml-2 flex-shrink-0 leading-none" title="Clear">&times;</button>
                 </div>
             </div>
             <div class="mt-auto space-y-3">
-                <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="block text-center border border-gray-800 py-2 text-[10px] text-gray-600 hover:text-acid hover:border-acid transition-all uppercase font-bold">Back to Top &uarr;</a>
-                <p class="text-[9px] text-gray-700 uppercase tracking-widest text-center">CodyKeegan.AI // v2.0</p>
+                <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="block text-center border border-gray-700 py-2.5 text-xs text-gray-400 hover:text-acid hover:border-acid transition-all uppercase font-bold">Back to Top &uarr;</a>
+                <p class="text-xs text-gray-600 uppercase tracking-widest text-center">CodyKeegan.AI</p>
             </div>
         </aside>
 
         <!-- ===== MAIN CONTENT ===== -->
-        <main class="flex-grow p-4 md:p-6 lg:p-12">
+        <main class="flex-grow p-4 md:p-6 lg:p-10">
+
             <!-- Mobile search -->
-            <div class="lg:hidden flex items-center gap-2 bg-gray-900 border border-gray-800 px-3 py-2 mb-6">
-                <span class="text-acid text-xs">></span>
-                <input type="text" id="mobileSearch" placeholder="SEARCH VAULT + BLUEPRINTS..." class="bg-transparent border-none text-white text-xs focus:outline-none w-full font-mono">
+            <div class="lg:hidden flex items-center gap-3 bg-gray-900 border border-gray-700 px-4 py-3 mb-8">
+                <span class="text-acid text-sm font-bold">></span>
+                <input type="text" id="mobileSearch" placeholder="SEARCH VAULT + BLUEPRINTS..." class="bg-transparent border-none text-white text-sm focus:outline-none w-full font-mono placeholder-gray-500">
             </div>
 
-            <!-- SECTION 1: THE TOOL VAULT -->
-            <section id="vault" class="mb-24 scroll-mt-28">
-                <div class="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-gray-800 pb-6 mb-4 gap-4">
-                    <div>
-                        <h2 class="font-loud text-4xl md:text-7xl uppercase tracking-tighter">01 // <span class="text-acid">The Tool Vault</span></h2>
-                        <p class="text-gray-500 mt-2 text-sm">Core components for automated commerce machines. <span id="toolResultCount" class="text-gray-600"></span></p>
-                    </div>
+            <!-- ====== SECTION 1: TOOL VAULT ====== -->
+            <section id="vault" class="mb-20 scroll-mt-32">
+                <div class="border-b-2 border-gray-800 pb-5 mb-5">
+                    <h2 class="font-loud text-4xl md:text-6xl uppercase tracking-tighter">01 // <span class="text-acid">The Tool Vault</span></h2>
+                    <p class="text-gray-300 mt-2 text-sm">Core components for automated commerce machines. <span id="toolResultCount" class="text-gray-400"></span></p>
                 </div>
-                <!-- FTC Inline Disclosure -->
-                <div class="border border-gray-800 bg-gray-900/50 px-4 py-2.5 mb-8 flex items-start gap-3">
-                    <span class="text-acid text-[10px] mt-0.5 flex-shrink-0">//</span>
-                    <p class="text-[10px] text-gray-500 uppercase tracking-wider leading-relaxed">
-                        <strong class="text-gray-400">Disclosure:</strong> Some tool links below are affiliate links. If you click and subscribe, the lab may earn a small commission at no extra cost to you. Affiliate links are marked with <span style="color:#ccff00">*</span>.
-                        <a href="affiliate.html" class="text-acid hover:text-white transition-colors underline">Full affiliate policy &rarr;</a>
+                <!-- FTC Disclosure -->
+                <div class="border border-gray-700 bg-gray-900/60 px-4 py-3 mb-6 flex items-start gap-3">
+                    <span class="text-acid text-sm mt-0.5 flex-shrink-0 font-bold">//</span>
+                    <p class="text-xs text-gray-400 uppercase tracking-wider leading-relaxed">
+                        <strong class="text-gray-300">Disclosure:</strong> Some links below are affiliate links &mdash; marked with <span style="color:#ccff00">*</span>. The lab may earn a small commission at no extra cost to you.
+                        <a href="affiliate.html" class="text-acid hover:text-white transition-colors underline ml-1">Full policy &rarr;</a>
                     </p>
                 </div>
-                <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    <div class="col-span-full text-gray-600 font-mono uppercase text-sm term-pulse">> Initializing Tool Vault...</div>
+                <div id="tools-container">
+                    <div class="text-gray-400 font-mono uppercase text-sm term-pulse py-8">> Initializing Tool Vault...</div>
                 </div>
             </section>
 
-            <!-- SECTION 2: EXECUTION BLUEPRINTS -->
-            <section id="blueprints" class="mb-24 scroll-mt-28">
-                <div class="border-b-2 border-gray-800 pb-6 mb-8">
-                    <h2 class="font-loud text-4xl md:text-7xl uppercase tracking-tighter">02 // <span class="text-cyan">Execution Blueprints</span></h2>
-                    <p class="text-gray-500 mt-2 text-sm">Experimental workflows and automated mission files. <span id="bpResultCount" class="text-gray-600"></span></p>
+            <!-- ====== SECTION 2: BLUEPRINTS ====== -->
+            <section id="blueprints" class="mb-20 scroll-mt-32">
+                <div class="border-b-2 border-gray-800 pb-5 mb-6">
+                    <h2 class="font-loud text-4xl md:text-6xl uppercase tracking-tighter">02 // <span class="text-cyan">Execution Blueprints</span></h2>
+                    <p class="text-gray-300 mt-2 text-sm">Experimental workflows and automated mission files. <span id="bpResultCount" class="text-gray-400"></span></p>
                 </div>
-                <div id="blueprints-container" class="space-y-10">
-                    <div class="text-gray-600 font-mono uppercase text-sm term-pulse">> Loading Execution Blueprints...</div>
+                <div id="blueprints-container">
+                    <div class="text-gray-400 font-mono uppercase text-sm term-pulse py-8">> Loading Execution Blueprints...</div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- ================= FOOTER ================= -->
+    <!-- ============ FOOTER ============ -->
     <footer class="border-t-2 border-gray-900 bg-black py-10 px-6 text-center mt-auto">
-        <p class="text-gray-600 text-xs uppercase tracking-[0.3em] mb-4">CodyKeegan.AI // Build the weird things.</p>
-        <div class="flex flex-wrap justify-center gap-6 font-mono text-xs text-gray-500 uppercase tracking-widest">
+        <p class="text-gray-500 text-xs uppercase tracking-[0.3em] mb-4">CodyKeegan.AI // Build the weird things.</p>
+        <div class="flex flex-wrap justify-center gap-6 font-mono text-xs text-gray-400 uppercase tracking-widest">
             <a href="about.html" class="hover:text-white transition-colors">About</a>
             <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate</a>
             <a href="terms.html" class="hover:text-cyan transition-colors">Terms</a>
@@ -138,179 +151,287 @@
         </div>
     </footer>
 
-    <script>
-    const C={acid:'#ccff00',cyan:'#00ffff',magenta:'#ff00ff',white:'#ffffff'};
+<script>
+/* ============================================
+   COLOR MAP + STATUS CONFIG
+   ============================================ */
+const C = { acid:'#ccff00', cyan:'#00ffff', magenta:'#ff00ff', white:'#ffffff' };
+const STATUS_ORDER = ['ACTIVE','STABLE','DEPLOYED','EXPERIMENTAL','TESTING','ROGUE'];
+const STATUS_HEX   = { ACTIVE:'#ccff00', STABLE:'#00ffff', DEPLOYED:'#ff00ff', EXPERIMENTAL:'#ccff00', TESTING:'#ff00ff', ROGUE:'#00ffff' };
+const STATUS_KEY   = { ACTIVE:'acid', STABLE:'cyan', DEPLOYED:'magenta', EXPERIMENTAL:'acid', TESTING:'magenta', ROGUE:'cyan' };
 
-    const FALLBACK_TOOLS=[{"id":"001","name":"Zapier","url":"https://zapier.com","status":"ACTIVE","statusColor":"acid","description":"Automation glue. Connects apps like a nervous system.","wildUse":"Build a \u2018lead-to-cash\u2019 conveyor belt that auto-qualifies, follows up, invoices, and books calls while you sleep.","complexity":2,"isAffiliate":true,"usedIn":["stack_02","stack_04","stack_05","stack_07"]},{"id":"002","name":"Notion","url":"https://notion.so","status":"STABLE","statusColor":"cyan","description":"Your ops brain in one place. Docs, databases, dashboards.","wildUse":"Turn it into a client-facing \u2018command center\u2019 that makes you look like a 20-person team.","complexity":2,"isAffiliate":true,"usedIn":["stack_03"]},{"id":"003","name":"Cloudflare Pages","url":"https://pages.cloudflare.com","status":"DEPLOYED","statusColor":"magenta","description":"Static hosting at warp speed.","wildUse":"Ship micro-sites for every offer angle you test, then kill the losers and scale the winners in hours.","complexity":3,"isAffiliate":false,"usedIn":["stack_04"]},{"id":"004","name":"Make","url":"https://make.com","status":"ACTIVE","statusColor":"acid","description":"Visual automation on steroids.","wildUse":"Chain 15 APIs together to build a complete SaaS backend without writing a single line of code.","complexity":3,"isAffiliate":true,"usedIn":["stack_01","stack_03","stack_06","stack_08"]},{"id":"005","name":"Airtable","url":"https://airtable.com","status":"STABLE","statusColor":"cyan","description":"The database for operators.","wildUse":"Serve as the central brain and content repository for a fully programmatic SEO agency.","complexity":2,"isAffiliate":true,"usedIn":["stack_01","stack_06","stack_07"]},{"id":"006","name":"OpenAI","url":"https://openai.com","status":"EXPERIMENTAL","statusColor":"magenta","description":"The brain API.","wildUse":"Pass it raw customer support transcripts to automatically identify churn risks and issue partial refunds before they cancel.","complexity":4,"isAffiliate":true,"usedIn":["stack_01","stack_04","stack_05"]},{"id":"007","name":"Anthropic","url":"https://anthropic.com","status":"ACTIVE","statusColor":"acid","description":"The nuanced thinker.","wildUse":"Feed it a 100-page industry PDF and have it autonomously draft 50 unique, highly-contextual LinkedIn posts.","complexity":4,"isAffiliate":true,"usedIn":["stack_03","stack_06"]},{"id":"008","name":"ElevenLabs","url":"https://elevenlabs.io","status":"DEPLOYED","statusColor":"cyan","description":"Hyper-realistic voice cloning.","wildUse":"Hook it to your newsletter to automatically generate a personalized daily podcast payload for premium subscribers.","complexity":3,"isAffiliate":true,"usedIn":["stack_02","stack_04"]},{"id":"009","name":"HeyGen","url":"https://heygen.com","status":"TESTING","statusColor":"magenta","description":"AI Avatars that don\u2019t look like garbage.","wildUse":"Programmatically generate personalized welcome videos saying the name of every new Stripe customer.","complexity":4,"isAffiliate":true,"usedIn":["stack_04"]},{"id":"010","name":"Vapi","url":"https://vapi.ai","status":"EXPERIMENTAL","statusColor":"acid","description":"Conversational voice API.","wildUse":"Replace your entire level-1 support team with an agent that answers within 1 second and handles 90% of basic inquiries.","complexity":5,"isAffiliate":true,"usedIn":["stack_02"]},{"id":"011","name":"Stripe","url":"https://stripe.com","status":"STABLE","statusColor":"cyan","description":"The money router.","wildUse":"Auto-split revenue between 5 different affiliate partners the exact millisecond a customer charge goes through.","complexity":3,"isAffiliate":false,"usedIn":["stack_02","stack_05","stack_08"]},{"id":"012","name":"Kit","url":"https://kit.com","status":"DEPLOYED","statusColor":"magenta","description":"Email infrastructure for builders.","wildUse":"Trigger a hyper-personalized 14-day sequence the moment someone visits a specific pricing tier on your site.","complexity":2,"isAffiliate":true,"usedIn":["stack_06","stack_08"]},{"id":"013","name":"Webflow","url":"https://webflow.com","status":"STABLE","statusColor":"acid","description":"Visual web development.","wildUse":"Pipe CMS data directly from Airtable to generate 10,000 programmatic SEO landing pages perfectly formatted overnight.","complexity":3,"isAffiliate":true,"usedIn":["stack_05"]},{"id":"014","name":"Midjourney","url":"https://midjourney.com","status":"ACTIVE","statusColor":"cyan","description":"Image generation mastery.","wildUse":"Automate an entire faceless Instagram account\u2019s visual pipeline with zero human input by triggering Discord bots via API.","complexity":4,"isAffiliate":false,"usedIn":["stack_03"]},{"id":"015","name":"Perplexity","url":"https://perplexity.ai","status":"TESTING","statusColor":"magenta","description":"The research engine.","wildUse":"Automatically scrape and summarize your competitor\u2019s new feature drops into a daily Slack intelligence alert.","complexity":3,"isAffiliate":true,"usedIn":["stack_03","stack_06","stack_08"]},{"id":"016","name":"Retell AI","url":"https://retellai.com","status":"EXPERIMENTAL","statusColor":"acid","description":"Low-latency voice AI.","wildUse":"Build an inbound sales closer that handles objections faster and with better tonality than a human rep.","complexity":5,"isAffiliate":true,"usedIn":[]},{"id":"017","name":"Bland AI","url":"https://bland.ai","status":"DEPLOYED","statusColor":"cyan","description":"Automated phone calling.","wildUse":"Dial every abandoned cart user with a custom discount offer in real-time before they leave the site.","complexity":4,"isAffiliate":true,"usedIn":["stack_07"]},{"id":"018","name":"Bubble","url":"https://bubble.io","status":"STABLE","statusColor":"magenta","description":"Full-stack no-code platform.","wildUse":"Launch a fully functional two-sided marketplace in a single weekend and start charging MRR.","complexity":3,"isAffiliate":true,"usedIn":[]},{"id":"019","name":"Framer","url":"https://framer.com","status":"ACTIVE","statusColor":"acid","description":"Ship sites fast.","wildUse":"Build a high-converting landing page, test it with live traffic, and pivot the entire design system in under 24 hours.","complexity":2,"isAffiliate":true,"usedIn":[]},{"id":"020","name":"Phantombuster","url":"https://phantombuster.com","status":"ROGUE","statusColor":"cyan","description":"Data extraction at scale.","wildUse":"Pull 5,000 highly targeted LinkedIn profiles and feed them directly into your cold outreach engine automatically.","complexity":4,"isAffiliate":true,"usedIn":["stack_07"]},{"id":"021","name":"Apify","url":"https://apify.com","status":"TESTING","statusColor":"magenta","description":"Web scraping for developers.","wildUse":"Monitor 50 competitor pricing pages daily and dynamically adjust your own Stripe checkout prices to match.","complexity":4,"isAffiliate":true,"usedIn":["stack_01","stack_05"]},{"id":"022","name":"Instantly","url":"https://instantly.ai","status":"DEPLOYED","statusColor":"acid","description":"Cold email infrastructure.","wildUse":"Spin up 50 domains and send 10,000 hyper-personalized emails a day with zero deliverability issues.","complexity":3,"isAffiliate":true,"usedIn":["stack_01"]},{"id":"023","name":"Claude","url":"https://claude.ai","status":"ACTIVE","statusColor":"cyan","description":"Advanced reasoning model.","wildUse":"Analyze massive datasets of failed sales calls to generate a perfect, probabilistically-optimized objection handling script.","complexity":4,"isAffiliate":false,"usedIn":["stack_08"]},{"id":"024","name":"Twilio","url":"https://twilio.com","status":"STABLE","statusColor":"magenta","description":"Communication API.","wildUse":"Build a rogue SMS bot that automatically detects when your internet drops and negotiates credit with your ISP.","complexity":4,"isAffiliate":false,"usedIn":["stack_02","stack_07"]},{"id":"025","name":"GitHub","url":"https://github.com","status":"STABLE","statusColor":"acid","description":"The code repository.","wildUse":"Automatically deploy new front-end features to Cloudflare the exact second you push an LLM-generated script.","complexity":3,"isAffiliate":false,"usedIn":[]}];
+/* ============================================
+   FALLBACK DATA
+   ============================================ */
+const FALLBACK_TOOLS=[{"id":"001","name":"Zapier","url":"https://zapier.com","status":"ACTIVE","statusColor":"acid","description":"Automation glue. Connects apps like a nervous system.","wildUse":"Build a \u2018lead-to-cash\u2019 conveyor belt that auto-qualifies, follows up, invoices, and books calls while you sleep.","complexity":2,"isAffiliate":true,"usedIn":["stack_02","stack_04","stack_05","stack_07"]},{"id":"002","name":"Notion","url":"https://notion.so","status":"STABLE","statusColor":"cyan","description":"Your ops brain in one place. Docs, databases, dashboards.","wildUse":"Turn it into a client-facing \u2018command center\u2019 that makes you look like a 20-person team.","complexity":2,"isAffiliate":true,"usedIn":["stack_03"]},{"id":"003","name":"Cloudflare Pages","url":"https://pages.cloudflare.com","status":"DEPLOYED","statusColor":"magenta","description":"Static hosting at warp speed.","wildUse":"Ship micro-sites for every offer angle you test, then kill the losers and scale the winners in hours.","complexity":3,"isAffiliate":false,"usedIn":["stack_04"]},{"id":"004","name":"Make","url":"https://make.com","status":"ACTIVE","statusColor":"acid","description":"Visual automation on steroids.","wildUse":"Chain 15 APIs together to build a complete SaaS backend without writing a single line of code.","complexity":3,"isAffiliate":true,"usedIn":["stack_01","stack_03","stack_06","stack_08"]},{"id":"005","name":"Airtable","url":"https://airtable.com","status":"STABLE","statusColor":"cyan","description":"The database for operators.","wildUse":"Serve as the central brain and content repository for a fully programmatic SEO agency.","complexity":2,"isAffiliate":true,"usedIn":["stack_01","stack_06","stack_07"]},{"id":"006","name":"OpenAI","url":"https://openai.com","status":"EXPERIMENTAL","statusColor":"magenta","description":"The brain API.","wildUse":"Pass it raw customer support transcripts to automatically identify churn risks and issue partial refunds before they cancel.","complexity":4,"isAffiliate":true,"usedIn":["stack_01","stack_04","stack_05"]},{"id":"007","name":"Anthropic","url":"https://anthropic.com","status":"ACTIVE","statusColor":"acid","description":"The nuanced thinker.","wildUse":"Feed it a 100-page industry PDF and have it autonomously draft 50 unique, highly-contextual LinkedIn posts.","complexity":4,"isAffiliate":true,"usedIn":["stack_03","stack_06"]},{"id":"008","name":"ElevenLabs","url":"https://elevenlabs.io","status":"DEPLOYED","statusColor":"cyan","description":"Hyper-realistic voice cloning.","wildUse":"Hook it to your newsletter to automatically generate a personalized daily podcast payload for premium subscribers.","complexity":3,"isAffiliate":true,"usedIn":["stack_02","stack_04"]},{"id":"009","name":"HeyGen","url":"https://heygen.com","status":"TESTING","statusColor":"magenta","description":"AI Avatars that don\u2019t look like garbage.","wildUse":"Programmatically generate personalized welcome videos saying the name of every new Stripe customer.","complexity":4,"isAffiliate":true,"usedIn":["stack_04"]},{"id":"010","name":"Vapi","url":"https://vapi.ai","status":"EXPERIMENTAL","statusColor":"acid","description":"Conversational voice API.","wildUse":"Replace your entire level-1 support team with an agent that answers within 1 second and handles 90% of basic inquiries.","complexity":5,"isAffiliate":true,"usedIn":["stack_02"]},{"id":"011","name":"Stripe","url":"https://stripe.com","status":"STABLE","statusColor":"cyan","description":"The money router.","wildUse":"Auto-split revenue between 5 different affiliate partners the exact millisecond a customer charge goes through.","complexity":3,"isAffiliate":false,"usedIn":["stack_02","stack_05","stack_08"]},{"id":"012","name":"Kit","url":"https://kit.com","status":"DEPLOYED","statusColor":"magenta","description":"Email infrastructure for builders.","wildUse":"Trigger a hyper-personalized 14-day sequence the moment someone visits a specific pricing tier on your site.","complexity":2,"isAffiliate":true,"usedIn":["stack_06","stack_08"]},{"id":"013","name":"Webflow","url":"https://webflow.com","status":"STABLE","statusColor":"acid","description":"Visual web development.","wildUse":"Pipe CMS data directly from Airtable to generate 10,000 programmatic SEO landing pages perfectly formatted overnight.","complexity":3,"isAffiliate":true,"usedIn":["stack_05"]},{"id":"014","name":"Midjourney","url":"https://midjourney.com","status":"ACTIVE","statusColor":"cyan","description":"Image generation mastery.","wildUse":"Automate an entire faceless Instagram account\u2019s visual pipeline with zero human input by triggering Discord bots via API.","complexity":4,"isAffiliate":false,"usedIn":["stack_03"]},{"id":"015","name":"Perplexity","url":"https://perplexity.ai","status":"TESTING","statusColor":"magenta","description":"The research engine.","wildUse":"Automatically scrape and summarize your competitor\u2019s new feature drops into a daily Slack intelligence alert.","complexity":3,"isAffiliate":true,"usedIn":["stack_03","stack_06","stack_08"]},{"id":"016","name":"Retell AI","url":"https://retellai.com","status":"EXPERIMENTAL","statusColor":"acid","description":"Low-latency voice AI.","wildUse":"Build an inbound sales closer that handles objections faster and with better tonality than a human rep.","complexity":5,"isAffiliate":true,"usedIn":[]},{"id":"017","name":"Bland AI","url":"https://bland.ai","status":"DEPLOYED","statusColor":"cyan","description":"Automated phone calling.","wildUse":"Dial every abandoned cart user with a custom discount offer in real-time before they leave the site.","complexity":4,"isAffiliate":true,"usedIn":["stack_07"]},{"id":"018","name":"Bubble","url":"https://bubble.io","status":"STABLE","statusColor":"magenta","description":"Full-stack no-code platform.","wildUse":"Launch a fully functional two-sided marketplace in a single weekend and start charging MRR.","complexity":3,"isAffiliate":true,"usedIn":[]},{"id":"019","name":"Framer","url":"https://framer.com","status":"ACTIVE","statusColor":"acid","description":"Ship sites fast.","wildUse":"Build a high-converting landing page, test it with live traffic, and pivot the entire design system in under 24 hours.","complexity":2,"isAffiliate":true,"usedIn":[]},{"id":"020","name":"Phantombuster","url":"https://phantombuster.com","status":"ROGUE","statusColor":"cyan","description":"Data extraction at scale.","wildUse":"Pull 5,000 highly targeted LinkedIn profiles and feed them directly into your cold outreach engine automatically.","complexity":4,"isAffiliate":true,"usedIn":["stack_07"]},{"id":"021","name":"Apify","url":"https://apify.com","status":"TESTING","statusColor":"magenta","description":"Web scraping for developers.","wildUse":"Monitor 50 competitor pricing pages daily and dynamically adjust your own Stripe checkout prices to match.","complexity":4,"isAffiliate":true,"usedIn":["stack_01","stack_05"]},{"id":"022","name":"Instantly","url":"https://instantly.ai","status":"DEPLOYED","statusColor":"acid","description":"Cold email infrastructure.","wildUse":"Spin up 50 domains and send 10,000 hyper-personalized emails a day with zero deliverability issues.","complexity":3,"isAffiliate":true,"usedIn":["stack_01"]},{"id":"023","name":"Claude","url":"https://claude.ai","status":"ACTIVE","statusColor":"cyan","description":"Advanced reasoning model.","wildUse":"Analyze massive datasets of failed sales calls to generate a perfect, probabilistically-optimized objection handling script.","complexity":4,"isAffiliate":false,"usedIn":["stack_08"]},{"id":"024","name":"Twilio","url":"https://twilio.com","status":"STABLE","statusColor":"magenta","description":"Communication API.","wildUse":"Build a rogue SMS bot that automatically detects when your internet drops and negotiates credit with your ISP.","complexity":4,"isAffiliate":false,"usedIn":["stack_02","stack_07"]},{"id":"025","name":"GitHub","url":"https://github.com","status":"STABLE","statusColor":"acid","description":"The code repository.","wildUse":"Automatically deploy new front-end features to Cloudflare the exact second you push an LLM-generated script.","complexity":3,"isAffiliate":false,"usedIn":[]}];
 
-    const FALLBACK_STACKS=[{"id":"stack_01","status":"UNPROVEN","title":"The Autonomous SDR","hookLine":"People say outbound can\u2019t be fully automated. Prototype the pipeline and see what happens.","wireframe":{"inputs":["LinkedIn URL","Target Company Data"],"process":["Scrape recent company news and funding events","Feed data to LLM to generate a customized icebreaker","Inject prospect and copy into an active cold email sequence"],"output":["An automated outbound workflow that routes replies and manages personalized sequences"],"proof":["Maintained an active outbound pipeline on autopilot using live company signals."]},"toolIds":["004","006","021","022","005"]},{"id":"stack_02","status":"UNPROVEN","title":"Voice-Activated Closer","hookLine":"Prototype a zero-latency voice routing system. Ship it first and test the limits of lead response.","wireframe":{"inputs":["New Lead Form Submission"],"process":["Trigger webhook the millisecond a lead form is submitted","Voice AI dials the provided phone number immediately","AI conducts a natural pre-qualification interview based on a script","If qualified, pushes a live transfer to a human closer"],"output":["A working voice-to-CRM routing flow with call logs and qualification outcomes"],"proof":["Verified routing logic against inbound lead volume in a live environment."]},"toolIds":["010","008","024","011","001"]},{"id":"stack_03","status":"UNPROVEN","title":"Zero-Click Content Engine","hookLine":"Someone will build a self-sustaining content loop. This is the blueprint to prototype the pipeline.","wireframe":{"inputs":["Raw MP3 file","Audio URL"],"process":["Transcribe audio with speaker mapping","Pass transcript to Claude to extract core frameworks and controversial takes","Generate long-form blogs and social posts via chained prompts","Format and save deliverables directly into a Notion database"],"output":["A centralized content repository populated with automated transcript transformations"],"proof":["Handled end-to-end content transformation from audio to database without manual intervention."]},"toolIds":["015","007","014","004","002"]},{"id":"stack_04","status":"UNPROVEN","title":"Faceless Video Factory","hookLine":"People say you need a studio. We say prototype the faceless pipeline and ship the first iteration.","wireframe":{"inputs":["Viral topic keyword","Competitor URL"],"process":["LLM writes a highly-engaging, controversial hook and script","Voice clone generates an emotional audio track","AI Avatar generator syncs photorealistic lip movements to the audio","Auto-publish via API to video platforms"],"output":["An automated video production sequence delivering rendered MP4 assets via API"],"proof":["Successfully generated and distributed synchronized visual assets using chained media APIs."]},"toolIds":["006","008","009","001","003"]},{"id":"stack_05","status":"UNPROVEN","title":"The Infinite Landing Page","hookLine":"Prototype the 1-to-1 message match. Ship it first to see if personalization beats the generic hero section.","wireframe":{"inputs":["User search query","Ad UTM parameters"],"process":["Capture inbound UTM parameters and search intent","LLM instantly rewrites the page headline and subcopy to match the exact query","Inject customized Stripe checkout link reflecting dynamic pricing","Deploy static page adjustments before the user realizes it happened"],"output":["A dynamic page generation system that updates copy based on inbound parameters"],"proof":["Achieved dynamic message match across multiple high-intent variations."]},"toolIds":["013","006","021","001","011"]},{"id":"stack_06","status":"UNPROVEN","title":"AI-Powered Research Agency","hookLine":"Someone will automate the high-end research agency. This is the stack to prototype the artifact.","wireframe":{"inputs":["Target Industry","Specific Niche"],"process":["Search agent scrapes the top competitors in the space","LLM synthesizes pricing models, core features, and negative reviews","Formats data into a styled PDF layout via document API","Automatically emails final deliverable to the client"],"output":["A structured intelligence report generated from programmatic competitive analysis"],"proof":["Produced structured industry intelligence reports using automated synthesis."]},"toolIds":["015","007","005","004","012"]},{"id":"stack_07","status":"UNPROVEN","title":"Local Business Lead Machine","hookLine":"People say local outreach is a grind. Prototype the reputation filter and see if it scales.","wireframe":{"inputs":["City Name","Business Type"],"process":["Scrape Google Maps for businesses with low ratings","Extract owner contact info and email addresses","Generate customized cold email featuring a screenshot of their worst review","Trigger AI voice mail drop offering an immediate fix"],"output":["A lead detection and outreach system focused on reputation signal triggers"],"proof":["Successfully mapped and contacted local businesses using negative sentiment triggers."]},"toolIds":["020","017","024","001","005"]},{"id":"stack_08","status":"UNPROVEN","title":"Auto-Newsletter Monetization","hookLine":"Build the loop that doesn\u2019t stop. Prototype the automated newsletter and sponsor outreach pipeline.","wireframe":{"inputs":["RSS feeds of niche blogs","Subreddits"],"process":["Aggregate weekly news and trending topics","LLM summarizes data and adds contrarian, engaging takes","Query sponsor database for relevant matches based on the content","Auto-insert sponsor tracking link and deploy broadcast via ESP"],"output":["A newsletter draft + sponsor outreach workflow + system send logs"],"proof":["Validated the automated content aggregation and sponsor insertion loop."]},"toolIds":["012","015","023","004","011"]}];
+const FALLBACK_STACKS=[{"id":"stack_01","status":"UNPROVEN","title":"The Autonomous SDR","hookLine":"People say outbound can\u2019t be fully automated. Prototype the pipeline and see what happens.","wireframe":{"inputs":["LinkedIn URL","Target Company Data"],"process":["Scrape recent company news and funding events","Feed data to LLM to generate a customized icebreaker","Inject prospect and copy into an active cold email sequence"],"output":["An automated outbound workflow that routes replies and manages personalized sequences"],"proof":["Maintained an active outbound pipeline on autopilot using live company signals."]},"toolIds":["004","006","021","022","005"]},{"id":"stack_02","status":"UNPROVEN","title":"Voice-Activated Closer","hookLine":"Prototype a zero-latency voice routing system. Ship it first and test the limits of lead response.","wireframe":{"inputs":["New Lead Form Submission"],"process":["Trigger webhook the millisecond a lead form is submitted","Voice AI dials the provided phone number immediately","AI conducts a natural pre-qualification interview based on a script","If qualified, pushes a live transfer to a human closer"],"output":["A working voice-to-CRM routing flow with call logs and qualification outcomes"],"proof":["Verified routing logic against inbound lead volume in a live environment."]},"toolIds":["010","008","024","011","001"]},{"id":"stack_03","status":"UNPROVEN","title":"Zero-Click Content Engine","hookLine":"Someone will build a self-sustaining content loop. This is the blueprint to prototype the pipeline.","wireframe":{"inputs":["Raw MP3 file","Audio URL"],"process":["Transcribe audio with speaker mapping","Pass transcript to Claude to extract core frameworks and controversial takes","Generate long-form blogs and social posts via chained prompts","Format and save deliverables directly into a Notion database"],"output":["A centralized content repository populated with automated transcript transformations"],"proof":["Handled end-to-end content transformation from audio to database without manual intervention."]},"toolIds":["015","007","014","004","002"]},{"id":"stack_04","status":"UNPROVEN","title":"Faceless Video Factory","hookLine":"People say you need a studio. We say prototype the faceless pipeline and ship the first iteration.","wireframe":{"inputs":["Viral topic keyword","Competitor URL"],"process":["LLM writes a highly-engaging, controversial hook and script","Voice clone generates an emotional audio track","AI Avatar generator syncs photorealistic lip movements to the audio","Auto-publish via API to video platforms"],"output":["An automated video production sequence delivering rendered MP4 assets via API"],"proof":["Successfully generated and distributed synchronized visual assets using chained media APIs."]},"toolIds":["006","008","009","001","003"]},{"id":"stack_05","status":"UNPROVEN","title":"The Infinite Landing Page","hookLine":"Prototype the 1-to-1 message match. Ship it first to see if personalization beats the generic hero section.","wireframe":{"inputs":["User search query","Ad UTM parameters"],"process":["Capture inbound UTM parameters and search intent","LLM instantly rewrites the page headline and subcopy to match the exact query","Inject customized Stripe checkout link reflecting dynamic pricing","Deploy static page adjustments before the user realizes it happened"],"output":["A dynamic page generation system that updates copy based on inbound parameters"],"proof":["Achieved dynamic message match across multiple high-intent variations."]},"toolIds":["013","006","021","001","011"]},{"id":"stack_06","status":"UNPROVEN","title":"AI-Powered Research Agency","hookLine":"Someone will automate the high-end research agency. This is the stack to prototype the artifact.","wireframe":{"inputs":["Target Industry","Specific Niche"],"process":["Search agent scrapes the top competitors in the space","LLM synthesizes pricing models, core features, and negative reviews","Formats data into a styled PDF layout via document API","Automatically emails final deliverable to the client"],"output":["A structured intelligence report generated from programmatic competitive analysis"],"proof":["Produced structured industry intelligence reports using automated synthesis."]},"toolIds":["015","007","005","004","012"]},{"id":"stack_07","status":"UNPROVEN","title":"Local Business Lead Machine","hookLine":"People say local outreach is a grind. Prototype the reputation filter and see if it scales.","wireframe":{"inputs":["City Name","Business Type"],"process":["Scrape Google Maps for businesses with low ratings","Extract owner contact info and email addresses","Generate customized cold email featuring a screenshot of their worst review","Trigger AI voice mail drop offering an immediate fix"],"output":["A lead detection and outreach system focused on reputation signal triggers"],"proof":["Successfully mapped and contacted local businesses using negative sentiment triggers."]},"toolIds":["020","017","024","001","005"]},{"id":"stack_08","status":"UNPROVEN","title":"Auto-Newsletter Monetization","hookLine":"Build the loop that doesn\u2019t stop. Prototype the automated newsletter and sponsor outreach pipeline.","wireframe":{"inputs":["RSS feeds of niche blogs","Subreddits"],"process":["Aggregate weekly news and trending topics","LLM summarizes data and adds contrarian, engaging takes","Query sponsor database for relevant matches based on the content","Auto-insert sponsor tracking link and deploy broadcast via ESP"],"output":["A newsletter draft + sponsor outreach workflow + system send logs"],"proof":["Validated the automated content aggregation and sponsor insertion loop."]},"toolIds":["012","015","023","004","011"]}];
 
-    let globalTools=[], globalStacks=[];
+let globalTools = [], globalStacks = [];
 
-    async function loadData(){
-        let tOk=false,sOk=false;
-        try{
-            const[tR,sR]=await Promise.all([fetch('tools.json'),fetch('challenge-stacks.json')]);
-            if(tR.ok){globalTools=await tR.json();tOk=true}
-            if(sR.ok){globalStacks=await sR.json();sOk=true}
-        }catch(e){console.warn('> fetch() blocked. Embedded fallback active.',e.message)}
-        if(!tOk){globalTools=FALLBACK_TOOLS;console.warn('> tools.json: fallback')}
-        if(!sOk){globalStacks=FALLBACK_STACKS;console.warn('> stacks: fallback')}
+/* ============================================
+   DATA LOADING
+   ============================================ */
+async function loadData() {
+    let tOk = false, sOk = false;
+    try {
+        const [tR, sR] = await Promise.all([fetch('tools.json'), fetch('challenge-stacks.json')]);
+        if (tR.ok) { globalTools = await tR.json(); tOk = true; }
+        if (sR.ok) { globalStacks = await sR.json(); sOk = true; }
+    } catch(e) { console.warn('> Fetch blocked. Using fallback.', e.message); }
+    if (!tOk) globalTools = FALLBACK_TOOLS;
+    if (!sOk) globalStacks = FALLBACK_STACKS;
 
-        // Backwards compat: old format had wildUse baked into description
-        globalTools=globalTools.map(t=>{
-            if(!t.wildUse&&t.description&&t.description.includes('Wild use:')){
-                const p=t.description.split('Wild use:');
-                t.description=p[0].trim();t.wildUse=p[1].trim();
-            }
-            if(t.complexity===undefined)t.complexity=3;
-            if(t.isAffiliate===undefined)t.isAffiliate=false;
-            return t;
-        });
-
-        if(!Array.isArray(globalTools)||!globalTools.length){
-            document.getElementById('tools-container').innerHTML='<div class="col-span-full border-2 p-4 font-mono uppercase text-sm" style="border-color:#ff00ff;color:#ff00ff">> FATAL: TOOL_DATA_CORRUPT. Contact terminal@codykeegan.ai</div>';
-            return;
+    // Backwards compat for old tools.json format
+    globalTools = globalTools.map(t => {
+        if (!t.wildUse && t.description && t.description.includes('Wild use:')) {
+            const p = t.description.split('Wild use:');
+            t.description = p[0].trim(); t.wildUse = p[1].trim();
         }
-        if(!Array.isArray(globalStacks)||!globalStacks.length){
-            document.getElementById('blueprints-container').innerHTML='<div class="border-2 p-4 font-mono uppercase text-sm" style="border-color:#ff00ff;color:#ff00ff">> FATAL: BLUEPRINT_DATA_CORRUPT. Contact terminal@codykeegan.ai</div>';
-            return;
-        }
-        renderAll();
-    }
-
-    function getSearchTerm(){
-        const sb=document.getElementById('sidebarSearch');
-        const mb=document.getElementById('mobileSearch');
-        return(sb&&sb===document.activeElement?sb.value:mb?mb.value:(sb?sb.value:'')).toLowerCase();
-    }
-
-    function syncSearch(src){
-        const v=src.value;
-        const sb=document.getElementById('sidebarSearch');
-        const mb=document.getElementById('mobileSearch');
-        if(sb&&sb!==src)sb.value=v;
-        if(mb&&mb!==src)mb.value=v;
-        const af=document.getElementById('activeFilter');
-        const aft=document.getElementById('activeFilterText');
-        if(v.length>0){af.classList.remove('hidden');aft.textContent='"'+v+'"'}
-        else{af.classList.add('hidden')}
-        renderAll();
-    }
-
-    function renderAll(){
-        const q=getSearchTerm();
-
-        const fTools=globalTools.filter(t=>
-            t.name.toLowerCase().includes(q)||
-            t.description.toLowerCase().includes(q)||
-            (t.wildUse||'').toLowerCase().includes(q)
-        );
-        const fStacks=globalStacks.filter(s=>{
-            if(!q)return true;
-            if(s.title.toLowerCase().includes(q))return true;
-            if(s.hookLine.toLowerCase().includes(q))return true;
-            const tn=s.toolIds.map(id=>(globalTools.find(t=>t.id===id)||{}).name||'').join(' ').toLowerCase();
-            return tn.includes(q);
-        });
-
-        // Counters
-        const u=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt};
-        u('toolResultCount',q?fTools.length+' of '+globalTools.length+' shown':globalTools.length+' tools loaded');
-        u('bpResultCount',q?fStacks.length+' of '+globalStacks.length+' shown':globalStacks.length+' blueprints loaded');
-        u('sidebarToolCount',fTools.length);
-        u('sidebarBpCount',fStacks.length);
-
-        // TOOL CARDS
-        if(!fTools.length){
-            document.getElementById('tools-container').innerHTML='<div class="col-span-full text-gray-600 font-mono uppercase text-sm">> NO MATCHING TOOLS FOUND.</div>';
-        } else {
-            document.getElementById('tools-container').innerHTML=fTools.map(t=>{
-                const hex=C[t.statusColor]||'#fff';
-                const cx=t.complexity||3;
-                const aff=t.isAffiliate?'<span style="color:#ccff00" title="Affiliate link"> *</span>':'';
-                const segs=Array.from({length:5},(_,i)=>'<div class="cx-seg '+(i<cx?'active-'+t.statusColor:'')+'"></div>').join('');
-                return `
-                <div class="tool-card border-2 border-gray-800 bg-black p-5 group"
-                     onmouseenter="this.style.borderColor='${hex}'"
-                     onmouseleave="this.style.borderColor='#1f2937'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center gap-2">
-                            <div class="w-10 h-10 bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-600 group-hover:text-white transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-loud text-2xl uppercase leading-none">${t.name}${aff}</h3>
-                                <p class="text-[10px] text-gray-600 font-mono mt-0.5">${t.description}</p>
-                            </div>
-                        </div>
-                        <span class="text-black text-[9px] font-black px-2 py-0.5 uppercase tracking-tighter flex-shrink-0" style="background:${hex}">${t.status}</span>
-                    </div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-[9px] text-gray-600 uppercase tracking-wider">Mission Complexity</span>
-                        <div class="cx-bar">${segs}</div>
-                        <span class="text-[9px] font-bold" style="color:${hex}">${cx}/5</span>
-                    </div>
-                    <div class="wild-use">
-                        <div class="border-l-2 pl-3 mb-4" style="border-color:${hex}">
-                            <p class="text-[9px] text-gray-600 uppercase font-bold mb-1">Wild Use Case</p>
-                            <p class="text-xs text-gray-400 leading-relaxed">${t.wildUse||''}</p>
-                        </div>
-                    </div>
-                    <a href="${t.url}" target="_blank" rel="noopener noreferrer"
-                       class="block w-full text-center border-2 border-gray-800 py-2.5 font-bold text-[10px] uppercase transition-all"
-                       onmouseenter="this.style.background='${hex}';this.style.color='#000';this.style.borderColor='${hex}'"
-                       onmouseleave="this.style.background='transparent';this.style.color='#fff';this.style.borderColor='#1f2937'">Launch Connection</a>
-                </div>`;
-            }).join('');
-        }
-
-        // BLUEPRINT CARDS
-        if(!fStacks.length){
-            document.getElementById('blueprints-container').innerHTML='<div class="text-gray-600 font-mono uppercase text-sm">> NO MATCHING BLUEPRINTS FOUND.</div>';
-        } else {
-            document.getElementById('blueprints-container').innerHTML=fStacks.map(s=>{
-                const rTools=s.toolIds.map(tid=>globalTools.find(t=>t.id===tid)).filter(Boolean);
-                const pills=rTools.map(t=>{
-                    const h=C[t.statusColor]||'#fff';
-                    return '<a href="'+t.url+'" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-gray-900 text-[9px] px-2 py-1 font-mono border border-gray-800 transition-all" style="color:'+h+'" onmouseenter="this.style.borderColor=\''+h+'\';this.style.background=\''+h+'\';this.style.color=\'#000\'" onmouseleave="this.style.borderColor=\'#1f2937\';this.style.background=\'#111827\';this.style.color=\''+h+'\'" title="Launch '+t.name+'">'+t.name+(t.isAffiliate?' <span style="color:#ccff00">*</span>':'')+'</a>';
-                }).join('');
-                return `
-                <div class="blueprint-card border-2 border-gray-800 p-6 md:p-8 transition-all relative overflow-hidden"
-                     onmouseenter="this.style.borderColor='#00ffff'"
-                     onmouseleave="this.style.borderColor='#1f2937'">
-                    <div class="relative z-10">
-                        <div class="flex flex-wrap items-center gap-3 mb-1">
-                            <span class="text-cyan font-mono text-[10px] uppercase tracking-widest">Blueprint: ${s.id}</span>
-                            <span class="text-gray-400 text-[9px] font-black px-2 py-0.5 uppercase tracking-tighter bg-gray-800">${s.status}</span>
-                            <span class="text-[9px] text-gray-600 font-mono">${s.toolIds.length} tools</span>
-                        </div>
-                        <h3 class="font-loud text-3xl md:text-4xl uppercase text-white mt-1 mb-3">${s.title}</h3>
-                        <p class="text-gray-400 font-mono italic text-sm border-l-2 border-cyan pl-4 mb-6">"${s.hookLine}"</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Process Logic</p>
-                                <ul class="text-[11px] text-gray-500 space-y-1.5">${s.wireframe.process.map(p=>'<li class="flex gap-2"><span class="text-cyan flex-shrink-0">></span> '+p+'</li>').join('')}</ul>
-                            </div>
-                            <div>
-                                <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Stack Components <span class="text-gray-700">(click to launch)</span></p>
-                                <div class="flex flex-wrap gap-2">${pills}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-    }
-
-    document.getElementById('sidebarSearch')?.addEventListener('input',function(){syncSearch(this)});
-    document.getElementById('mobileSearch')?.addEventListener('input',function(){syncSearch(this)});
-    document.getElementById('clearFilter')?.addEventListener('click',function(){
-        ['sidebarSearch','mobileSearch'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=''});
-        document.getElementById('activeFilter')?.classList.add('hidden');
-        renderAll();
+        if (t.complexity === undefined) t.complexity = 3;
+        if (t.isAffiliate === undefined) t.isAffiliate = false;
+        return t;
     });
-    window.onload=loadData;
-    </script>
+
+    if (!Array.isArray(globalTools) || !globalTools.length) {
+        document.getElementById('tools-container').innerHTML = '<div class="border-2 p-6 font-mono uppercase text-base" style="border-color:#ff00ff;color:#ff00ff">> FATAL: TOOL_DATA_CORRUPT. Contact terminal@codykeegan.ai</div>';
+        return;
+    }
+    renderAll();
+}
+
+/* ============================================
+   SEARCH
+   ============================================ */
+function getQ() {
+    const sb = document.getElementById('sidebarSearch');
+    const mb = document.getElementById('mobileSearch');
+    return (sb && sb === document.activeElement ? sb.value : mb ? mb.value : (sb ? sb.value : '')).toLowerCase();
+}
+function syncSearch(src) {
+    const v = src.value;
+    ['sidebarSearch','mobileSearch'].forEach(id => {
+        const e = document.getElementById(id);
+        if (e && e !== src) e.value = v;
+    });
+    const af = document.getElementById('activeFilter');
+    const aft = document.getElementById('activeFilterText');
+    if (v.length > 0) { af.classList.remove('hidden'); aft.textContent = '"' + v + '"'; }
+    else { af.classList.add('hidden'); }
+    renderAll();
+}
+
+/* ============================================
+   ACCORDION TOGGLE
+   ============================================ */
+function toggleAcc(id) {
+    const body = document.getElementById('body-' + id);
+    const chev = document.getElementById('chev-' + id);
+    if (!body) return;
+    body.classList.toggle('open');
+    if (chev) chev.classList.toggle('rot');
+}
+
+/* ============================================
+   RENDER
+   ============================================ */
+function renderAll() {
+    const q = getQ();
+
+    // Filter tools
+    const fTools = globalTools.filter(t =>
+        t.name.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q) ||
+        (t.wildUse || '').toLowerCase().includes(q)
+    );
+
+    // Filter blueprints
+    const fStacks = globalStacks.filter(s => {
+        if (!q) return true;
+        if (s.title.toLowerCase().includes(q)) return true;
+        if (s.hookLine.toLowerCase().includes(q)) return true;
+        return s.toolIds.map(id => (globalTools.find(t => t.id === id) || {}).name || '').join(' ').toLowerCase().includes(q);
+    });
+
+    // Update counters
+    const u = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
+    u('toolResultCount', q ? fTools.length + ' of ' + globalTools.length + ' shown' : globalTools.length + ' tools loaded');
+    u('bpResultCount', q ? fStacks.length + ' of ' + globalStacks.length + ' shown' : globalStacks.length + ' blueprints loaded');
+    u('sidebarToolCount', String(fTools.length));
+    u('sidebarBpCount', String(fStacks.length));
+
+    /* ================================================
+       TOOL VAULT — Accordion grouped by status
+       ================================================ */
+    if (!fTools.length) {
+        document.getElementById('tools-container').innerHTML = '<div class="text-gray-400 font-mono uppercase text-sm py-6">> No matching tools found.</div>';
+    } else {
+        // Group by status
+        const groups = {};
+        fTools.forEach(t => {
+            if (!groups[t.status]) groups[t.status] = [];
+            groups[t.status].push(t);
+        });
+        const sorted = Object.keys(groups).sort((a, b) => {
+            const ai = STATUS_ORDER.indexOf(a), bi = STATUS_ORDER.indexOf(b);
+            return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+        });
+
+        let html = '';
+        sorted.forEach((status, idx) => {
+            const tools = groups[status];
+            const hex = STATUS_HEX[status] || '#ccff00';
+            const colorKey = STATUS_KEY[status] || 'acid';
+            const isOpen = (q.length > 0) || (idx === 0); // First open by default, all open when searching
+
+            html += '<div class="mb-3">';
+
+            // --- Accordion header ---
+            html += '<button onclick="toggleAcc(\'t-' + status + '\')" class="w-full flex items-center justify-between px-5 py-4 border-2 cursor-pointer text-left transition-colors hover:bg-white/5" style="border-color:' + hex + '">';
+            html += '  <div class="flex items-center gap-3">';
+            html += '    <span id="chev-t-' + status + '" class="acc-chev font-bold text-lg' + (isOpen ? ' rot' : '') + '" style="color:' + hex + '">&#9656;</span>';
+            html += '    <span class="font-loud text-xl md:text-2xl uppercase tracking-tight">' + status + '</span>';
+            html += '    <span class="text-xs font-mono font-bold px-2.5 py-1 uppercase" style="background:' + hex + ';color:#000">' + tools.length + ' tool' + (tools.length > 1 ? 's' : '') + '</span>';
+            html += '  </div>';
+            html += '  <span class="text-xs text-gray-400 font-mono uppercase hidden sm:block">Click to ' + (isOpen ? 'collapse' : 'expand') + '</span>';
+            html += '</button>';
+
+            // --- Accordion body ---
+            html += '<div id="body-t-' + status + '" class="acc-body' + (isOpen ? ' open' : '') + '">';
+            html += '  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 p-4 md:p-5 border-x-2 border-b-2" style="border-color:' + hex + '33">';
+
+            tools.forEach(t => {
+                const tHex = C[t.statusColor] || '#fff';
+                const cx = t.complexity || 3;
+                const aff = t.isAffiliate ? ' <span style="color:#ccff00" title="Affiliate link">*</span>' : '';
+                const bpCount = globalStacks.filter(s => s.toolIds.includes(t.id)).length;
+                const segs = Array.from({length:5}, (_, i) =>
+                    '<div class="cx-seg' + (i < cx ? ' on-' + t.statusColor : '') + '"></div>'
+                ).join('');
+
+                html += '<div class="tool-card border-2 border-gray-800 bg-black p-6 group" onmouseenter="this.style.borderColor=\'' + tHex + '\'" onmouseleave="this.style.borderColor=\'#1f2937\'">';
+
+                // Top row: name + status
+                html += '  <div class="flex justify-between items-start mb-3">';
+                html += '    <div>';
+                html += '      <h3 class="font-loud text-2xl md:text-3xl uppercase leading-tight text-white">' + t.name + aff + '</h3>';
+                html += '      <p class="text-sm text-gray-300 mt-1 leading-snug">' + t.description + '</p>';
+                html += '    </div>';
+                html += '    <span class="text-black text-[11px] font-black px-2.5 py-1 uppercase tracking-tight flex-shrink-0 ml-3" style="background:' + tHex + '">' + t.status + '</span>';
+                html += '  </div>';
+
+                // Complexity bar
+                html += '  <div class="flex items-center gap-3 mb-4">';
+                html += '    <span class="text-xs text-gray-400 uppercase tracking-wider font-bold">Complexity</span>';
+                html += '    <div class="cx-bar">' + segs + '</div>';
+                html += '    <span class="text-xs font-bold" style="color:' + tHex + '">' + cx + '/5</span>';
+                if (bpCount > 0) {
+                    html += '    <span class="text-xs text-gray-400 ml-auto">Used in ' + bpCount + ' blueprint' + (bpCount > 1 ? 's' : '') + '</span>';
+                }
+                html += '  </div>';
+
+                // Wild Use — always visible
+                html += '  <div class="border-l-2 pl-4 mb-5" style="border-color:' + tHex + '">';
+                html += '    <p class="text-xs text-gray-400 uppercase font-bold mb-1">Wild Use Case</p>';
+                html += '    <p class="text-sm text-gray-300 leading-relaxed">' + (t.wildUse || 'No wild use documented yet.') + '</p>';
+                html += '  </div>';
+
+                // CTA
+                html += '  <a href="' + t.url + '" target="_blank" rel="noopener noreferrer" class="block w-full text-center border-2 border-gray-700 py-3 font-bold text-[13px] uppercase transition-all text-white" onmouseenter="this.style.background=\'' + tHex + '\';this.style.color=\'#000\';this.style.borderColor=\'' + tHex + '\'" onmouseleave="this.style.background=\'transparent\';this.style.color=\'#fff\';this.style.borderColor=\'#374151\'">Launch Connection &rarr;</a>';
+
+                html += '</div>'; // end tool-card
+            });
+
+            html += '  </div>'; // end grid
+            html += '</div>'; // end acc-body
+            html += '</div>'; // end wrapper
+        });
+
+        document.getElementById('tools-container').innerHTML = html;
+    }
+
+    /* ================================================
+       BLUEPRINTS — Each one is its own accordion
+       ================================================ */
+    if (!fStacks.length) {
+        document.getElementById('blueprints-container').innerHTML = '<div class="text-gray-400 font-mono uppercase text-sm py-6">> No matching blueprints found.</div>';
+    } else {
+        let bpHtml = '';
+        fStacks.forEach((s, idx) => {
+            const isOpen = (q.length > 0) || (idx === 0);
+            const rTools = s.toolIds.map(tid => globalTools.find(t => t.id === tid)).filter(Boolean);
+            const pills = rTools.map(t => {
+                const h = C[t.statusColor] || '#fff';
+                return '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-gray-900 text-xs px-3 py-2 font-mono border border-gray-700 transition-all" style="color:' + h + '" onmouseenter="this.style.borderColor=\'' + h + '\';this.style.background=\'' + h + '\';this.style.color=\'#000\'" onmouseleave="this.style.borderColor=\'#374151\';this.style.background=\'#111827\';this.style.color=\'' + h + '\'" title="Launch ' + t.name + '">' + t.name + (t.isAffiliate ? ' <span style="color:#ccff00">*</span>' : '') + '</a>';
+            }).join('');
+
+            bpHtml += '<div class="mb-3">';
+
+            // --- Blueprint accordion header ---
+            bpHtml += '<button onclick="toggleAcc(\'bp-' + s.id + '\')" class="blueprint-card w-full flex items-center justify-between px-5 md:px-6 py-5 border-2 border-gray-800 cursor-pointer text-left transition-colors hover:border-cyan">';
+            bpHtml += '  <div class="flex items-center gap-3 flex-grow min-w-0">';
+            bpHtml += '    <span id="chev-bp-' + s.id + '" class="acc-chev text-cyan font-bold text-lg flex-shrink-0' + (isOpen ? ' rot' : '') + '">&#9656;</span>';
+            bpHtml += '    <div class="min-w-0">';
+            bpHtml += '      <div class="flex flex-wrap items-center gap-2 mb-1">';
+            bpHtml += '        <span class="text-xs text-cyan font-mono uppercase tracking-widest">' + s.id.replace('_', ' ') + '</span>';
+            bpHtml += '        <span class="text-[11px] text-gray-400 font-black px-2 py-0.5 uppercase bg-gray-800">' + s.status + '</span>';
+            bpHtml += '        <span class="text-xs text-gray-400 font-mono">' + s.toolIds.length + ' tools</span>';
+            bpHtml += '      </div>';
+            bpHtml += '      <h3 class="font-loud text-2xl md:text-3xl uppercase text-white leading-tight">' + s.title + '</h3>';
+            bpHtml += '      <p class="text-sm text-gray-300 font-mono italic mt-1 truncate">"' + s.hookLine + '"</p>';
+            bpHtml += '    </div>';
+            bpHtml += '  </div>';
+            bpHtml += '</button>';
+
+            // --- Blueprint accordion body ---
+            bpHtml += '<div id="body-bp-' + s.id + '" class="acc-body' + (isOpen ? ' open' : '') + '">';
+            bpHtml += '  <div class="border-x-2 border-b-2 border-gray-800 p-5 md:p-8 space-y-6">';
+
+            // Process logic
+            bpHtml += '    <div>';
+            bpHtml += '      <p class="text-xs text-gray-400 uppercase font-bold mb-3 tracking-wider">Process Logic</p>';
+            bpHtml += '      <ol class="space-y-3">';
+            s.wireframe.process.forEach((p, pi) => {
+                bpHtml += '      <li class="flex gap-3 items-start">';
+                bpHtml += '        <span class="text-cyan font-bold text-sm flex-shrink-0 mt-0.5">' + String(pi + 1).padStart(2, '0') + '.</span>';
+                bpHtml += '        <span class="text-sm text-gray-300 leading-relaxed">' + p + '</span>';
+                bpHtml += '      </li>';
+            });
+            bpHtml += '      </ol>';
+            bpHtml += '    </div>';
+
+            // Output
+            bpHtml += '    <div>';
+            bpHtml += '      <p class="text-xs text-gray-400 uppercase font-bold mb-2 tracking-wider">Expected Output</p>';
+            bpHtml += '      <p class="text-sm text-gray-300 leading-relaxed border-l-2 border-cyan pl-4">' + (s.wireframe.output || []).join(' ') + '</p>';
+            bpHtml += '    </div>';
+
+            // Stack components
+            bpHtml += '    <div>';
+            bpHtml += '      <p class="text-xs text-gray-400 uppercase font-bold mb-3 tracking-wider">Stack Components <span class="text-gray-500 normal-case">(click to launch)</span></p>';
+            bpHtml += '      <div class="flex flex-wrap gap-2.5">' + pills + '</div>';
+            bpHtml += '    </div>';
+
+            bpHtml += '  </div>'; // end inner padding
+            bpHtml += '</div>'; // end acc-body
+            bpHtml += '</div>'; // end wrapper
+        });
+
+        document.getElementById('blueprints-container').innerHTML = bpHtml;
+    }
+}
+
+/* ============================================
+   EVENT WIRING
+   ============================================ */
+document.getElementById('sidebarSearch')?.addEventListener('input', function(){ syncSearch(this); });
+document.getElementById('mobileSearch')?.addEventListener('input', function(){ syncSearch(this); });
+document.getElementById('clearFilter')?.addEventListener('click', function(){
+    ['sidebarSearch','mobileSearch'].forEach(id => { const e = document.getElementById(id); if(e) e.value = ''; });
+    document.getElementById('activeFilter')?.classList.add('hidden');
+    renderAll();
+});
+window.onload = loadData;
+</script>
 </body>
 </html>

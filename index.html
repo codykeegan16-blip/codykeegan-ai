@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodyKeegan.AI // The Lab</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { loud: ['Oswald', 'sans-serif'], mono: ['Space Mono', 'monospace'] },
-                    colors: { acid: '#ccff00', cyan: '#00ffff', magenta: '#ff00ff' },
-                    animation: { 'marquee': 'marquee 30s linear infinite', 'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite' },
-                    keyframes: { marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-100%)' } } }
+                    fontFamily: {
+                        loud: ['Oswald', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        acid: '#ccff00',
+                        cyan: '#00ffff',
+                        magenta: '#ff00ff',
+                    },
+                    animation: {
+                        'marquee': 'marquee 30s linear infinite',
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' }
+                        }
+                    }
                 }
             }
         }
@@ -22,16 +39,16 @@
         ::selection { background-color: #ccff00; color: #000; }
         .text-stroke { -webkit-text-stroke: 1px #fff; color: transparent; }
         .text-stroke:hover { color: #fff; -webkit-text-stroke: 0px; cursor: crosshair; }
-        .chaos-grid { background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px; }
-        @keyframes typeIn { from { width: 0; } to { width: 100%; } }
-        .type-line { overflow: hidden; white-space: nowrap; border-right: 2px solid #ccff00; width: 0; }
-        .type-line.active { animation: typeIn 0.6s steps(30) forwards; }
-        .type-line.done { border-right: none; width: 100%; }
+        .chaos-grid {
+            background-image: radial-gradient(#333 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="font-mono antialiased overflow-x-hidden chaos-grid selection:bg-acid selection:text-black flex flex-col min-h-screen">
 
-    <!-- Marquee Banner -->
     <div class="w-full bg-acid text-black font-loud font-black uppercase text-xl md:text-3xl py-2 overflow-hidden border-b-4 border-black relative">
         <div class="flex whitespace-nowrap">
             <div class="animate-marquee flex-shrink-0">
@@ -45,7 +62,6 @@
 
     <main class="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-16 pt-24 pb-20 flex-grow">
         
-        <!-- Hero -->
         <div class="mb-32">
             <h1 class="font-loud font-black text-6xl sm:text-8xl md:text-[140px] leading-[0.85] tracking-tighter uppercase mb-12">
                 I can't stop<br>
@@ -57,155 +73,136 @@
             </p>
         </div>
 
-        <!-- Access Terminal -->
+        <div class="flex flex-col items-end text-right mb-40">
+            <div class="max-w-5xl space-y-12">
+                <p class="font-loud text-5xl md:text-7xl uppercase tracking-tighter leading-none hover:text-cyan transition-colors duration-200 cursor-crosshair">
+                    What if you chained a voice cloner to an automated dialer?
+                </p>
+                <p class="font-loud text-5xl md:text-7xl uppercase tracking-tighter leading-none hover:text-magenta transition-colors duration-200 cursor-crosshair">
+                    What if you fed a rogue script 10,000 data points and told it to invent a product?
+                </p>
+                <p class="font-mono text-xl md:text-3xl text-acid bg-black/50 inline-block p-4 border-2 border-acid transform rotate-2">
+                    Does it work? I don't know. Let's plug it in.
+                </p>
+            </div>
+        </div>
+
+        <div class="relative mb-40 flex flex-col md:flex-row gap-12 items-center md:items-start mt-32">
+            <div class="w-full md:w-1/3 relative z-10 group">
+                <div class="absolute inset-0 bg-acid translate-x-4 translate-y-4 border-2 border-white transition-transform group-hover:translate-x-6 group-hover:translate-y-6"></div>
+                <div class="relative z-20 w-full aspect-square bg-gray-800 border-4 border-white overflow-hidden">
+                    <img src="IMAGE.png" alt="Cody Keegan Profile" class="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-500">
+                </div>
+                <div class="absolute -bottom-6 -right-6 bg-black border-2 border-white px-4 py-2 font-mono text-acid font-bold z-30">
+                    ID: CODY KEEGAN
+                </div>
+            </div>
+            
+            <div class="w-full md:w-2/3 md:pl-16 space-y-8 font-mono text-xl md:text-3xl text-gray-300 leading-relaxed mt-12 md:mt-0">
+                <p class="text-white font-bold text-4xl">I just have ideas.</p>
+                <p>I am not an expert. I don’t have a secret system. I don't sell a course.</p>
+                <p>I just sit here, look at the insane AI tools dropping every single day, and try to hook them together to build weird, automated commerce machines.</p>
+                <p class="text-acid uppercase font-bold tracking-widest text-2xl border-l-4 border-acid pl-6">We stack. We break. We rebuild.</p>
+            </div>
+        </div>
+
         <div class="max-w-6xl mx-auto border-4 border-white p-6 md:p-16 relative bg-black">
             <div class="absolute top-0 right-0 w-16 h-16 border-b-4 border-l-4 border-acid"></div>
-            <div class="absolute -top-3 left-10 bg-black px-4 font-mono text-sm text-gray-500 tracking-widest uppercase">Access_Terminal</div>
+            <div class="absolute bottom-0 left-0 w-16 h-16 border-t-4 border-r-4 border-cyan"></div>
+            <div class="absolute -top-3 left-10 bg-black px-4 font-mono text-sm text-gray-500 tracking-widest">ACCESS_TERMINAL</div>
 
             <div class="text-center mb-16">
                 <h2 class="font-loud text-6xl md:text-9xl uppercase tracking-tighter mb-6 leading-[0.8]">
                     The <span class="text-acid">Dashboard</span>.
                 </h2>
-                <p class="font-mono text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-                    Access the raw, unpolished AI blueprints. 99% of people will stare at this and do nothing. The 1% will take these tools and build a monster.
+                <p class="font-mono text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+                    It's a living, breathing, messy list of every AI tool I'm currently obsessing over. Links, API docs, and raw experiments. It's an open playground.
                 </p>
             </div>
 
-            <!-- Kit Form — Terminal Design (AJAX headless submission) -->
-            <form id="chaosForm" class="flex flex-col lg:flex-row gap-0 group relative z-20" novalidate>
+            <form id="chaosForm" 
+                  action="https://app.kit.com/forms/dbac4b59a7/subscriptions" 
+                  method="post" 
+                  data-sv-form="dbac4b59a7" 
+                  class="flex flex-col lg:flex-row gap-0 group relative z-20">
+                
                 <input type="email" 
-                       id="emailInput"
                        name="email_address" 
+                       id="email" 
                        required 
-                       placeholder="ENTER EMAIL // ACCESS VAULT" 
+                       placeholder="ENTER EMAIL // GET THE TOOLS" 
                        class="w-full lg:w-2/3 bg-transparent border-4 border-white text-white font-mono text-xl md:text-3xl p-6 md:p-8 placeholder-gray-600 focus:outline-none focus:border-acid focus:bg-white/5 transition-all">
                 
                 <button type="submit" 
-                        id="submitBtn"
                         class="w-full lg:w-1/3 bg-white text-black font-loud uppercase text-4xl md:text-5xl px-8 py-6 tracking-tighter hover:bg-acid transition-colors border-4 border-white lg:border-l-0 whitespace-nowrap flex items-center justify-center gap-4">
                     LET ME IN <span class="animate-pulse-fast">_</span>
                 </button>
             </form>
 
-            <!-- Terminal Success Animation -->
-            <div id="terminalSuccess" class="hidden mt-8 p-6 border-2 border-dashed border-acid bg-acid/10 text-acid font-mono text-lg md:text-xl text-left space-y-2">
-                <div id="line1" class="type-line">> CONNECTION ESTABLISHED.</div>
-                <div id="line2" class="type-line">> SECURING ACCESS...</div>
-                <div id="line3" class="type-line">> REDIRECTING TO MISSION HUB...</div>
-            </div>
-
-            <!-- Error state -->
-            <div id="terminalError" class="hidden mt-8 p-6 border-2 border-dashed border-magenta bg-magenta/10 text-magenta font-mono text-lg text-left">
-                > ERROR: TRANSMISSION_FAILED. Check your email and try again.
+            <div id="terminalSuccess" class="hidden mt-8 p-6 border-2 border-dashed border-acid bg-acid/10 text-acid font-mono text-xl text-left">
+                > CONNECTION ESTABLISHED.<br>
+                > LINK DISPATCHED TO INBOX.<br>
+                > AUTHORIZING DASHBOARD ACCESS...
             </div>
         </div>
+
+        <div class="mt-40 text-center space-y-4">
+            <p class="font-mono text-gray-600 text-sm md:text-base uppercase tracking-[0.2em]">One idea leads to ten more.</p>
+            <p class="font-loud text-3xl md:text-5xl text-gray-800 uppercase tracking-tighter">Open your laptop.</p>
+        </div>
+
     </main>
 
-    <!-- Footer -->
     <footer class="w-full border-t-2 border-gray-800 bg-black py-12 px-4 sm:px-8 mt-auto">
         <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div class="space-y-2">
-                <p class="font-mono text-sm text-gray-500 uppercase tracking-widest">&copy; 2026 CodyKeegan.AI // Build the weird things.</p>
+            <div class="space-y-2 max-w-2xl">
+                <p class="font-mono text-sm text-gray-500 uppercase tracking-widest">&copy; 2026 CodyKeegan.AI // All Rights Reserved.</p>
+                <p class="font-mono text-xs text-gray-600">
+                    <span class="text-acid font-bold">FTC DISCLOSURE:</span> Some links on this site may be affiliate links. If you click them and buy something, I might make a commission at no extra cost to you. I only link to tools I actually test and use in the lab.
+                </p>
             </div>
             <div class="flex gap-6 font-mono text-sm text-gray-400 uppercase tracking-widest">
-                <a href="about.html" class="hover:text-white transition-colors">About</a>
-                <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate</a>
-                <a href="terms.html" class="hover:text-cyan transition-colors">Terms</a>
-                <a href="privacy.html" class="hover:text-magenta transition-colors">Privacy</a>
+                <a href="affiliate.html" class="hover:text-acid transition-colors">Affiliate Disclaimer</a>
+                <a href="terms.html" class="hover:text-cyan transition-colors">Terms of Service</a>
+                <a href="privacy.html" class="hover:text-magenta transition-colors">Privacy Policy</a>
             </div>
         </div>
     </footer>
 
+    <script async data-uid="dbac4b59a7" src="https://cody-keegan-ai.kit.com/dbac4b59a7/index.js"></script>
+
     <script>
-    /* =========================================================
-       HEADLESS KIT FORM SUBMISSION
-       Sends email via fetch() to Kit's API. No page navigation.
-       Shows terminal animation, then redirects to dashboard.
-       ========================================================= */
-    const KIT_FORM_UID = 'dbac4b59a7';
-    const KIT_ENDPOINT = `https://app.kit.com/forms/${KIT_FORM_UID}/subscriptions`;
+        document.getElementById('chaosForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const form = this;
+            
+            if(email) {
+                // UI feedback
+                form.style.opacity = '0.3';
+                form.style.pointerEvents = 'none';
+                document.getElementById('terminalSuccess').classList.remove('hidden');
+                
+                const convertKitUrl = form.action;
+                const formData = new FormData();
+                formData.append('email_address', email);
 
-    const form = document.getElementById('chaosForm');
-    const emailInput = document.getElementById('emailInput');
-    const submitBtn = document.getElementById('submitBtn');
-    const successEl = document.getElementById('terminalSuccess');
-    const errorEl = document.getElementById('terminalError');
-
-    // Simple email validation
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    // Typewriter animation sequence
-    function runTerminalAnimation() {
-        successEl.classList.remove('hidden');
-        errorEl.classList.add('hidden');
-
-        const lines = [
-            document.getElementById('line1'),
-            document.getElementById('line2'),
-            document.getElementById('line3')
-        ];
-
-        lines.forEach((l, i) => {
-            setTimeout(() => {
-                l.classList.add('active');
-                // Remove cursor from previous line
-                if (i > 0) lines[i-1].classList.add('done');
-            }, i * 700);
+                // Send data to Kit
+                fetch(convertKitUrl, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' 
+                })
+                .then(() => {
+                    // Slight delay for the user to read the terminal message
+                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+                })
+                .catch(error => {
+                    // Fail gracefully and redirect anyway
+                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+                });
+            }
         });
-
-        // Redirect after animation completes
-        setTimeout(() => {
-            window.location.href = 'dashboard.html';
-        }, 2800);
-    }
-
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Prevent native form POST — this is the critical fix
-
-        const email = emailInput.value.trim();
-
-        // Validate
-        if (!email || !isValidEmail(email)) {
-            emailInput.style.borderColor = '#ff00ff';
-            emailInput.focus();
-            setTimeout(() => { emailInput.style.borderColor = '#fff'; }, 1500);
-            return;
-        }
-
-        // Disable form
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'TRANSMITTING...';
-        form.style.opacity = '0.4';
-        form.style.pointerEvents = 'none';
-
-        // Send to Kit via fetch (headless)
-        try {
-            const formData = new FormData();
-            formData.append('email_address', email);
-
-            await fetch(KIT_ENDPOINT, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors' // Kit doesn't send CORS headers for form submissions
-            });
-
-            // With mode: 'no-cors', we can't read the response, 
-            // but the request IS sent. This is standard for Kit headless.
-            runTerminalAnimation();
-
-        } catch (err) {
-            console.error('Kit submission failed:', err);
-            // Show error state
-            errorEl.classList.remove('hidden');
-            form.style.opacity = '1';
-            form.style.pointerEvents = 'auto';
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'LET ME IN <span class="animate-pulse-fast">_</span>';
-        }
-    });
     </script>
-
 </body>
 </html>
