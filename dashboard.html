@@ -10,8 +10,17 @@
     
     <script>
         tailwind.config = {
-            // Safelist ensures Tailwind CDN generates these classes even though they are injected later via JavaScript
-            safelist: ['bg-acid', 'bg-cyan', 'bg-magenta', 'text-black', 'text-white', 'hover:border-acid', 'hover:text-acid', 'hover:border-cyan', 'hover:text-cyan', 'hover:border-magenta', 'hover:text-magenta'],
+            safelist: [
+                'bg-acid', 'bg-cyan', 'bg-magenta', 'text-black', 'text-white', 
+                'text-acid', 'text-cyan', 'text-magenta',
+                'border-acid', 'border-cyan', 'border-magenta',
+                'hover:border-acid', 'hover:text-acid', 'hover:bg-acid/10',
+                'hover:border-cyan', 'hover:text-cyan', 'hover:bg-cyan/10',
+                'hover:border-magenta', 'hover:text-magenta', 'hover:bg-magenta/10',
+                'group-hover:text-acid', 'group-hover:border-acid', 
+                'group-hover:text-cyan', 'group-hover:border-cyan', 
+                'group-hover:text-magenta', 'group-hover:border-magenta'
+            ],
             theme: {
                 extend: {
                     fontFamily: {
@@ -33,18 +42,16 @@
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 40px 40px;
         }
-        .tool-card:hover {
-            box-shadow: 10px 10px 0px #ccff00;
-            transform: translate(-5px, -5px);
-        }
-        /* Custom scrollbar for idea boxes if content gets long */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #111; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00ffff; }
         
-        /* Select dropdown styling fix for dark mode */
         select option { background: #000; color: #fff; }
+        
+        /* Details/Summary overrides for Collapsible Stacks */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
 <body class="font-mono antialiased chaos-grid selection:bg-acid selection:text-black min-h-screen flex flex-col">
@@ -70,7 +77,7 @@
         
         <div class="mb-20">
             <h2 class="font-loud text-5xl md:text-7xl uppercase leading-none mb-4">Connection <span class="text-cyan">Established</span>.</h2>
-            <p class="text-xl text-gray-400 max-w-2xl">The tools below are the current building blocks of the automated commerce machines. Break them, stack them, or ignore them.</p>
+            <p class="text-xl text-gray-400 max-w-2xl font-mono">People say it can't be done. Someone will. Who ships first?</p>
         </div>
 
         <!-- SECTION 1: DYNAMIC TOOLS GRID -->
@@ -80,13 +87,34 @@
                 <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: tools.json</span>
             </div>
             
-            <div class="mb-8 p-4 border-l-4 border-acid bg-acid/10 text-gray-300 font-mono text-sm">
+            <div class="mb-8 p-4 border-l-4 border-acid bg-acid/10 text-acid font-mono text-sm uppercase tracking-widest">
                 Disclosure: Some links may be affiliate links. If you choose to use them, I may earn a commission at no extra cost to you.
+            </div>
+
+            <!-- CONTROL PANEL -->
+            <div class="flex flex-col xl:flex-row gap-4 mb-8 p-4 border-2 border-gray-800 bg-black/80 items-stretch xl:items-center backdrop-blur-sm">
+                <div class="flex-grow flex items-center gap-3 border-b-2 xl:border-b-0 xl:border-r-2 border-gray-800 pb-4 xl:pb-0 xl:pr-4">
+                    <span class="text-acid font-mono">></span>
+                    <input type="text" id="toolSearch" placeholder="SEARCH TOOLS..." class="bg-transparent border-none text-white font-mono text-sm focus:outline-none w-full placeholder-gray-600">
+                </div>
+                <div class="flex flex-wrap md:flex-nowrap gap-4">
+                    <select id="toolCategory" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-2 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer">
+                        <option value="all">CATEGORY: ALL</option>
+                    </select>
+                    <select id="toolStack" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-2 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer">
+                        <option value="all">STACK: ALL</option>
+                    </select>
+                    <select id="toolSort" class="bg-black border border-gray-700 text-gray-300 font-mono text-xs px-3 py-2 focus:border-acid focus:outline-none flex-grow md:flex-grow-0 cursor-pointer">
+                        <option value="used">SORT: MOST USED</option>
+                        <option value="az">SORT: A-Z</option>
+                        <option value="cat">SORT: CATEGORY</option>
+                    </select>
+                </div>
             </div>
             
             <!-- Tools get injected here by Javascript -->
-            <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p class="text-gray-500 animate-pulse">Fetching tool data...</p>
+            <div id="tools-container" class="space-y-4">
+                <p class="text-gray-500 font-mono animate-pulse">> FETCHING TOOL DATA...</p>
             </div>
         </section>
 
@@ -97,13 +125,13 @@
                 <span class="text-xs font-mono text-gray-500 uppercase tracking-widest hidden sm:inline">Source: challenge-stacks.json</span>
             </div>
 
-            <div class="mb-8 p-4 border-l-4 border-cyan bg-cyan/10 text-gray-300 font-mono text-sm">
+            <div class="mb-8 p-4 border-l-4 border-cyan bg-cyan/10 text-cyan font-mono text-sm uppercase tracking-widest">
                 Disclosure: Some links may be affiliate links. If you choose to use them, I may earn a commission at no extra cost to you.
             </div>
 
             <!-- Stacks get injected here by Javascript -->
-            <div id="challenge-stacks-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <p class="text-gray-500 animate-pulse">Fetching challenge stacks...</p>
+            <div id="challenge-stacks-container" class="space-y-4">
+                <p class="text-gray-500 font-mono animate-pulse">> FETCHING CHALLENGE STACKS...</p>
             </div>
         </section>
 
@@ -160,6 +188,7 @@
                             <select id="completedStack" 
                                     class="w-full bg-transparent border-2 border-gray-800 text-white font-mono text-xl p-4 focus:outline-none focus:border-magenta focus:bg-white/5 transition-all cursor-pointer">
                                 <option value="" disabled selected>Select the stack you built...</option>
+                                <!-- Populated dynamically by JS if desired, or kept static -->
                                 <option value="The Autonomous SDR">The Autonomous SDR</option>
                                 <option value="Voice-Activated Closer">Voice-Activated Closer</option>
                                 <option value="Zero-Click Content Engine">Zero-Click Content Engine</option>
@@ -205,115 +234,209 @@
 
     <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
+        // Data stores
+        let globalTools = [];
+        let globalStacks = [];
+
+        // Manual category mapping since it's not in tools.json
+        const toolCategoryMap = {
+            "Zapier": "Automation", "Make": "Automation", "Instantly": "Automation",
+            "OpenAI": "Agents", "Anthropic": "Agents", "Claude": "Agents", "Vapi": "Agents", "Retell AI": "Agents", "Bland AI": "Agents",
+            "ElevenLabs": "Video", "HeyGen": "Video", "Midjourney": "Video",
+            "Perplexity": "Research",
+            "Cloudflare Pages": "Infra", "Stripe": "Infra", "Kit": "Infra", "Twilio": "Infra",
+            "Webflow": "Design", "Framer": "Design", "Bubble": "Design",
+            "Notion": "Data", "Airtable": "Data", "Phantombuster": "Data", "Apify": "Data",
+            "GitHub": "Dev"
+        };
+
+        // Icon SVG Factory
+        function getCategoryIcon(category) {
+            const icons = {
+                'Automation': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>',
+                'Agents': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>',
+                'Video': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><polygon points="18 10 22 8 22 16 18 14"></polygon></svg>',
+                'Research': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>',
+                'Infra': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>',
+                'Design': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>',
+                'Data': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>',
+                'Dev': '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>'
+            };
+            return icons[category] || '<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
-            // Load tools first, store them, and pass them to stacks to map the tool IDs
-            const tools = await loadTools();
-            if (tools) {
-                await loadChallengeStacks(tools);
+            try {
+                // Fetch JSON asynchronously
+                const [toolsRes, stacksRes] = await Promise.all([
+                    fetch('tools.json').catch(() => ({ ok: false })),
+                    fetch('challenge-stacks.json').catch(() => ({ ok: false }))
+                ]);
+                
+                if (toolsRes.ok) globalTools = await toolsRes.json();
+                if (stacksRes.ok) globalStacks = await stacksRes.json();
+                
+                // Enrich tools with computed category and fix usedIn ties
+                globalTools.forEach(t => {
+                    t.category = toolCategoryMap[t.name] || "Dev";
+                    t.usedIn = t.usedIn || [];
+                });
+
+                // Compute any missing usedIn relations dynamically from stacks
+                globalStacks.forEach(stack => {
+                    stack.toolIds.forEach(id => {
+                        const tool = globalTools.find(t => t.id === id);
+                        if (tool && !tool.usedIn.includes(stack.id)) {
+                            tool.usedIn.push(stack.id);
+                        }
+                    });
+                });
+
+                populateDropdowns();
+                renderTools();
+                renderStacks();
+
+                // Setup Filter Listeners
+                document.getElementById('toolSearch').addEventListener('input', renderTools);
+                document.getElementById('toolCategory').addEventListener('change', renderTools);
+                document.getElementById('toolStack').addEventListener('change', renderTools);
+                document.getElementById('toolSort').addEventListener('change', renderTools);
+
+            } catch (e) {
+                console.error("Initialization Error:", e);
+                document.getElementById('tools-container').innerHTML = `> ERROR: FAILED TO LOAD SYSTEM DATA.`;
             }
             
-            // Initialize form mode correctly on load
             toggleFormMode();
         });
 
-        // Fetch and Render Section 1: Tools
-        async function loadTools() {
-            const container = document.getElementById('tools-container');
-            try {
-                const response = await fetch('tools.json');
-                if (!response.ok) throw new Error('File not found');
-                
-                const tools = await response.json();
-                
-                container.innerHTML = tools.map(tool => `
-                    <div class="tool-card border-4 border-white p-6 bg-black transition-all duration-200 flex flex-col h-full">
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="flex items-center gap-4">
-                                <img src="${tool.logoUrl}" alt="${tool.name} Logo" class="w-12 h-12 object-cover border-2 border-gray-700 bg-gray-900" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'40\\' height=\\'40\\'><rect width=\\'40\\' height=\\'40\\' fill=\\'%23222\\'/><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23666\\' font-family=\\'monospace\\' font-size=\\'10\\' text-anchor=\\'middle\\' dy=\\'.3em\\'>IMG</text></svg>'">
-                                <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-xs font-bold px-2 py-1 uppercase tracking-widest">${tool.status}</span>
-                            </div>
-                            <span class="text-gray-600 font-bold font-mono text-sm">#${tool.id}</span>
-                        </div>
-                        <h3 class="font-loud text-3xl uppercase mb-2">
-                            <a href="${tool.url}" target="_blank" class="hover:text-acid transition-colors">${tool.name}</a>
-                        </h3>
-                        <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">${tool.description}</p>
-                        
-                        <div class="border-t border-gray-800 pt-4 mb-6">
-                            <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Used in:</p>
-                            <div class="flex flex-wrap gap-2">
-                                ${tool.usedIn && tool.usedIn.length > 0 
-                                    ? tool.usedIn.map(stackId => `<span class="text-xs font-mono text-gray-400 bg-gray-900 border border-gray-800 px-2 py-1">${stackId}</span>`).join('') 
-                                    : '<span class="text-xs font-mono text-gray-600">N/A</span>'
-                                }
-                            </div>
-                        </div>
+        function populateDropdowns() {
+            const catSelect = document.getElementById('toolCategory');
+            const categories = [...new Set(globalTools.map(t => t.category))].sort();
+            categories.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c;
+                opt.textContent = `CATEGORY: ${c.toUpperCase()}`;
+                catSelect.appendChild(opt);
+            });
 
-                        <a href="${tool.url}" target="_blank" class="text-acid hover:underline font-bold uppercase tracking-widest text-sm mt-auto w-max">Open Docs -></a>
-                    </div>
-                `).join('');
-
-                return tools;
-
-            } catch (error) {
-                console.error("Error loading tools.json:", error);
-                container.innerHTML = `
-                    <div class="border-2 border-dashed border-red-900 bg-red-900/10 p-6 text-red-500 col-span-full">
-                        > ERROR: Failed to load tools.json. Please ensure the file exists in the root directory.
-                    </div>
-                `;
-                return null;
-            }
+            const stackSelect = document.getElementById('toolStack');
+            globalStacks.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.textContent = `STACK: ${s.title.toUpperCase()}`;
+                stackSelect.appendChild(opt);
+            });
         }
 
-        // Fetch and Render Section 2: Challenge Stacks
-        async function loadChallengeStacks(globalTools) {
-            const container = document.getElementById('challenge-stacks-container');
-            try {
-                const response = await fetch('challenge-stacks.json');
-                if (!response.ok) throw new Error('File not found');
-                
-                const stacks = await response.json();
-                
-                container.innerHTML = stacks.map(stack => {
-                    // Map toolIds to actual tool objects
-                    const stackTools = stack.toolIds
-                        .map(id => globalTools.find(t => t.id === id))
-                        .filter(Boolean); // Filter out any undefined matches
+        function renderTools() {
+            const search = document.getElementById('toolSearch').value.toLowerCase();
+            const cat = document.getElementById('toolCategory').value;
+            const stackFilter = document.getElementById('toolStack').value;
+            const sort = document.getElementById('toolSort').value;
 
-                    return `
-                    <div class="border-2 border-dashed border-gray-700 p-8 bg-black hover:border-cyan hover:bg-gray-900/30 transition-all duration-300 flex flex-col h-full relative group">
-                        
-                        <!-- Decorative Terminal Element -->
-                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="text-cyan text-xs font-mono animate-pulse">SYS_READY</span>
+            // Filter
+            let filtered = globalTools.filter(t => {
+                const matchSearch = t.name.toLowerCase().includes(search) || t.description.toLowerCase().includes(search);
+                const matchCat = cat === 'all' || t.category === cat;
+                const matchStack = stackFilter === 'all' || (t.usedIn && t.usedIn.includes(stackFilter));
+                return matchSearch && matchCat && matchStack;
+            });
+
+            // Sort
+            filtered.sort((a, b) => {
+                if (sort === 'used') {
+                    return (b.usedIn ? b.usedIn.length : 0) - (a.usedIn ? a.usedIn.length : 0);
+                } else if (sort === 'az') {
+                    return a.name.localeCompare(b.name);
+                } else if (sort === 'cat') {
+                    return a.category.localeCompare(b.category);
+                }
+                return 0;
+            });
+
+            const container = document.getElementById('tools-container');
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="p-8 border-2 border-dashed border-gray-800 text-gray-500 font-mono text-center uppercase tracking-widest">> No tools found matching criteria.</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(tool => {
+                const stackTitles = tool.usedIn.map(id => {
+                    const s = globalStacks.find(x => x.id === id);
+                    return s ? s.title : id;
+                });
+                const stackChips = stackTitles.map(t => `<span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest">${t}</span>`).join('');
+                const usedInHtml = stackChips.length > 0 ? `<div class="flex flex-wrap gap-2 items-center mt-3"><span class="text-[10px] text-gray-600 uppercase tracking-widest">Used in:</span>${stackChips}</div>` : '';
+
+                return `
+                <div class="tool-card group border-2 border-gray-800 hover:border-${tool.statusColor} p-4 bg-black transition-all duration-200 flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-center w-full">
+                    
+                    <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center border-2 border-gray-800 text-gray-500 group-hover:text-${tool.statusColor} group-hover:border-${tool.statusColor} transition-colors">
+                        ${getCategoryIcon(tool.category)}
+                    </div>
+                    
+                    <div class="flex-grow min-w-0">
+                        <div class="flex flex-wrap items-center gap-3 mb-1">
+                            <h3 class="font-loud text-2xl uppercase tracking-wide truncate group-hover:text-${tool.statusColor} transition-colors">${tool.name}</h3>
+                            <span class="bg-gray-900 border border-gray-700 text-gray-400 text-[10px] px-2 py-0.5 font-mono uppercase tracking-widest">${tool.category}</span>
+                            <span class="bg-${tool.statusColor} text-${tool.statusColor === 'magenta' ? 'white' : 'black'} text-[10px] font-bold px-1.5 py-0.5 uppercase tracking-widest">${tool.status}</span>
                         </div>
+                        <p class="text-gray-400 text-sm font-mono leading-relaxed truncate md:whitespace-normal pr-4">${tool.description}</p>
+                        ${usedInHtml}
+                    </div>
 
-                        <h3 class="font-mono font-bold text-2xl text-cyan mb-2">_${stack.title}</h3>
-                        <p class="font-loud text-2xl text-white uppercase tracking-tighter leading-tight mb-8">"${stack.hookLine}"</p>
-                        
-                        <div class="space-y-4 flex-grow mb-8">
+                    <div class="flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
+                        <a href="${tool.url}" target="_blank" class="block text-center border-2 border-gray-800 group-hover:border-${tool.statusColor} group-hover:text-${tool.statusColor} hover:bg-${tool.statusColor}/10 text-gray-400 font-mono text-xs uppercase px-6 py-3 transition-all tracking-widest">Open -></a>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function renderStacks() {
+            const container = document.getElementById('challenge-stacks-container');
+            if (globalStacks.length === 0) {
+                container.innerHTML = `<div class="p-8 border-2 border-dashed border-gray-800 text-gray-500 font-mono text-center uppercase tracking-widest">> No stacks loaded.</div>`;
+                return;
+            }
+
+            container.innerHTML = globalStacks.map(stack => {
+                const stackTools = stack.toolIds
+                    .map(id => globalTools.find(t => t.id === id))
+                    .filter(Boolean);
+
+                return `
+                <details class="group border-2 border-dashed border-gray-700 bg-black hover:border-cyan transition-all duration-300">
+                    <summary class="cursor-pointer p-6 flex flex-row items-center justify-between outline-none">
+                        <div class="pr-6">
+                            <h3 class="font-mono font-bold text-xl text-cyan mb-1 hover:underline">_${stack.title}</h3>
+                            <p class="font-loud text-2xl md:text-3xl text-white uppercase tracking-tighter leading-tight">"${stack.hookLine}"</p>
+                        </div>
+                        <div class="flex-shrink-0 w-8 h-8 border-2 border-cyan text-cyan flex items-center justify-center font-mono text-xl group-open:rotate-90 transition-transform bg-cyan/10 select-none">
+                            >
+                        </div>
+                    </summary>
+                    <div class="p-6 pt-0 border-t border-gray-800 mt-2">
+                        <div class="space-y-4 mb-8 pt-6">
                             <div>
                                 <span class="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-1">Inputs:</span>
                                 <div class="font-mono text-sm text-gray-300 bg-gray-900/50 p-3 border border-gray-800">
                                     > ${stack.wireframe.inputs.join(' + ')}
                                 </div>
                             </div>
-                            
                             <div>
                                 <span class="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-1">Process:</span>
                                 <ul class="font-mono text-sm text-gray-300 space-y-2 bg-gray-900/50 p-3 border border-gray-800">
                                     ${stack.wireframe.process.map(step => `<li><span class="text-magenta">></span> ${step}</li>`).join('')}
                                 </ul>
                             </div>
-                            
                             <div>
                                 <span class="text-xs text-gray-500 uppercase tracking-[0.2em] block mb-1">Output:</span>
                                 <div class="font-mono text-sm text-gray-300 bg-gray-900/50 p-3 border border-gray-800 border-l-2 border-l-acid">
                                     > ${stack.wireframe.output.join(', ')}
                                 </div>
                             </div>
-
                             <div>
                                 <span class="text-xs text-cyan uppercase tracking-[0.2em] block mb-1">Proof:</span>
                                 <div class="font-mono text-sm text-cyan bg-cyan/10 p-3 border border-cyan/20">
@@ -322,60 +445,45 @@
                             </div>
                         </div>
 
-                        <div class="border-t border-dashed border-gray-800 pt-6 mt-auto">
+                        <div class="border-t border-dashed border-gray-800 pt-6">
                             <p class="text-xs text-gray-600 uppercase tracking-[0.2em] mb-4">Required_Stack:</p>
                             <div class="flex flex-wrap gap-3">
                                 ${stackTools.map(t => `
-                                    <a href="${t.url}" target="_blank" class="text-xs font-mono text-gray-300 bg-gray-900 border border-gray-700 px-3 py-1.5 hover:border-${t.statusColor} hover:text-${t.statusColor} transition-colors">
+                                    <a href="${t.url}" target="_blank" class="flex items-center gap-2 text-xs font-mono text-gray-300 bg-gray-900 border border-gray-700 px-3 py-1.5 hover:border-${t.statusColor} hover:text-${t.statusColor} transition-colors">
+                                        <span class="text-gray-500 group-hover:text-${t.statusColor}">${getCategoryIcon(t.category)}</span>
                                         ${t.name}
                                     </a>
                                 `).join('')}
                             </div>
                         </div>
                     </div>
-                `}).join('');
-
-            } catch (error) {
-                console.error("Error loading challenge-stacks.json:", error);
-                container.innerHTML = `
-                    <div class="border-2 border-dashed border-red-900 bg-red-900/10 p-6 text-red-500 col-span-full">
-                        > ERROR: Failed to load challenge-stacks.json. Please ensure the file exists in the root directory.
-                    </div>
+                </details>
                 `;
-            }
+            }).join('');
         }
 
-        // Handle form mode toggling and HTML5 validation attributes
+        // Form mode toggling
         function toggleFormMode() {
             const mode = document.getElementById('submissionType').value;
-            
             const ideaFields = document.getElementById('ideaModeFields');
             const proofFields = document.getElementById('proofModeFields');
-            
             const ideaTitle = document.getElementById('ideaTitle');
             const ideaDesc = document.getElementById('ideaDesc');
-            
             const completedStack = document.getElementById('completedStack');
             const proofLink = document.getElementById('proofLink');
 
             if (mode === 'idea') {
                 ideaFields.classList.remove('hidden');
                 proofFields.classList.add('hidden');
-                
-                // Add required constraints to visible fields
                 ideaTitle.setAttribute('required', 'required');
                 ideaDesc.setAttribute('required', 'required');
-                
-                // Remove required constraints from hidden fields so form can submit
                 completedStack.removeAttribute('required');
                 proofLink.removeAttribute('required');
             } else {
                 ideaFields.classList.add('hidden');
                 proofFields.classList.remove('hidden');
-                
                 ideaTitle.removeAttribute('required');
                 ideaDesc.removeAttribute('required');
-                
                 completedStack.setAttribute('required', 'required');
                 proofLink.setAttribute('required', 'required');
             }
@@ -385,7 +493,6 @@
         function submitIdea(e) {
             e.preventDefault();
             const mode = document.getElementById('submissionType').value;
-            
             let subject = '';
             let body = '';
             
@@ -393,32 +500,17 @@
                 const title = document.getElementById('ideaTitle').value;
                 const desc = document.getElementById('ideaDesc').value;
                 const links = document.getElementById('ideaLinks').value;
-                
-                console.log("=== NEW IDEA TRANSMISSION ===");
-                console.log("Title:", title);
-                console.log("Description:", desc);
-                console.log("Links:", links);
-
                 subject = encodeURIComponent(`Lab Idea: ${title}`);
                 body = encodeURIComponent(`New challenge idea submitted from the dashboard.\n\n--- Title ---\n${title}\n\n--- Description ---\n${desc}\n\n--- Links ---\n${links || 'None provided'}`);
             } else {
                 const stack = document.getElementById('completedStack').value;
                 const proof = document.getElementById('proofLink').value;
                 const notes = document.getElementById('completionNotes').value;
-                
-                console.log("=== NEW PROOF TRANSMISSION ===");
-                console.log("Stack:", stack);
-                console.log("Proof:", proof);
-                console.log("Notes:", notes);
-
                 subject = encodeURIComponent(`Lab Proof: ${stack}`);
                 body = encodeURIComponent(`New proof of work submitted from the dashboard.\n\n--- Completed Stack ---\n${stack}\n\n--- Proof URL ---\n${proof}\n\n--- Field Notes ---\n${notes || 'None provided'}`);
             }
 
-            // Trigger mailto client
             window.location.href = `mailto:terminal@codykeegan.ai?subject=${subject}&body=${body}`;
-            
-            // Reset form and UI
             e.target.reset();
             toggleFormMode();
         }
