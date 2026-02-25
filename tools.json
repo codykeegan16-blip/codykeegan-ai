@@ -6,7 +6,8 @@
     "logoUrl": "https://logo.clearbit.com/zapier.com",
     "status": "ACTIVE",
     "statusColor": "acid",
-    "description": "Automation glue. Connects apps like a nervous system. Wild use: build a 'lead-to-cash' conveyor belt that auto-qualifies, follows up, invoices, and books calls while you sleep."
+    "description": "Automation glue. Connects apps like a nervous system. Wild use: build a 'lead-to-cash' conveyor belt that auto-qualifies, follows up, invoices, and books calls while you sleep.",
+    "usedIn": ["stack_02", "stack_04", "stack_05", "stack_07"]
   },
   {
     "id": "002",
@@ -15,7 +16,8 @@
     "logoUrl": "https://logo.clearbit.com/notion.so",
     "status": "STABLE",
     "statusColor": "cyan",
-    "description": "Your ops brain in one place. Docs, databases, dashboards. Wild use: turn it into a client-facing 'command center' that makes you look like a 20-person team."
+    "description": "Your ops brain in one place. Docs, databases, dashboards. Wild use: turn it into a client-facing 'command center' that makes you look like a 20-person team.",
+    "usedIn": ["stack_03"]
   },
   {
     "id": "003",
@@ -24,6 +26,227 @@
     "logoUrl": "https://logo.clearbit.com/cloudflare.com",
     "status": "DEPLOYED",
     "statusColor": "magenta",
-    "description": "Static hosting at warp speed. Wild use: ship micro-sites for every offer angle you test, then kill the losers and scale the winners in hours."
+    "description": "Static hosting at warp speed. Wild use: ship micro-sites for every offer angle you test, then kill the losers and scale the winners in hours.",
+    "usedIn": ["stack_04"]
+  },
+  {
+    "id": "004",
+    "name": "Make",
+    "url": "https://make.com",
+    "logoUrl": "https://logo.clearbit.com/make.com",
+    "status": "ACTIVE",
+    "statusColor": "acid",
+    "description": "Visual automation on steroids. Wild use: chain 15 APIs together to build a complete SaaS backend without writing a single line of code.",
+    "usedIn": ["stack_01", "stack_03", "stack_06", "stack_08"]
+  },
+  {
+    "id": "005",
+    "name": "Airtable",
+    "url": "https://airtable.com",
+    "logoUrl": "https://logo.clearbit.com/airtable.com",
+    "status": "STABLE",
+    "statusColor": "cyan",
+    "description": "The database for operators. Wild use: serve as the central brain and content repository for a fully programmatic SEO agency.",
+    "usedIn": ["stack_01", "stack_06", "stack_07"]
+  },
+  {
+    "id": "006",
+    "name": "OpenAI",
+    "url": "https://openai.com",
+    "logoUrl": "https://logo.clearbit.com/openai.com",
+    "status": "EXPERIMENTAL",
+    "statusColor": "magenta",
+    "description": "The brain API. Wild use: pass it raw customer support transcripts to automatically identify churn risks and issue partial refunds before they cancel.",
+    "usedIn": ["stack_01", "stack_04", "stack_05"]
+  },
+  {
+    "id": "007",
+    "name": "Anthropic",
+    "url": "https://anthropic.com",
+    "logoUrl": "https://logo.clearbit.com/anthropic.com",
+    "status": "ACTIVE",
+    "statusColor": "acid",
+    "description": "The nuanced thinker. Wild use: feed it a 100-page industry PDF and have it autonomously draft 50 unique, highly-contextual LinkedIn posts.",
+    "usedIn": ["stack_03", "stack_06"]
+  },
+  {
+    "id": "008",
+    "name": "ElevenLabs",
+    "url": "https://elevenlabs.io",
+    "logoUrl": "https://logo.clearbit.com/elevenlabs.io",
+    "status": "DEPLOYED",
+    "statusColor": "cyan",
+    "description": "Hyper-realistic voice cloning. Wild use: hook it to your newsletter to automatically generate a personalized daily podcast payload for premium subscribers.",
+    "usedIn": ["stack_02", "stack_04"]
+  },
+  {
+    "id": "009",
+    "name": "HeyGen",
+    "url": "https://heygen.com",
+    "logoUrl": "https://logo.clearbit.com/heygen.com",
+    "status": "TESTING",
+    "statusColor": "magenta",
+    "description": "AI Avatars that don't look like garbage. Wild use: programmatically generate personalized welcome videos saying the name of every new Stripe customer.",
+    "usedIn": ["stack_04"]
+  },
+  {
+    "id": "010",
+    "name": "Vapi",
+    "url": "https://vapi.ai",
+    "logoUrl": "https://logo.clearbit.com/vapi.ai",
+    "status": "EXPERIMENTAL",
+    "statusColor": "acid",
+    "description": "Conversational voice API. Wild use: replace your entire level-1 support team with an agent that answers within 1 second and handles 90% of basic inquiries.",
+    "usedIn": ["stack_02"]
+  },
+  {
+    "id": "011",
+    "name": "Stripe",
+    "url": "https://stripe.com",
+    "logoUrl": "https://logo.clearbit.com/stripe.com",
+    "status": "STABLE",
+    "statusColor": "cyan",
+    "description": "The money router. Wild use: auto-split revenue between 5 different affiliate partners the exact millisecond a customer charge goes through.",
+    "usedIn": ["stack_02", "stack_05", "stack_08"]
+  },
+  {
+    "id": "012",
+    "name": "Kit",
+    "url": "https://kit.com",
+    "logoUrl": "https://logo.clearbit.com/kit.com",
+    "status": "DEPLOYED",
+    "statusColor": "magenta",
+    "description": "Email infrastructure for builders. Wild use: trigger a hyper-personalized 14-day sequence the moment someone visits a specific pricing tier on your site.",
+    "usedIn": ["stack_06", "stack_08"]
+  },
+  {
+    "id": "013",
+    "name": "Webflow",
+    "url": "https://webflow.com",
+    "logoUrl": "https://logo.clearbit.com/webflow.com",
+    "status": "STABLE",
+    "statusColor": "acid",
+    "description": "Visual web development. Wild use: pipe CMS data directly from Airtable to generate 10,000 programmatic SEO landing pages perfectly formatted overnight.",
+    "usedIn": ["stack_05"]
+  },
+  {
+    "id": "014",
+    "name": "Midjourney",
+    "url": "https://midjourney.com",
+    "logoUrl": "https://logo.clearbit.com/midjourney.com",
+    "status": "ACTIVE",
+    "statusColor": "cyan",
+    "description": "Image generation mastery. Wild use: automate an entire faceless Instagram account's visual pipeline with zero human input by triggering Discord bots via API.",
+    "usedIn": ["stack_03"]
+  },
+  {
+    "id": "015",
+    "name": "Perplexity",
+    "url": "https://perplexity.ai",
+    "logoUrl": "https://logo.clearbit.com/perplexity.ai",
+    "status": "TESTING",
+    "statusColor": "magenta",
+    "description": "The research engine. Wild use: automatically scrape and summarize your competitor's new feature drops into a daily Slack intelligence alert.",
+    "usedIn": ["stack_03", "stack_06", "stack_08"]
+  },
+  {
+    "id": "016",
+    "name": "Retell AI",
+    "url": "https://retellai.com",
+    "logoUrl": "https://logo.clearbit.com/retellai.com",
+    "status": "EXPERIMENTAL",
+    "statusColor": "acid",
+    "description": "Low-latency voice AI. Wild use: build an inbound sales closer that handles objections faster and with better tonality than a human rep.",
+    "usedIn": []
+  },
+  {
+    "id": "017",
+    "name": "Bland AI",
+    "url": "https://bland.ai",
+    "logoUrl": "https://logo.clearbit.com/bland.ai",
+    "status": "DEPLOYED",
+    "statusColor": "cyan",
+    "description": "Automated phone calling. Wild use: dial every abandoned cart user with a custom discount offer in real-time before they leave the site.",
+    "usedIn": ["stack_07"]
+  },
+  {
+    "id": "018",
+    "name": "Bubble",
+    "url": "https://bubble.io",
+    "logoUrl": "https://logo.clearbit.com/bubble.io",
+    "status": "STABLE",
+    "statusColor": "magenta",
+    "description": "Full-stack no-code platform. Wild use: launch a fully functional two-sided marketplace in a single weekend and start charging MRR.",
+    "usedIn": []
+  },
+  {
+    "id": "019",
+    "name": "Framer",
+    "url": "https://framer.com",
+    "logoUrl": "https://logo.clearbit.com/framer.com",
+    "status": "ACTIVE",
+    "statusColor": "acid",
+    "description": "Ship sites fast. Wild use: build a high-converting landing page, test it with live traffic, and pivot the entire design system in under 24 hours.",
+    "usedIn": []
+  },
+  {
+    "id": "020",
+    "name": "Phantombuster",
+    "url": "https://phantombuster.com",
+    "logoUrl": "https://logo.clearbit.com/phantombuster.com",
+    "status": "ROGUE",
+    "statusColor": "cyan",
+    "description": "Data extraction at scale. Wild use: pull 5,000 highly targeted LinkedIn profiles and feed them directly into your cold outreach engine automatically.",
+    "usedIn": ["stack_07"]
+  },
+  {
+    "id": "021",
+    "name": "Apify",
+    "url": "https://apify.com",
+    "logoUrl": "https://logo.clearbit.com/apify.com",
+    "status": "TESTING",
+    "statusColor": "magenta",
+    "description": "Web scraping for developers. Wild use: monitor 50 competitor pricing pages daily and dynamically adjust your own Stripe checkout prices to match.",
+    "usedIn": ["stack_01", "stack_05"]
+  },
+  {
+    "id": "022",
+    "name": "Instantly",
+    "url": "https://instantly.ai",
+    "logoUrl": "https://logo.clearbit.com/instantly.ai",
+    "status": "DEPLOYED",
+    "statusColor": "acid",
+    "description": "Cold email infrastructure. Wild use: spin up 50 domains and send 10,000 hyper-personalized emails a day with zero deliverability issues.",
+    "usedIn": ["stack_01"]
+  },
+  {
+    "id": "023",
+    "name": "Claude",
+    "url": "https://claude.ai",
+    "logoUrl": "https://logo.clearbit.com/claude.ai",
+    "status": "ACTIVE",
+    "statusColor": "cyan",
+    "description": "Advanced reasoning model. Wild use: analyze massive datasets of failed sales calls to generate a perfect, probabilistically-optimized objection handling script.",
+    "usedIn": ["stack_08"]
+  },
+  {
+    "id": "024",
+    "name": "Twilio",
+    "url": "https://twilio.com",
+    "logoUrl": "https://logo.clearbit.com/twilio.com",
+    "status": "STABLE",
+    "statusColor": "magenta",
+    "description": "Communication API. Wild use: build a rogue SMS bot that automatically detects when your internet drops and negotiates credit with your ISP.",
+    "usedIn": ["stack_02", "stack_07"]
+  },
+  {
+    "id": "025",
+    "name": "GitHub",
+    "url": "https://github.com",
+    "logoUrl": "https://logo.clearbit.com/github.com",
+    "status": "STABLE",
+    "statusColor": "acid",
+    "description": "The code repository. Wild use: automatically deploy new front-end features to Cloudflare the exact second you push an LLM-generated script.",
+    "usedIn": []
   }
 ]

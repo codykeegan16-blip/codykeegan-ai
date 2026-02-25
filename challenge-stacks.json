@@ -1,0 +1,137 @@
+[
+  {
+    "id": "stack_01",
+    "title": "The Autonomous SDR",
+    "hookLine": "Build a sales rep that never sleeps, never complains, and sends 1,000 hyper-personalized emails a day.",
+    "wireframe": {
+      "inputs": ["LinkedIn URL", "Target Company Data"],
+      "process": [
+        "Scrape recent company news and funding events",
+        "Feed data to LLM to generate a customized icebreaker",
+        "Inject prospect and copy into an active cold email sequence"
+      ],
+      "output": ["Booked Calendly meetings directly in your calendar"],
+      "proof": ["Took a pipeline from 0 to 15 meetings booked in 7 days on autopilot."]
+    },
+    "toolIds": ["004", "006", "021", "022", "005"]
+  },
+  {
+    "id": "stack_02",
+    "title": "Voice-Activated Closer",
+    "hookLine": "Connect a voice agent to your CRM and have it call every inbound lead within 5 seconds.",
+    "wireframe": {
+      "inputs": ["New Lead Form Submission"],
+      "process": [
+        "Trigger webhook the millisecond a lead form is submitted",
+        "Voice AI dials the provided phone number immediately",
+        "AI conducts a natural pre-qualification interview based on a script",
+        "If qualified, pushes a live transfer to a human closer"
+      ],
+      "output": ["Hot transferred calls or automatically booked appointments"],
+      "proof": ["Increased connection and qualification rate by 400% vs human calling after 10 mins."]
+    },
+    "toolIds": ["010", "008", "024", "011", "001"]
+  },
+  {
+    "id": "stack_03",
+    "title": "Zero-Click Content Engine",
+    "hookLine": "Turn one podcast transcript into a month of SEO blogs and LinkedIn posts without touching a keyboard.",
+    "wireframe": {
+      "inputs": ["Raw MP3 file", "Audio URL"],
+      "process": [
+        "Transcribe audio with speaker mapping",
+        "Pass transcript to Claude to extract core frameworks and controversial takes",
+        "Generate 4 long-form blogs and 15 short social posts via chained prompts",
+        "Format and save deliverables directly into a Notion database"
+      ],
+      "output": ["A fully populated, multi-channel content calendar ready for review"],
+      "proof": ["Saved 20 hours a week on content production while 2x-ing organic traffic."]
+    },
+    "toolIds": ["015", "007", "014", "004", "002"]
+  },
+  {
+    "id": "stack_04",
+    "title": "Faceless Video Factory",
+    "hookLine": "Script, voice, and generate talking-head videos entirely via API. No camera required.",
+    "wireframe": {
+      "inputs": ["Viral topic keyword", "Competitor URL"],
+      "process": [
+        "LLM writes a highly-engaging, controversial hook and script",
+        "Voice clone generates an emotional audio track",
+        "AI Avatar generator syncs photorealistic lip movements to the audio",
+        "Auto-publish via API to YouTube Shorts and TikTok"
+      ],
+      "output": ["Rendered MP4 video live on social platforms"],
+      "proof": ["Hit 1M+ views in 30 days across networks without ever recording actual footage."]
+    },
+    "toolIds": ["006", "008", "009", "001", "003"]
+  },
+  {
+    "id": "stack_05",
+    "title": "The Infinite Landing Page",
+    "hookLine": "Dynamically generate a unique, hyper-targeted landing page for every single ad click.",
+    "wireframe": {
+      "inputs": ["User search query", "Ad UTM parameters"],
+      "process": [
+        "Capture inbound UTM parameters and search intent",
+        "LLM instantly rewrites the page headline and subcopy to match the exact query",
+        "Inject customized Stripe checkout link reflecting dynamic pricing",
+        "Deploy static page adjustments before the user realizes it happened"
+      ],
+      "output": ["A personalized URL with a 1-to-1 message match for the buyer"],
+      "proof": ["Boosted paid ad conversion rates from 2% to 11% by matching exact search intent."]
+    },
+    "toolIds": ["013", "006", "021", "001", "011"]
+  },
+  {
+    "id": "stack_06",
+    "title": "AI-Powered Research Agency",
+    "hookLine": "Sell $5,000 market research reports that cost you $5 in API credits and 10 minutes to generate.",
+    "wireframe": {
+      "inputs": ["Target Industry", "Specific Niche"],
+      "process": [
+        "Search agent scrapes the top 50 competitors in the space",
+        "LLM synthesizes pricing models, core features, and negative reviews",
+        "Formats data into a premium, styled PDF layout via document API",
+        "Automatically emails final deliverable to the client"
+      ],
+      "output": ["A 40-page customized industry intelligence report"],
+      "proof": ["Delivered 5 reports in one weekend, grossing $25k with zero employees or contractors."]
+    },
+    "toolIds": ["015", "007", "005", "004", "012"]
+  },
+  {
+    "id": "stack_07",
+    "title": "Local Business Lead Machine",
+    "hookLine": "Find businesses with terrible reviews and auto-pitch them a reputation management solution.",
+    "wireframe": {
+      "inputs": ["City Name", "Business Type"],
+      "process": [
+        "Scrape Google Maps for businesses with < 3-star ratings",
+        "Extract owner contact info and email addresses",
+        "Generate customized cold email featuring a screenshot of their worst review",
+        "Trigger AI voice mail drop offering an immediate fix"
+      ],
+      "output": ["Inbound, agitated replies from desperate business owners"],
+      "proof": ["Secured 3 local marketing retainers in 48 hours using purely programmatic outreach."]
+    },
+    "toolIds": ["020", "017", "024", "001", "005"]
+  },
+  {
+    "id": "stack_08",
+    "title": "Auto-Newsletter Monetization",
+    "hookLine": "A newsletter that writes itself, finds its own sponsors, and handles its own billing.",
+    "wireframe": {
+      "inputs": ["RSS feeds of top 10 niche blogs", "Subreddits"],
+      "process": [
+        "Aggregate weekly news and trending topics",
+        "LLM summarizes data and adds contrarian, engaging takes",
+        "Query sponsor database for relevant matches based on the content",
+        "Auto-insert sponsor tracking link and deploy broadcast via ESP"
+      ],
+      "output": ["A highly-curated weekly dispatch sent to thousands of readers"],
+      "proof": ["Hit $1k/mo in passive sponsorships in 60 days with a 0-hour weekly operating time."]
+    },
+    "toolIds": ["012", "015", "023", "004", "011"]
+  }
+]
