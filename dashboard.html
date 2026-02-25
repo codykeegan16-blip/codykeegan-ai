@@ -3,81 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodyKeegan.AI // The Lab</title>
+    <title>Dashboard // The Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            safelist: [{ pattern: /(bg|text|border)-(acid|cyan|magenta)/ }, { pattern: /hover:(bg|text|border)-(acid|cyan|magenta)/ }],
             theme: {
                 extend: {
                     fontFamily: { loud: ['Oswald', 'sans-serif'], mono: ['Space Mono', 'monospace'] },
-                    colors: { acid: '#ccff00', cyan: '#00ffff', magenta: '#ff00ff' },
-                    animation: { 'marquee': 'marquee 30s linear infinite', 'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite' },
-                    keyframes: { marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-100%)' } } }
+                    colors: { acid: '#ccff00', cyan: '#00ffff', magenta: '#ff00ff' }
                 }
             }
         }
     </script>
     <style>
         ::selection { background-color: #ccff00; color: #000; }
-        .text-stroke { -webkit-text-stroke: 1px #fff; color: transparent; }
-        .text-stroke:hover { color: #fff; -webkit-text-stroke: 0px; cursor: crosshair; }
         .chaos-grid { background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px; }
+        .blueprint-card { background: linear-gradient(180deg, rgba(0,255,255,0.05) 0%, rgba(0,0,0,1) 100%); }
     </style>
 </head>
-<body class="font-mono antialiased overflow-x-hidden chaos-grid selection:bg-acid selection:text-black flex flex-col min-h-screen">
+<body class="font-mono antialiased chaos-grid flex flex-col min-h-screen">
 
-    <div class="w-full bg-acid text-black font-loud font-black uppercase text-xl md:text-3xl py-2 overflow-hidden border-b-4 border-black relative">
-        <div class="flex whitespace-nowrap">
-            <div class="animate-marquee flex-shrink-0">
-                WHAT IF YOU CONNECTED X TO Y? /// BREAK THE AI /// STACK THE TOOLS /// SEE WHAT HAPPENS /// WHAT IF YOU CONNECTED X TO Y? /// BREAK THE AI /// STACK THE TOOLS /// SEE WHAT HAPPENS ///&nbsp;
+    <header class="border-b-4 border-white bg-black sticky top-0 z-50 h-[80px]">
+        <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center h-full">
+            <div class="flex items-center gap-4">
+                <h1 class="font-loud text-2xl md:text-4xl uppercase tracking-tighter">The <span class="text-acid">Dashboard</span></h1>
+                <div class="hidden md:block h-8 w-px bg-gray-800 ml-4"></div>
+                <p class="hidden md:block text-[10px] text-gray-500 uppercase tracking-[0.2em] ml-4">Access_Level: 01 // System_Online</p>
             </div>
-            <div class="animate-marquee flex-shrink-0">
-                WHAT IF YOU CONNECTED X TO Y? /// BREAK THE AI /// STACK THE TOOLS /// SEE WHAT HAPPENS /// WHAT IF YOU CONNECTED X TO Y? /// BREAK THE AI /// STACK THE TOOLS /// SEE WHAT HAPPENS ///&nbsp;
-            </div>
+            <a href="index.html" class="border-2 border-white px-4 py-2 hover:bg-white hover:text-black transition-all text-xs font-bold uppercase">Logout_</a>
         </div>
+    </header>
+
+    <div class="flex flex-grow max-w-[1600px] mx-auto w-full relative">
+        
+        <aside class="hidden lg:flex flex-col w-64 border-r border-gray-800 sticky top-[80px] h-[calc(100vh-80px)] p-6 gap-8 bg-black/50 backdrop-blur-md">
+            <nav class="space-y-6">
+                <div>
+                    <p class="text-[9px] text-gray-600 uppercase tracking-widest mb-4">Navigation</p>
+                    <ul class="space-y-4">
+                        <li><a href="#vault" class="flex items-center gap-3 text-acid hover:text-white transition-colors uppercase font-bold text-sm"><span class="w-2 h-2 bg-acid"></span> The Tool Vault</a></li>
+                        <li><a href="#blueprints" class="flex items-center gap-3 text-cyan hover:text-white transition-colors uppercase font-bold text-sm"><span class="w-2 h-2 bg-cyan"></span> Exec Blueprints</a></li>
+                    </ul>
+                </div>
+                <div class="pt-8 border-t border-gray-900">
+                    <p class="text-[9px] text-gray-600 uppercase tracking-widest mb-4">Quick Filters</p>
+                    <div class="space-y-2">
+                        <button onclick="filterByCat('Intelligence')" class="text-[10px] text-gray-500 hover:text-magenta block uppercase tracking-tighter transition-colors">> Intelligence Models</button>
+                        <button onclick="filterByCat('Automation')" class="text-[10px] text-gray-500 hover:text-acid block uppercase tracking-tighter transition-colors">> Automation Glue</button>
+                        <button onclick="filterByCat('Voice')" class="text-[10px] text-gray-500 hover:text-cyan block uppercase tracking-tighter transition-colors">> Voice/Comms</button>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="flex-grow p-6 lg:p-12 overflow-x-hidden">
+            
+            <section id="vault" class="mb-32 scroll-mt-24">
+                <div class="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-gray-800 pb-6 mb-12 gap-4">
+                    <div>
+                        <h2 class="font-loud text-5xl md:text-7xl uppercase tracking-tighter">01 // <span class="text-acid">Tool Vault</span></h2>
+                        <p class="text-gray-500 mt-2 max-w-xl">Curated components for building automated commerce machines. Ready for integration.</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-gray-900 border border-gray-800 px-4 py-2 min-w-[300px]">
+                        <span class="text-acid">></span>
+                        <input type="text" id="globalSearch" placeholder="SEARCH VAULT..." class="bg-transparent border-none text-white text-xs focus:outline-none w-full">
+                    </div>
+                </div>
+
+                <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    </div>
+            </section>
+
+            <section id="blueprints" class="mb-32 scroll-mt-24">
+                <div class="border-b-2 border-gray-800 pb-6 mb-12">
+                    <h2 class="font-loud text-5xl md:text-7xl uppercase tracking-tighter">02 // <span class="text-cyan">Execution Blueprints</span></h2>
+                    <p class="text-gray-500 mt-2">Proven workflows that connect the tools. Choose a mission to begin.</p>
+                </div>
+                <div id="blueprints-container" class="space-y-12">
+                    </div>
+            </section>
+        </main>
     </div>
 
-    <main class="max-w-[1600px] mx-auto px-4 sm:px-8 md:px-16 pt-24 pb-20 flex-grow">
-        <div class="mb-32">
-            <h1 class="font-loud font-black text-6xl sm:text-8xl md:text-[140px] leading-[0.85] tracking-tighter uppercase mb-12">
-                I can't stop<br>
-                <span class="text-stroke transition-all duration-300">thinking</span><br>
-                about this.
-            </h1>
-            <p class="font-mono text-2xl md:text-4xl max-w-4xl leading-tight text-gray-300">What if you wired an image generator to a mechanical claw?</p>
-        </div>
-
-        <div class="max-w-6xl mx-auto border-4 border-white p-6 md:p-16 relative bg-black">
-            <div class="absolute top-0 right-0 w-16 h-16 border-b-4 border-l-4 border-acid"></div>
-            <div class="absolute -top-3 left-10 bg-black px-4 font-mono text-sm text-gray-500 tracking-widest uppercase">Access_Terminal</div>
-
-            <div class="text-center mb-16">
-                <h2 class="font-loud text-6xl md:text-9xl uppercase tracking-tighter mb-6 leading-[0.8]">The <span class="text-acid">Dashboard</span>.</h2>
-                <p class="font-mono text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">Access the raw, unpolished AI blueprints. 99% of people will stare at this and do nothing. The 1% will take these tools and build a monster.</p>
-            </div>
-
-            <form action="https://app.kit.com/forms/8114380a48/subscriptions" method="post" data-sv-form="8114380a48" id="chaosForm" class="flex flex-col lg:flex-row gap-0 group relative z-20">
-                <input type="email" name="email_address" required placeholder="ENTER EMAIL // ACCESS VAULT" class="w-full lg:w-2/3 bg-transparent border-4 border-white text-white font-mono text-xl md:text-3xl p-6 md:p-8 placeholder-gray-600 focus:outline-none focus:border-acid focus:bg-white/5 transition-all">
-                <button type="submit" class="w-full lg:w-1/3 bg-white text-black font-loud uppercase text-4xl md:text-5xl px-8 py-6 tracking-tighter hover:bg-acid transition-colors border-4 border-white lg:border-l-0 whitespace-nowrap flex items-center justify-center gap-4">
-                    LET ME IN <span class="animate-pulse-fast">_</span>
-                </button>
-            </form>
-
-            <div id="terminalSuccess" class="hidden mt-8 p-6 border-2 border-dashed border-acid bg-acid/10 text-acid font-mono text-xl text-left">
-                > CONNECTION ESTABLISHED.<br>> SECURING ACCESS...<br>> REDIRECTING TO DASHBOARD...
-            </div>
-        </div>
-    </main>
-
-    <script async data-uid="8114380a48" src="https://cody-keegan-ai.kit.com/8114380a48/index.js"></script>
     <script>
-        document.getElementById('chaosForm').addEventListener('submit', function() {
-            this.style.opacity = '0.3';
-            this.style.pointerEvents = 'none';
-            document.getElementById('terminalSuccess').classList.remove('hidden');
-            setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
-        });
+        let globalTools = [];
+        let globalStacks = [];
+
+        async function loadData() {
+            try {
+                const [toolsRes, stacksRes] = await Promise.all([fetch('tools.json'), fetch('challenge-stacks.json')]);
+                globalTools = await toolsRes.json();
+                globalStacks = await stacksRes.json();
+                renderAll();
+            } catch (e) { console.error("Database error", e); }
+        }
+
+        function filterByCat(cat) {
+            document.getElementById('globalSearch').value = cat;
+            renderAll();
+        }
+
+        function renderAll() {
+            const search = document.getElementById('globalSearch').value.toLowerCase();
+            
+            // Render Vault Tools
+            const filteredTools = globalTools.filter(t => t.name.toLowerCase().includes(search) || t.description.toLowerCase().includes(search));
+            document.getElementById('tools-container').innerHTML = filteredTools.map(t => `
+                <div class="border-2 border-gray-800 bg-black p-6 hover:border-${t.statusColor} transition-all group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-600 group-hover:text-${t.statusColor}">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <span class="bg-${t.statusColor} text-black text-[9px] font-black px-2 py-0.5 uppercase tracking-tighter">${t.status}</span>
+                    </div>
+                    <h3 class="font-loud text-3xl uppercase group-hover:text-${t.statusColor} transition-colors mb-2">${t.name}</h3>
+                    <p class="text-xs text-gray-500 font-mono leading-relaxed mb-6 h-12 overflow-hidden">${t.description}</p>
+                    <a href="${t.url}" target="_blank" class="block w-full text-center border-2 border-gray-800 py-3 font-bold text-[10px] uppercase hover:bg-${t.statusColor} hover:text-black transition-all">Launch Connection</a>
+                </div>
+            `).join('');
+
+            // Render Execution Blueprints
+            document.getElementById('blueprints-container').innerHTML = globalStacks.map(s => `
+                <div class="blueprint-card border-2 border-gray-800 p-8 hover:border-cyan transition-all relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan/5 -rotate-45 translate-x-16 -translate-y-16"></div>
+                    <div class="flex flex-col lg:flex-row justify-between gap-8 relative z-10">
+                        <div class="flex-grow">
+                            <span class="text-cyan font-mono text-[10px] uppercase tracking-widest">Blueprint ID: ${s.id}</span>
+                            <h3 class="font-loud text-4xl uppercase text-white mt-1 mb-4">${s.title}</h3>
+                            <p class="text-gray-400 font-mono italic text-sm border-l-2 border-cyan pl-4 mb-6">"${s.hookLine}"</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Process Logic</p>
+                                    <ul class="space-y-1 text-[11px] text-gray-500">
+                                        ${s.wireframe.process.map(p => `<li>> ${p}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Validated Proof</p>
+                                    <p class="text-[11px] text-acid font-mono italic">${s.wireframe.proof}</p>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] text-gray-600 uppercase font-bold mb-2">Component Stack</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${s.toolIds.map(tid => `<span class="bg-gray-900 text-gray-500 text-[9px] px-2 py-1 font-mono">${globalTools.find(t => t.id === tid)?.name || 'Tool'}</span>`).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-48 flex flex-col justify-end">
+                            <button onclick="copyLink('${s.id}')" class="text-cyan border border-cyan/30 px-4 py-3 text-[10px] font-bold hover:bg-cyan/10 uppercase transition-all">Copy Mission File</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function copyLink(id) {
+            const url = window.location.href.split('#')[0] + '#' + id;
+            navigator.clipboard.writeText(url).then(() => { alert("Mission file link copied to clipboard."); });
+        }
+
+        document.getElementById('globalSearch').addEventListener('input', renderAll);
+        window.onload = loadData;
     </script>
 </body>
 </html>
