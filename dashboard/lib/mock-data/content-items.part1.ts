@@ -71,7 +71,7 @@ export const CONTENT_ITEMS_PART1: ContentItem[] = [
         mentions: [],
         primaryCTA: 'Drop your take in the comments',
         media: [{ id: 'm_003', type: 'image', url: '/mock/li-ai-quote.jpg', aspectRatio: '1:1', altText: 'AI is not replacing developers. It\'s raising the floor.' }],
-        platformSpecific: { articleUrl: null, targetAudience: 'tech professionals & engineering managers', documentType: 'none', sponsored: false },
+        platformSpecific: { articleUrl: undefined, targetAudience: 'tech professionals & engineering managers', documentType: 'none', sponsored: false },
         status: 'published',
         publishedAt: '2026-03-06T08:30:00Z',
         metrics: { impressions: 22000, reach: 18400, likes: 1100, comments: 287, shares: 314, saves: 890, engagementRate: 6.3, clicks: 980, ctr: 4.5 },

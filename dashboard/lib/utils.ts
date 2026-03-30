@@ -42,6 +42,7 @@ export const STATUS_COLORS: Record<ContentStatus, string> = {
   scheduled: 'text-cyan-400 bg-cyan-400/10',
   published: 'text-emerald-400 bg-emerald-400/10',
   failed: 'text-red-400 bg-red-400/10',
+  blocked: 'text-orange-400 bg-orange-400/10',
 };
 
 export const STATUS_LABELS: Record<ContentStatus, string> = {
@@ -52,6 +53,7 @@ export const STATUS_LABELS: Record<ContentStatus, string> = {
   scheduled: 'Scheduled',
   published: 'Published',
   failed: 'Failed',
+  blocked: 'Blocked',
 };
 
 export const CONTENT_TYPE_LABELS: Record<ContentType, string> = {
@@ -62,8 +64,9 @@ export const CONTENT_TYPE_LABELS: Record<ContentType, string> = {
   story: 'Story',
   reel: 'Reel',
   short: 'Short',
-  post: 'Post',
+  longform: 'Long-form',
   article: 'Article',
+  thread: 'Thread',
 };
 
 export function getPlatformBgColor(platform: Platform): string {
