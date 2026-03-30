@@ -28,6 +28,8 @@ export type ContentType =
 
 export type MediaType = 'image' | 'video' | 'carousel' | 'short' | 'longform';
 
+export type AspectRatio = '9:16' | '1:1' | '16:9' | '4:5';
+
 export type PublishIntent =
   | 'educational'
   | 'promotional'
@@ -40,6 +42,8 @@ export type PublishIntent =
 
 export type MetricPeriod = '7d' | '30d' | '90d' | '1y';
 
+export type Priority = 'low' | 'medium' | 'high';
+
 // ─────────────────────────────────────────────
 // Media
 // ─────────────────────────────────────────────
@@ -49,15 +53,96 @@ export interface MediaAsset {
   type: MediaType;
   url: string;
   thumbnailUrl?: string;
+  aspectRatio?: AspectRatio;
   width?: number;
   height?: number;
-  durationSeconds?: number;   // video / short / longform
+  durationSeconds?: number;
   altText?: string;
-  fileSize?: number;           // bytes
+  fileSizeBytes?: number;
 }
 
 // ─────────────────────────────────────────────
-// Platform config (constraints)
+// Metrics — standardised across all platforms
+// ─────────────────────────────────────────────
+
+export interface PlatformMetrics {
+  impressions?: number;
+  reach?: number;
+  clicks?: number;
+  likes?: number;
+  comments?: number;
+  shares?: number;
+  saves?: number;
+  watchTimeSeconds?: number;
+  ctr?: number;              // click-through rate, 0–100
+  engagementRate?: number;   // 0–100
+  completionRate?: number;   // 0–100 (video)
+  views?: number;            // distinct from impressions on video platforms
+  followers?: number;
+  followerGrowth?: number;
+}
+
+// ─────────────────────────────────────────────
+// Platform-specific payloads (typed hints)
+// ─────────────────────────────────────────────
+
+export interface TikTokSpecific {
+  duetEnabled?: boolean;
+  stitchEnabled?: boolean;
+  soundId?: string;
+  soundName?: string;
+  branded?: boolean;
+}
+
+export interface FacebookSpecific {
+  targetingAgeMin?: number;
+  targetingAgeMax?: number;
+  targetingGeo?: string[];
+  boostBudget?: number;
+  pageId?: string;
+  callToActionType?: string;
+}
+
+export interface LinkedInSpecific {
+  articleUrl?: string;
+  targetAudience?: string;
+  documentType?: 'carousel' | 'pdf' | 'none';
+  sponsored?: boolean;
+  slideCount?: number;
+}
+
+export interface YouTubeSpecific {
+  chapters?: string[];
+  endScreenEnabled?: boolean;
+  cards?: string[];
+  tags?: string[];
+  category?: string;
+  madeForKids?: boolean;
+  visibility?: 'public' | 'unlisted' | 'private';
+}
+
+export interface XSpecific {
+  isThread?: boolean;
+  threadCount?: number;
+  replySettings?: 'everyone' | 'followers' | 'mentioned';
+  promoted?: boolean;
+}
+
+export interface ThreadsSpecific {
+  crosspostToInstagram?: boolean;
+  replyControl?: 'everyone' | 'followers';
+}
+
+export type PlatformSpecificPayload =
+  | TikTokSpecific
+  | FacebookSpecific
+  | LinkedInSpecific
+  | YouTubeSpecific
+  | XSpecific
+  | ThreadsSpecific;
+
+// ─────────────────────────────────────────────
+// Platform config (constraints + capabilities)
 // ─────────────────────────────────────────────
 
 export interface PlatformConfig {
@@ -71,7 +156,7 @@ export interface PlatformConfig {
   supportsStories: boolean;
   supportsLongform: boolean;
   supportedContentTypes: ContentType[];
-  optimalPostTimes: string[];  // e.g. "18:00"
+  optimalPostTimes: string[];
 }
 
 // ─────────────────────────────────────────────
@@ -92,38 +177,33 @@ export interface Campaign {
 
 // ─────────────────────────────────────────────
 // ContentVariant — execution layer
-// One per target platform.  Variant status drives scheduling + publishing.
+// Status here drives scheduling + publishing per platform.
 // ─────────────────────────────────────────────
 
 export interface ContentVariant {
   id: string;
   platform: Platform;
+  platformAccountId?: string;    // which connected account to publish from
 
-  // Copy
+  // Copy (platform-tuned)
+  hook: string;
   caption: string;
-  hook: string;              // first line / scroll-stopper (platform-tuned)
   hashtags: string[];
   mentions: string[];
-  primaryCTA: string;        // e.g. "Link in bio", "Comment YES", "Subscribe"
+  primaryCTA: string;
 
   // Media
   media: MediaAsset[];
 
-  // Platform escape hatch — carry whatever that platform needs
-  // TikTok: { duetEnabled, stitchEnabled, soundId }
-  // LinkedIn: { articleUrl, targetAudience }
-  // YouTube: { chapters, endScreen, tags }
-  // Facebook: { targetingAge, targetingGeo, boostBudget }
-  // X:        { isThread, threadCount }
-  // Threads:  { crosspostToInstagram }
-  platformSpecific: Record<string, unknown>;
+  // Platform-specific config
+  platformSpecific: PlatformSpecificPayload;
 
   // Workflow
   status: ContentStatus;
-  blockedReason?: string;     // only when status === 'blocked'
-  scheduledAt?: string;       // ISO 8601
+  blockedReason?: string;
+  scheduledAt?: string;
   publishedAt?: string;
-  failureReason?: string;
+  failedReason?: string;
 
   // Post-publish
   metrics?: PlatformMetrics;
@@ -131,8 +211,8 @@ export interface ContentVariant {
 
 // ─────────────────────────────────────────────
 // ContentItem — master / editorial intent
-// Status here = editorial state (explicitly set by team).
-// Variant statuses = per-platform execution state.
+// status is EXPLICITLY set by the team — never auto-derived.
+// Variant statuses drive per-platform execution.
 // ─────────────────────────────────────────────
 
 export interface ContentItem {
@@ -140,14 +220,18 @@ export interface ContentItem {
   title: string;
   type: ContentType;
 
-  // Editorial intent
-  status: ContentStatus;           // EXPLICIT — not derived
+  // Editorial state (explicitly set)
+  status: ContentStatus;
+  priority?: Priority;
+  estimatedValue?: number;       // USD, used for ROI scoring
+
+  // Intent
   publishIntent: PublishIntent;
-  hook: string;                    // master hook (adapted per variant)
-  primaryCTA: string;              // master CTA (adapted per variant)
+  hook: string;                  // master scroll-stopper, adapted per variant
+  primaryCTA: string;            // master CTA, adapted per variant
 
   // Repurposing chain
-  repurposeFrom?: string;          // ContentItem.id this was derived from
+  repurposeFrom?: string;        // ContentItem.id this was derived from
 
   // Organisation
   campaignId?: string;
@@ -155,37 +239,17 @@ export interface ContentItem {
   notes?: string;
 
   // Team
-  createdBy: string;               // TeamMember.id
-  assignedTo?: string;             // TeamMember.id
-  approvedBy?: string;             // TeamMember.id
+  createdBy: string;
+  assignedTo?: string;
+  approvedBy?: string;
   approvedAt?: string;
 
   // Timestamps
   createdAt: string;
   updatedAt: string;
 
-  // Platform executions
+  // Executions
   variants: ContentVariant[];
-}
-
-// ─────────────────────────────────────────────
-// Metrics
-// ─────────────────────────────────────────────
-
-export interface PlatformMetrics {
-  views?: number;
-  likes?: number;
-  comments?: number;
-  shares?: number;
-  saves?: number;
-  clicks?: number;
-  impressions?: number;
-  reach?: number;
-  engagementRate?: number;     // 0–100
-  watchTimeSeconds?: number;
-  completionRate?: number;     // 0–100
-  followers?: number;
-  followerGrowth?: number;
 }
 
 // ─────────────────────────────────────────────
@@ -225,8 +289,8 @@ export interface CompetitorPlatform {
   platform: Platform;
   handle: string;
   followers: number;
-  weeklyGrowth: number;        // %
-  avgEngagementRate: number;   // %
+  weeklyGrowth: number;
+  avgEngagementRate: number;
   postsPerWeek: number;
   topContentType: ContentType;
   recentPosts: CompetitorPost[];
@@ -262,7 +326,7 @@ export interface TrendItem {
   source: string;
   category: string;
   publishedAt: string;
-  trendScore: number;          // 0–100
+  trendScore: number;
   velocity: 'rising' | 'peak' | 'fading';
   platforms: Platform[];
   platformAngles: Partial<Record<Platform, PlatformAngle>>;
