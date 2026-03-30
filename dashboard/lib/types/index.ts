@@ -256,17 +256,35 @@ export interface ContentItem {
 // Platform accounts
 // ─────────────────────────────────────────────
 
+export type AccountStatus = 'active' | 'disconnected' | 'error' | 'pending';
+
 export interface PlatformAccount {
   id: string;
   platform: Platform;
-  handle: string;
-  displayName: string;
+
+  // Identity
+  handle: string;               // @username or page slug
+  displayName: string;          // shown name / channel name
+  profileUrl?: string;
+  avatarUrl?: string;
+  accountType?: string;         // e.g. 'Channel', 'Page', 'Personal', 'Company'
+
+  // Connection
+  isPrimary: boolean;
+  status: AccountStatus;
+  connected: boolean;
+  connectedAt?: string;
+  lastSync?: string;
+
+  // Audience
   followers: number;
   following: number;
   verified: boolean;
-  connected: boolean;
-  lastSync?: string;
+
+  // Aggregate metrics (rolling 30d)
   metrics: PlatformMetrics;
+
+  // Time-series (last 7 days)
   dailyMetrics: Array<{ date: string } & PlatformMetrics>;
 }
 
