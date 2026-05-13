@@ -29,18 +29,39 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg); color: var(--text);
     font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-    font-weight: 400;
-    line-height: 1.5;
-    min-height: 100vh;
-    overflow-x: hidden;
+    font-weight: 400; line-height: 1.5; min-height: 100vh; overflow-x: hidden;
     background-image:
       radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.08), transparent 50%),
       radial-gradient(ellipse at 80% 100%, rgba(255,45,138,0.06), transparent 50%);
   }
   .container { max-width: 640px; margin: 0 auto; padding: 80px 24px 64px; }
+
+  /* Day-of-show ticker — top of page */
+  .day-ticker {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--cyan);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .day-ticker.visible { opacity: 1; }
+  .day-ticker .pulse {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--magenta); border-radius: 50%;
+    margin-right: 8px; vertical-align: middle;
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 12px var(--magenta); }
+  }
+
   .hero { text-align: center; margin-bottom: 56px; }
   .avatar-wrap {
     width: 128px; height: 128px; margin: 0 auto 24px;
@@ -65,11 +86,8 @@
   .tagline { color: var(--text-muted); font-size: 16px; margin-bottom: 18px; max-width: 420px; margin-left: auto; margin-right: auto; }
   .badge { display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); padding: 5px 14px; border-radius: 100px; font-weight: 500; }
   .credibility {
-    margin-top: 24px;
-    font-size: 12px;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-    line-height: 1.7;
+    margin-top: 24px; font-size: 12px; color: var(--text-muted);
+    letter-spacing: 0.04em; line-height: 1.7;
   }
   .credibility .dot { color: var(--cyan); opacity: 0.7; margin: 0 6px; }
   .section-label { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; padding-left: 4px; }
@@ -80,60 +98,38 @@
     color: var(--text); text-decoration: none; transition: all 0.2s ease;
   }
   .link:hover { background: var(--bg-card-hover); border-color: rgba(0,212,255,0.3); transform: translateY(-1px); }
-  .link .icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; flex-shrink: 0; color: var(--cyan); }
+  .link .icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(0,212,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--text);
+    transition: all 0.2s ease;
+  }
+  .link .icon svg { width: 18px; height: 18px; }
+  .link:hover .icon { background: rgba(0,212,255,0.16); color: var(--cyan); }
   .link .label { font-weight: 500; font-size: 15px; }
   .link .sub { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
   .link.featured { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(255,45,138,0.08)); border-color: rgba(0,212,255,0.4); }
   .link.featured .icon { background: rgba(255,45,138,0.15); color: var(--magenta); }
   .badge-new { margin-left: auto; font-size: 10px; letter-spacing: 0.1em; color: var(--magenta); background: rgba(255,45,138,0.12); padding: 3px 8px; border-radius: 100px; text-transform: uppercase; font-weight: 600; }
   .magnets-intro {
-    text-align: center;
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    line-height: 1.5;
+    text-align: center; font-size: 14px; color: var(--text-muted);
+    margin-bottom: 20px; line-height: 1.5;
   }
   .magnets-intro strong { color: var(--text); font-weight: 500; }
-  .magnets-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-bottom: 40px;
-  }
+  .magnets-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 40px; }
   .magnet {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px 16px;
-    text-decoration: none;
-    color: var(--text);
-    transition: all 0.2s ease;
-    display: block;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 16px; text-decoration: none; color: var(--text);
+    transition: all 0.2s ease; display: block;
   }
-  .magnet:hover {
-    background: var(--bg-card-hover);
-    border-color: rgba(0,212,255,0.3);
-    transform: translateY(-1px);
-  }
+  .magnet:hover { background: var(--bg-card-hover); border-color: rgba(0,212,255,0.3); transform: translateY(-1px); }
   .magnet .trigger {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    font-weight: 700;
-    color: var(--cyan);
-    margin-bottom: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    letter-spacing: 0.18em; font-weight: 700; color: var(--cyan); margin-bottom: 8px;
   }
-  .magnet .title {
-    font-weight: 500;
-    font-size: 14px;
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-  .magnet .desc {
-    color: var(--text-muted);
-    font-size: 12px;
-    line-height: 1.4;
-  }
+  .magnet .title { font-weight: 500; font-size: 14px; margin-bottom: 4px; line-height: 1.3; }
+  .magnet .desc { color: var(--text-muted); font-size: 12px; line-height: 1.4; }
   .quote { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: var(--text); text-align: center; margin: 48px 0 12px; padding: 0 16px; line-height: 1.35; }
   .quote-attribution { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
   footer { text-align: center; padding-top: 32px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; line-height: 1.7; }
@@ -145,11 +141,17 @@
     .quote { font-size: 19px; }
     .avatar-wrap { width: 112px; height: 112px; }
     .magnets-grid { grid-template-columns: 1fr; }
+    .day-ticker { font-size: 10px; letter-spacing: 0.18em; }
   }
 </style>
 </head>
 <body>
 <div class="container">
+
+  <div class="day-ticker" id="day-ticker">
+    <span class="pulse"></span>
+    <span id="day-text">Loading today's video&hellip;</span>
+  </div>
 
   <header class="hero">
     <div class="avatar-wrap">
@@ -167,7 +169,7 @@
   <div class="section-label">The Show</div>
   <div class="stack">
     <a class="link featured" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
-      <div class="icon">&#9654;</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.69a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.12z"/></svg></div>
       <div>
         <div class="label">Crazy Ways AI Gets Money</div>
         <div class="sub">30 days of real AI workflows. TikTok daily.</div>
@@ -179,7 +181,7 @@
   <div class="section-label">The Newsletter</div>
   <div class="stack">
     <a class="link" href="https://codykeeganai.substack.com" target="_blank" rel="noopener">
-      <div class="icon">&#9993;</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></div>
       <div>
         <div class="label">Crazy Ways AI Gets Money &mdash; the Newsletter</div>
         <div class="sub">Long-form notes from the show. Every Sunday. Free.</div>
@@ -221,47 +223,47 @@
   <div class="section-label">Watch &amp; Follow</div>
   <div class="stack">
     <a class="link" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
-      <div class="icon">T</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.69a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.12z"/></svg></div>
       <div><div class="label">TikTok</div><div class="sub">@codykeegan.ai &mdash; daily</div></div>
     </a>
     <a class="link" href="https://instagram.com/codykeegan.ai" target="_blank" rel="noopener">
-      <div class="icon">I</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
       <div><div class="label">Instagram</div><div class="sub">@codykeegan.ai &mdash; Reels + Stories</div></div>
     </a>
     <a class="link" href="https://www.youtube.com/@codykeeganai" target="_blank" rel="noopener">
-      <div class="icon">Y</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
       <div><div class="label">YouTube</div><div class="sub">Shorts + long-form deep dives</div></div>
     </a>
     <a class="link" href="https://www.linkedin.com/in/cody-keegan-a17b6137/" target="_blank" rel="noopener">
-      <div class="icon">L</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
       <div><div class="label">LinkedIn</div><div class="sub">Business-owner version of the show</div></div>
     </a>
     <a class="link" href="https://x.com/codykeeganai" target="_blank" rel="noopener">
-      <div class="icon">X</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
       <div><div class="label">X / Twitter</div><div class="sub">Short, punchy, real time</div></div>
     </a>
     <a class="link" href="https://www.threads.com/@ckeegan60" target="_blank" rel="noopener">
-      <div class="icon">@</div>
-      <div><div class="label">Threads</div><div class="sub">Same energy as X, more conversation</div></div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32l-1.757-1.18c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.323.143 1.504.708 2.604 1.78 3.182 3.1.806 1.84.881 4.84-1.564 7.229-1.871 1.828-4.137 2.652-7.227 2.674zm1.504-10.602-.346.018c-1.622.09-3.244.83-3.21 2.075.025.488.226.91.598 1.211.566.484 1.474.747 2.585.685 1.044-.057 1.84-.404 2.43-1.067.654-.738.97-1.794 1.018-3.255-.617-.144-1.273-.214-1.95-.214-.394 0-.769.022-1.125.067z"/></svg></div>
+      <div><div class="label">Threads</div><div class="sub">@ckeegan60</div></div>
     </a>
     <a class="link" href="https://www.facebook.com/profile.php?id=61587202133127" target="_blank" rel="noopener">
-      <div class="icon">F</div>
-      <div><div class="label">Facebook</div><div class="sub">For the wider business-owner audience</div></div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+      <div><div class="label">Facebook</div><div class="sub">For the business-owner audience</div></div>
     </a>
     <a class="link" href="https://www.pinterest.com/CodyKeeganAI/" target="_blank" rel="noopener">
-      <div class="icon">P</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/></svg></div>
       <div><div class="label">Pinterest</div><div class="sub">Evergreen visual breakdowns</div></div>
     </a>
   </div>
 
   <div class="section-label">Get In Touch</div>
   <div class="stack">
-    <a class="link" href="mailto:terminal@codykeegan.ai">
-      <div class="icon">&#9993;</div>
-      <div><div class="label">Email</div><div class="sub">terminal@codykeegan.ai</div></div>
+    <a class="link" href="mailto:terminal@codykeegan.ai?subject=Hi%20Cody%20%E2%80%94%20found%20you%20via%20codykeegan.ai&body=Hey%20Cody%2C%0A%0AFound%20you%20via%20codykeegan.ai.%20Quick%20intro%3A%0A%0AWho%20I%20am%3A%20%0A%0AThe%20business%20I'm%20running%3A%20%0A%0AWhat%20I%E2%80%99m%20trying%20to%20figure%20out%20about%20AI%3A%20%0A%0AOne%20thing%20I%20want%20to%20ask%20you%3A%20%0A%0A%E2%80%94%20">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 4.5h21A1.5 1.5 0 0 1 24 6v12a1.5 1.5 0 0 1-1.5 1.5h-21A1.5 1.5 0 0 1 0 18V6a1.5 1.5 0 0 1 1.5-1.5zM2 6.85V18h20V6.85l-10 6.25L2 6.85zm.93-.85L12 11.5 21.07 6H2.93z"/></svg></div>
+      <div><div class="label">Email</div><div class="sub">terminal@codykeegan.ai &mdash; opens with intro template</div></div>
     </a>
     <a class="link" href="https://www.linkedin.com/in/cody-keegan-a17b6137/" target="_blank" rel="noopener">
-      <div class="icon">L</div>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
       <div><div class="label">LinkedIn DM</div><div class="sub">Best for business inquiries</div></div>
     </a>
   </div>
@@ -273,5 +275,31 @@
   </footer>
 
 </div>
+
+<script>
+  // Dynamic "Day X of 30 — Comment WORD" ticker
+  (function() {
+    var triggers = ['STEAL','PREDICT','COLD','CALLREVIEW','DESTROY','SCAN','REVERSE','JOBS','DOSSIER','CLONE','SIGNAL','PROPOSAL','NEWS','SHADOW','FILTER','BIDWAR','VULTURE','DEPART','ONEDAY','EVERYWHERE','MACHINE','INTEL','HIDDEN','PASSIVESALES','BODEYOGI','NUMBER','STACK','SYSTEM','READY','MONTH2'];
+    var launch = new Date(2026, 4, 14); // May 14, 2026 (month is 0-indexed)
+    launch.setHours(0,0,0,0);
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    var dayNum = Math.floor((today - launch) / 86400000) + 1;
+    var ticker = document.getElementById('day-ticker');
+    var text = document.getElementById('day-text');
+    if (dayNum >= 1 && dayNum <= 30) {
+      var word = triggers[dayNum - 1];
+      text.innerHTML = 'Day ' + dayNum + ' of 30 &nbsp;&middot;&nbsp; Today\'s word: ' + word;
+      ticker.classList.add('visible');
+    } else if (dayNum < 1) {
+      var days = Math.abs(dayNum - 1);
+      text.innerHTML = 'Show launches in ' + days + ' day' + (days === 1 ? '' : 's');
+      ticker.classList.add('visible');
+    } else {
+      text.innerHTML = '30 days complete &nbsp;&middot;&nbsp; Month 2 incoming';
+      ticker.classList.add('visible');
+    }
+  })();
+</script>
 </body>
 </html>
