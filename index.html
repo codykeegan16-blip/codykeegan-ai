@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Cody Keegan — AI Sales Partner. I help AI products land with real buyers. Commission only. No close, no cost." />
+<meta name="description" content="Cody Keegan — AI Sales Partner. Real AI workflows that generate real revenue. The daily show: Crazy Ways AI Gets Money." />
 <meta property="og:title" content="Cody Keegan — AI Sales Partner" />
-<meta property="og:description" content="Runs three businesses on AI. Posts daily. Real workflows, real results." />
+<meta property="og:description" content="Sales since 2003. Three businesses on AI now. Real workflows, real money. Daily show: Crazy Ways AI Gets Money." />
 <meta property="og:image" content="./avatar.jpg" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://codykeegan.ai" />
@@ -64,30 +64,93 @@
   h1 { font-family: 'Instrument Serif', serif; font-size: 52px; line-height: 1.05; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 12px; }
   .tagline { color: var(--text-muted); font-size: 16px; margin-bottom: 18px; max-width: 420px; margin-left: auto; margin-right: auto; }
   .badge { display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); padding: 5px 14px; border-radius: 100px; font-weight: 500; }
+  .credibility {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+  }
+  .credibility .dot { color: var(--cyan); opacity: 0.7; margin: 0 6px; }
   .section-label { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; padding-left: 4px; }
   .stack { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
-  .link { display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; color: var(--text); text-decoration: none; transition: all 0.2s ease; }
+  .link {
+    display: flex; align-items: center; gap: 16px; padding: 18px 20px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+    color: var(--text); text-decoration: none; transition: all 0.2s ease;
+  }
   .link:hover { background: var(--bg-card-hover); border-color: rgba(0,212,255,0.3); transform: translateY(-1px); }
-  .link .icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; flex-shrink: 0; }
+  .link .icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; flex-shrink: 0; color: var(--cyan); }
   .link .label { font-weight: 500; font-size: 15px; }
   .link .sub { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
   .link.featured { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(255,45,138,0.08)); border-color: rgba(0,212,255,0.4); }
-  .link.featured .icon { background: rgba(255,45,138,0.15); }
+  .link.featured .icon { background: rgba(255,45,138,0.15); color: var(--magenta); }
   .badge-new { margin-left: auto; font-size: 10px; letter-spacing: 0.1em; color: var(--magenta); background: rgba(255,45,138,0.12); padding: 3px 8px; border-radius: 100px; text-transform: uppercase; font-weight: 600; }
+  .magnets-intro {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .magnets-intro strong { color: var(--text); font-weight: 500; }
+  .magnets-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .magnet {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s ease;
+    display: block;
+  }
+  .magnet:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(0,212,255,0.3);
+    transform: translateY(-1px);
+  }
+  .magnet .trigger {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 8px;
+  }
+  .magnet .title {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .magnet .desc {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.4;
+  }
   .quote { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: var(--text); text-align: center; margin: 48px 0 12px; padding: 0 16px; line-height: 1.35; }
   .quote-attribution { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
-  footer { text-align: center; padding-top: 32px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; }
-  footer .entity { font-size: 11px; letter-spacing: 0.05em; opacity: 0.7; margin-top: 8px; }
+  footer { text-align: center; padding-top: 32px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+  footer .show-line { color: var(--text); margin-top: 6px; }
+  footer .entity { font-size: 11px; letter-spacing: 0.05em; opacity: 0.7; margin-top: 12px; }
   @media (max-width: 480px) {
     .container { padding: 56px 18px 48px; }
     h1 { font-size: 40px; }
     .quote { font-size: 19px; }
     .avatar-wrap { width: 112px; height: 112px; }
+    .magnets-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="container">
+
   <header class="hero">
     <div class="avatar-wrap">
       <img class="avatar" src="./avatar.jpg" alt="Cody Keegan" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -96,6 +159,9 @@
     <h1>Cody Keegan</h1>
     <p class="tagline">AI Sales Partner. Sales since 2003. Runs three businesses on AI.</p>
     <span class="badge">Crazy Ways AI Gets Money</span>
+    <p class="credibility">
+      Sales since 2003<span class="dot">·</span>AARP Products of the Year 2019<span class="dot">·</span>500+ events served<span class="dot">·</span>Six figures on Amazon, Etsy, eBay
+    </p>
   </header>
 
   <div class="section-label">The Show</div>
@@ -110,47 +176,102 @@
     </a>
   </div>
 
-  <div class="section-label">Free Resources</div>
+  <div class="section-label">The Newsletter</div>
   <div class="stack">
-    <a class="link" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
-      <div class="icon">&#9889;</div>
-      <div>
-        <div class="label">CLAUDE.md Brand Bible Template</div>
-        <div class="sub">Comment CLAUDE on any video — auto-DM in 60 seconds.</div>
-      </div>
-    </a>
     <a class="link" href="https://codykeeganai.substack.com" target="_blank" rel="noopener">
       <div class="icon">&#9993;</div>
       <div>
-        <div class="label">The Newsletter</div>
-        <div class="sub">Long-form. Every Sunday. Free.</div>
+        <div class="label">Crazy Ways AI Gets Money &mdash; the Newsletter</div>
+        <div class="sub">Long-form notes from the show. Every Sunday. Free.</div>
       </div>
+    </a>
+  </div>
+
+  <div class="section-label">Free Resources</div>
+  <p class="magnets-intro">
+    Comment any word below on any video.<br>
+    <strong>I DM the resource within 60 seconds.</strong>
+  </p>
+  <div class="magnets-grid">
+    <a class="magnet" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
+      <div class="trigger">CLAUDE</div>
+      <div class="title">Brand Bible Template</div>
+      <div class="desc">The file that makes AI sound like you, not generic slop.</div>
+    </a>
+    <a class="magnet" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
+      <div class="trigger">STEAL</div>
+      <div class="title">Competitor Review Mining</div>
+      <div class="desc">Pull 5 sales-script patterns from 50 reviews in 4 minutes.</div>
+    </a>
+    <a class="magnet" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
+      <div class="trigger">STACK</div>
+      <div class="title">The $144 Tool Stack</div>
+      <div class="desc">Every dollar of the AI stack that runs three businesses.</div>
+    </a>
+    <a class="magnet" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
+      <div class="trigger">SYSTEM</div>
+      <div class="title">The Full Architecture</div>
+      <div class="desc">How a comment becomes a closed deal without me touching it.</div>
     </a>
   </div>
 
   <p class="quote">"Real AI. Real businesses. Real Tuesday morning. Here's what's happening."</p>
-  <p class="quote-attribution">— What every episode delivers</p>
+  <p class="quote-attribution">&mdash; What every episode delivers</p>
 
   <div class="section-label">Watch &amp; Follow</div>
   <div class="stack">
-    <a class="link" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener"><div class="icon">T</div><div><div class="label">TikTok</div><div class="sub">@codykeegan.ai — daily</div></div></a>
-    <a class="link" href="https://instagram.com/codykeegan.ai" target="_blank" rel="noopener"><div class="icon">I</div><div><div class="label">Instagram</div><div class="sub">@codykeegan.ai — Reels + Stories</div></div></a>
-    <a class="link" href="https://linkedin.com/in/codykeegan" target="_blank" rel="noopener"><div class="icon">L</div><div><div class="label">LinkedIn</div><div class="sub">Business-owner version of the show</div></div></a>
-    <a class="link" href="https://x.com/codykeeganai" target="_blank" rel="noopener"><div class="icon">X</div><div><div class="label">X / Twitter</div><div class="sub">Short, punchy, real time</div></div></a>
-    <a class="link" href="https://youtube.com/@codykeegan" target="_blank" rel="noopener"><div class="icon">Y</div><div><div class="label">YouTube</div><div class="sub">Shorts + long-form deep dives</div></div></a>
-    <a class="link" href="https://threads.net/@codykeegan.ai" target="_blank" rel="noopener"><div class="icon">@</div><div><div class="label">Threads</div><div class="sub">Same energy as X, more conversation</div></div></a>
+    <a class="link" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
+      <div class="icon">T</div>
+      <div><div class="label">TikTok</div><div class="sub">@codykeegan.ai &mdash; daily</div></div>
+    </a>
+    <a class="link" href="https://instagram.com/codykeegan.ai" target="_blank" rel="noopener">
+      <div class="icon">I</div>
+      <div><div class="label">Instagram</div><div class="sub">@codykeegan.ai &mdash; Reels + Stories</div></div>
+    </a>
+    <a class="link" href="https://www.youtube.com/@codykeeganai" target="_blank" rel="noopener">
+      <div class="icon">Y</div>
+      <div><div class="label">YouTube</div><div class="sub">Shorts + long-form deep dives</div></div>
+    </a>
+    <a class="link" href="https://www.linkedin.com/in/cody-keegan-a17b6137/" target="_blank" rel="noopener">
+      <div class="icon">L</div>
+      <div><div class="label">LinkedIn</div><div class="sub">Business-owner version of the show</div></div>
+    </a>
+    <a class="link" href="https://x.com/codykeeganai" target="_blank" rel="noopener">
+      <div class="icon">X</div>
+      <div><div class="label">X / Twitter</div><div class="sub">Short, punchy, real time</div></div>
+    </a>
+    <a class="link" href="https://www.threads.com/@ckeegan60" target="_blank" rel="noopener">
+      <div class="icon">@</div>
+      <div><div class="label">Threads</div><div class="sub">Same energy as X, more conversation</div></div>
+    </a>
+    <a class="link" href="https://www.facebook.com/profile.php?id=61587202133127" target="_blank" rel="noopener">
+      <div class="icon">F</div>
+      <div><div class="label">Facebook</div><div class="sub">For the wider business-owner audience</div></div>
+    </a>
+    <a class="link" href="https://www.pinterest.com/CodyKeeganAI/" target="_blank" rel="noopener">
+      <div class="icon">P</div>
+      <div><div class="label">Pinterest</div><div class="sub">Evergreen visual breakdowns</div></div>
+    </a>
   </div>
 
   <div class="section-label">Get In Touch</div>
   <div class="stack">
-    <a class="link" href="mailto:cody@codykeegan.ai"><div class="icon">&#9993;</div><div><div class="label">Email</div><div class="sub">cody@codykeegan.ai</div></div></a>
-    <a class="link" href="https://linkedin.com/in/codykeegan" target="_blank" rel="noopener"><div class="icon">L</div><div><div class="label">LinkedIn DM</div><div class="sub">Best for business inquiries</div></div></a>
+    <a class="link" href="mailto:terminal@codykeegan.ai">
+      <div class="icon">&#9993;</div>
+      <div><div class="label">Email</div><div class="sub">terminal@codykeegan.ai</div></div>
+    </a>
+    <a class="link" href="https://www.linkedin.com/in/cody-keegan-a17b6137/" target="_blank" rel="noopener">
+      <div class="icon">L</div>
+      <div><div class="label">LinkedIn DM</div><div class="sub">Best for business inquiries</div></div>
+    </a>
   </div>
 
   <footer>
     <div>Built in Tucson. Lived on commission since 2003.</div>
+    <div class="show-line">A Darkhorse Traders LLC operation. The daily show: Crazy Ways AI Gets Money.</div>
     <div class="entity">&copy; Darkhorse Traders LLC</div>
   </footer>
+
 </div>
 </body>
 </html>
