@@ -1,1039 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CodyKeegan.ai — Revenue Recovery Systems</title>
-<meta name="description" content="AI revenue systems for service businesses losing jobs to missed calls, slow response, and weak follow-up.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Cody Keegan — AI Sales Partner. I help AI products land with real buyers. Commission only. No close, no cost." />
+<meta property="og:title" content="Cody Keegan — AI Sales Partner" />
+<meta property="og:description" content="Runs three businesses on AI. Posts daily. Real workflows, real results." />
+<meta property="og:image" content="./avatar.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://codykeegan.ai" />
+<meta name="twitter:card" content="summary_large_image" />
+<title>Cody Keegan — AI Sales Partner</title>
+<link rel="icon" type="image/jpeg" href="./avatar.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════
-   TOKENS
-═══════════════════════════════════════ */
-:root{
-  --bg:   #0B0F14;
-  --s1:   #111927;
-  --s2:   #161f2e;
-  --tx:   #E6EDF3;
-  --tx2:  #8B9AAA;
-  --tx3:  #3d4f62;
-  --vi:   #7C5CFF;
-  --vi-a: rgba(124,92,255,.1);
-  --vi-b: rgba(124,92,255,.18);
-  --vi-c: rgba(124,92,255,.32);
-  --te:   #00D1B2;
-  --te-a: rgba(0,209,178,.08);
-  --te-c: rgba(0,209,178,.28);
-  --re:   #FF5A5F;
-  --re-a: rgba(255,90,95,.07);
-  --re-c: rgba(255,90,95,.24);
-  --ln:   rgba(255,255,255,.07);
-  --ln2:  rgba(255,255,255,.1);
-  --sans: 'Inter',system-ui,sans-serif;
-  --mono: 'IBM Plex Mono',monospace;
-  --max:  1120px;
-}
-
-/* ═══════════════════════════════════════
-   RESET + CANVAS
-═══════════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  background:var(--bg);color:var(--tx);
-  font-family:var(--sans);font-size:15px;line-height:1.6;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit}
-
-/* one continuous atmospheric surface */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 60% 50% at 5%   0%, rgba(124,92,255,.08), transparent),
-    radial-gradient(ellipse 45% 40% at 95% 60%, rgba(0,209,178,.04),  transparent),
-    radial-gradient(ellipse 70% 35% at 50% 98%, rgba(124,92,255,.05), transparent);
-}
-/* film grain */
-body::after{
-  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  opacity:.02;background-size:160px;
-}
-.w{width:min(var(--max),calc(100% - 32px));margin:0 auto;position:relative;z-index:1}
-
-/* ═══════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════ */
-.btn{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.01em;
-  padding:9px 18px;
-  background:var(--vi);color:#fff;
-  border:1px solid transparent;border-radius:3px;
-  cursor:pointer;white-space:nowrap;
-  transition:background 100ms ease-out,box-shadow 100ms ease-out;
-}
-.btn:hover{background:#8f72ff;box-shadow:0 0 0 3px rgba(124,92,255,.22)}
-.btn:active{opacity:.9}
-
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:var(--sans);font-size:13px;font-weight:500;
-  padding:9px 18px;
-  background:transparent;color:var(--tx2);
-  border:1px solid var(--ln2);border-radius:3px;
-  cursor:pointer;white-space:nowrap;
-  transition:color 100ms ease-out,border-color 100ms ease-out;
-}
-.btn-ghost:hover{color:var(--tx);border-color:rgba(255,255,255,.2)}
-
-/* ═══════════════════════════════════════
-   NAV
-═══════════════════════════════════════ */
-#nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:50px;
-  background:rgba(11,15,20,.92);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--ln);
-}
-.nav-w{
-  max-width:calc(var(--max) + 48px);margin:0 auto;
-  padding:0 16px;height:50px;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  position:relative;z-index:1;
-}
-.nav-brand{
-  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.07em;
-  color:var(--tx);display:flex;align-items:center;gap:8px;flex-shrink:0;
-}
-.ndot{
-  width:6px;height:6px;border-radius:50%;flex-shrink:0;
-  background:var(--te);box-shadow:0 0 6px var(--te);
-  animation:dp 2.5s ease-in-out infinite;
-}
-@keyframes dp{0%,100%{opacity:1;box-shadow:0 0 5px var(--te)}50%{opacity:.2;box-shadow:0 0 12px var(--te)}}
-.nav-sys{
-  display:none;
-  font-family:var(--mono);font-size:10px;color:var(--tx3);letter-spacing:.05em;
-  gap:14px;align-items:center;flex-shrink:0;
-}
-.sys-on{color:var(--te)}
-.nav-r{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.nav-ph{
-  font-family:var(--mono);font-size:12px;color:var(--tx2);
-  letter-spacing:.05em;display:none;white-space:nowrap;
-  transition:color 100ms ease-out;
-}
-.nav-ph:hover{color:var(--tx)}
-
-/* ═══════════════════════════════════════
-   HERO — left-heavy, right-anchored visual
-═══════════════════════════════════════ */
-#hero{
-  padding:80px 0 64px;
-  position:relative;overflow:hidden;
-}
-/* strong directional glow — pulls toward panel side */
-#hero::before{
-  content:'';
-  position:absolute;top:-10%;right:-5%;
-  width:660px;height:660px;
-  background:radial-gradient(ellipse,rgba(124,92,255,.1),transparent 60%);
-  pointer-events:none;z-index:0;
-}
-.hero-g{
-  display:grid;grid-template-columns:1fr;
-  gap:44px;align-items:start;
-  position:relative;z-index:1;
-}
-/* eyebrow */
-.eyebrow{
-  display:inline-flex;align-items:center;gap:9px;
-  font-family:var(--mono);font-size:10px;font-weight:500;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--vi);
-  margin-bottom:18px;
-}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--vi);opacity:.6;flex-shrink:0}
-/* dominant headline */
-h1{
-  font-size:clamp(36px,8vw,68px);font-weight:700;
-  line-height:1.03;letter-spacing:-.05em;color:var(--tx);
-  margin-bottom:20px;
-}
-.hero-sub{
-  font-size:17px;color:var(--tx2);line-height:1.68;
-  max-width:520px;margin-bottom:26px;font-weight:400;
-}
-.blist{
-  list-style:none;display:flex;flex-direction:column;gap:9px;
-  margin-bottom:28px;
-}
-.blist li{
-  display:flex;align-items:center;gap:10px;
-  font-size:14px;color:var(--tx);font-weight:500;
-}
-.blist li::before{
-  content:'';width:4px;height:4px;border-radius:50%;
-  background:var(--vi);flex-shrink:0;
-}
-.hero-ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.hero-ph{
-  display:block;margin-bottom:14px;
-  font-family:var(--mono);font-size:13px;color:var(--tx2);
-  letter-spacing:.05em;transition:color 100ms ease-out;
-}
-.hero-ph:hover{color:var(--tx)}
-.trust{
-  font-family:var(--mono);font-size:10px;color:var(--tx3);
-  letter-spacing:.07em;line-height:1.8;
-}
-
-/* right column wrapper */
-.hero-right{display:flex;flex-direction:column;gap:10px}
-
-/* ─── VISUAL 1: signal flow ─── */
-.sig-flow{
-  background:var(--s1);
-  border:1px solid var(--ln2);
-  border-radius:4px;
-  padding:14px 16px;
-  display:none;
-  position:relative;overflow:hidden;
-}
-.sig-flow::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--vi) 40%,var(--te) 70%,transparent);
-  opacity:.45;
-}
-.sig-label{
-  font-family:var(--mono);font-size:9px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--tx3);margin-bottom:12px;
-}
-.sig-nodes{display:flex;align-items:center;gap:0}
-.sig-node{
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  flex-shrink:0;
-}
-.sig-dot{
-  width:26px;height:26px;border-radius:50%;
-  border:1px solid var(--vi-c);background:var(--vi-a);
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;color:var(--vi);font-family:var(--mono);
-}
-.sig-dot.active{
-  border-color:var(--vi);background:var(--vi-b);
-  box-shadow:0 0 12px rgba(124,92,255,.3);
-}
-.sig-dot-te{
-  border-color:var(--te-c);background:var(--te-a);color:var(--te);
-  box-shadow:0 0 12px rgba(0,209,178,.25);
-}
-.sig-dot-dim{border-color:var(--ln2);background:var(--s2);color:var(--tx3)}
-.sig-txt{
-  font-family:var(--mono);font-size:8px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--tx3);
-  text-align:center;max-width:40px;line-height:1.3;
-}
-.sig-line{
-  flex:1;height:1px;position:relative;min-width:12px;margin-bottom:18px;
-}
-.sig-line::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,var(--vi),rgba(124,92,255,.25));
-}
-.sig-line::after{
-  content:'';position:absolute;top:-2px;left:0;
-  width:4px;height:4px;border-radius:50%;
-  background:var(--vi);box-shadow:0 0 5px var(--vi);
-  animation:travel 2.2s ease-in-out infinite;
-}
-.sig-line.te-line::before{background:linear-gradient(90deg,rgba(124,92,255,.25),var(--te))}
-.sig-line.te-line::after{background:var(--te);box-shadow:0 0 5px var(--te);animation-delay:.6s}
-@keyframes travel{
-  0%,100%{left:0;opacity:0}
-  12%{opacity:1}
-  88%{opacity:1}
-  100%{left:calc(100% - 4px);opacity:0}
-}
-
-/* ─── SYSTEM PANEL ─── */
-.sp{
-  background:var(--s1);
-  border:1px solid var(--ln2);
-  border-radius:4px;overflow:hidden;
-}
-.sp-hdr{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:9px 13px;
-  background:var(--s2);border-bottom:1px solid var(--ln);
-}
-.sp-title{
-  font-family:var(--mono);font-size:10px;font-weight:500;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);
-}
-.sp-live{
-  display:flex;align-items:center;gap:5px;
-  font-family:var(--mono);font-size:10px;color:var(--te);letter-spacing:.12em;
-}
-.sp-live::before{
-  content:'';width:5px;height:5px;border-radius:50%;
-  background:var(--te);box-shadow:0 0 5px var(--te);animation:dp 2s infinite;
-}
-.sp-row{
-  display:flex;gap:10px;align-items:flex-start;
-  padding:11px 13px;border-bottom:1px solid var(--ln);
-  transition:background 180ms ease-out;
-}
-.sp-row:last-of-type{border-bottom:none}
-.sp-row.bad{background:var(--re-a)}
-.sp-row.ok{background:rgba(124,92,255,.05)}
-.sp-row.ok.lit{background:rgba(124,92,255,.11)}
-.sp-ico{
-  width:24px;height:24px;flex-shrink:0;
-  border:1px solid var(--ln2);background:var(--s2);
-  border-radius:3px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-family:var(--mono);color:var(--tx3);margin-top:1px;
-}
-.sp-row.bad .sp-ico{border-color:var(--re-c);color:var(--re);background:var(--re-a)}
-.sp-row.ok  .sp-ico{border-color:var(--vi-c);color:var(--vi);background:var(--vi-b)}
-.sp-txt{flex:1;min-width:0}
-.sp-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:2px}
-.sp-nm{font-size:12px;font-weight:600;color:var(--tx);letter-spacing:-.01em}
-.sp-row.bad .sp-nm{color:var(--re)}
-.sp-row.ok  .sp-nm{color:#a590ff}
-.sp-ts{font-family:var(--mono);font-size:10px;color:var(--tx3);flex-shrink:0}
-.sp-desc{font-size:12px;color:var(--tx2);line-height:1.5}
-.sp-met{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  background:var(--s2);border-top:1px solid var(--ln);
-}
-.sp-m{padding:10px;text-align:center;border-right:1px solid var(--ln)}
-.sp-m:last-child{border-right:none}
-.sp-mn{
-  font-family:var(--mono);font-size:17px;font-weight:500;
-  color:var(--vi);line-height:1;margin-bottom:3px;letter-spacing:-.02em;
-}
-.sp-ml{
-  font-family:var(--mono);font-size:9px;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);
-}
-
-/* ═══════════════════════════════════════
-   PROOF STRIP — no grid borders, just space
-═══════════════════════════════════════ */
-#proof{
-  padding:0;
-  border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);
-}
-.pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.pf{padding:24px 20px}
-/* very subtle internal separators */
-.pf:nth-child(1),.pf:nth-child(2){border-bottom:1px solid var(--ln)}
-.pf:nth-child(odd){border-right:1px solid var(--ln)}
-.pf-n{
-  font-family:var(--mono);font-size:32px;font-weight:500;
-  color:var(--vi);line-height:1;letter-spacing:-.03em;margin-bottom:6px;
-}
-.pf-l{font-size:13px;font-weight:600;color:var(--tx);line-height:1.35;margin-bottom:3px}
-.pf-s{font-family:var(--mono);font-size:9px;color:var(--tx3);letter-spacing:.08em}
-
-/* ═══════════════════════════════════════
-   SECTION BASE — flow by padding, not borders
-═══════════════════════════════════════ */
-.sec{padding:60px 0}
-/* only one divider: between proof and first .sec */
-#proof+.sec{border-top:1px solid var(--ln)}
-/* all other section transitions: padding only, no line */
-
-.stag{
-  font-family:var(--mono);font-size:10px;font-weight:500;
-  letter-spacing:.24em;text-transform:uppercase;
-  margin-bottom:14px;
-  display:flex;align-items:center;gap:8px;
-}
-h2{
-  font-size:clamp(26px,4.2vw,42px);font-weight:700;
-  line-height:1.07;letter-spacing:-.04em;color:var(--tx);margin-bottom:14px;
-}
-.ssub{
-  font-size:16px;color:var(--tx2);line-height:1.72;
-  max-width:600px;margin-bottom:32px;
-}
-
-/* ═══════════════════════════════════════
-   LEAK ROWS — no left-column box feel
-═══════════════════════════════════════ */
-.lrows{margin-top:8px}
-.lrow{
-  display:grid;grid-template-columns:56px 1fr;
-  padding:20px 0;
-  border-top:1px solid var(--ln);
-  transition:background 100ms ease-out;
-  cursor:default;
-}
-.lrow:last-child{border-bottom:1px solid var(--ln)}
-.lrow:hover .lname{color:var(--tx)}
-/* number column — ghost, no border */
-.ln{
-  display:flex;flex-direction:column;justify-content:flex-start;
-  padding-top:2px;
-  /* NO border-right — just space */
-}
-.lt{
-  font-family:var(--mono);font-size:9px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--re);opacity:.55;
-}
-.lnum{
-  font-family:var(--mono);font-size:28px;font-weight:500;
-  color:var(--re);opacity:.1;line-height:1;margin-top:2px;
-}
-.lb{padding-left:8px}
-.lname{
-  font-size:17px;font-weight:700;color:var(--tx);
-  letter-spacing:-.03em;margin-bottom:6px;
-  transition:color 100ms ease-out;
-}
-.ldesc{font-size:13px;color:var(--tx2);line-height:1.68}
-
-/* ═══════════════════════════════════════
-   VISUAL 2 — speed timeline, no card chrome
-═══════════════════════════════════════ */
-.speed-visual{
-  margin:36px 0 32px;
-  padding:18px 0 6px;
-  border-top:1px solid var(--ln);
-  position:relative;
-}
-/* no background box, no border box — just the tracks */
-.sv-label{
-  font-family:var(--mono);font-size:9px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--tx3);margin-bottom:18px;
-}
-.sv-tracks{display:flex;flex-direction:column;gap:16px}
-.sv-track{display:flex;align-items:center;gap:0}
-.sv-start{
-  font-family:var(--mono);font-size:10px;color:var(--tx3);
-  letter-spacing:.08em;width:56px;flex-shrink:0;
-}
-.sv-line{flex:1;height:1px;position:relative;margin:0 10px}
-.sv-line.win::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--vi),var(--te))}
-.sv-line.lose::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--re),rgba(255,90,95,.12))}
-.sv-line.win::after{
-  content:'';position:absolute;top:-3px;left:0;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--te);box-shadow:0 0 8px var(--te);
-  animation:sv-win 3s ease-in-out infinite;
-}
-.sv-line.lose::after{
-  content:'';position:absolute;top:-3px;left:0;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--re);box-shadow:0 0 5px var(--re);
-  animation:sv-lose 3s ease-in-out infinite .5s;
-}
-@keyframes sv-win{0%,100%{left:0;opacity:0}10%{opacity:1}82%{opacity:1}100%{left:calc(100% - 6px)}}
-@keyframes sv-lose{0%,100%{left:0;opacity:0}10%{opacity:.7}55%{opacity:.4}68%{left:44%;opacity:.15}100%{left:44%;opacity:0}}
-.sv-end{
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;
-  width:96px;flex-shrink:0;text-align:right;
-  display:flex;align-items:center;justify-content:flex-end;gap:5px;
-}
-.sv-end.win{color:var(--te)}
-.sv-end.lose{color:rgba(255,90,95,.45)}
-.sv-node{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sv-node.win{background:var(--te);box-shadow:0 0 6px var(--te)}
-.sv-node.lose{background:var(--re);opacity:.4}
-
-/* ═══════════════════════════════════════
-   COMPARE — two columns, no outer box
-═══════════════════════════════════════ */
-.cmp-w{
-  display:grid;grid-template-columns:1fr 1fr;
-  border:1px solid var(--ln2);border-radius:4px;overflow:hidden;
-}
-.cmp-col{padding:22px 20px}
-.cmp-col:first-child{border-right:1px solid var(--ln);background:rgba(255,90,95,.03)}
-.cmp-col:last-child{background:rgba(124,92,255,.04)}
-.cmp-h{
-  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--ln);
-}
-.cmp-h.bad{color:var(--re)}
-.cmp-h.good{color:var(--vi)}
-.cmp-l{list-style:none;display:flex;flex-direction:column;gap:10px}
-.cmp-l li{font-size:13px;line-height:1.45;display:flex;align-items:flex-start;gap:8px}
-.cmp-l.bad  li{color:rgba(255,90,95,.4)}
-.cmp-l.good li{color:var(--tx2)}
-.cmp-l.bad  li::before{content:'×';font-family:var(--mono);font-size:11px;color:var(--re); flex-shrink:0;margin-top:1px;opacity:.65}
-.cmp-l.good li::before{content:'✓';font-family:var(--mono);font-size:11px;color:var(--vi);flex-shrink:0;margin-top:1px;opacity:.8}
-
-/* ═══════════════════════════════════════
-   MODULES — no left column border
-═══════════════════════════════════════ */
-.mrows{margin-top:8px}
-.mrow{
-  display:grid;grid-template-columns:44px 1fr;
-  padding:20px 0;
-  border-top:1px solid var(--ln);
-  transition:background 100ms ease-out;
-}
-.mrow:last-child{border-bottom:1px solid var(--ln)}
-.mrow:hover{background:rgba(255,255,255,.018)}
-/* no left column border — just padding rhythm */
-.mn{
-  font-family:var(--mono);font-size:10px;color:var(--tx3);
-  letter-spacing:.1em;
-  display:flex;align-items:flex-start;padding-top:3px;
-}
-.mb{padding-left:6px}
-.mname{font-size:16px;font-weight:700;color:var(--tx);letter-spacing:-.03em;margin-bottom:6px}
-.mdesc{font-size:13px;color:var(--tx2);line-height:1.68;margin-bottom:7px}
-.mproof{font-family:var(--mono);font-size:10px;color:var(--vi);letter-spacing:.04em;opacity:.55}
-
-/* ═══════════════════════════════════════
-   FAQ
-═══════════════════════════════════════ */
-.frows{margin-top:8px}
-.fi{border-top:1px solid var(--ln)}
-.fi:last-child{border-bottom:1px solid var(--ln)}
-.fq{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  width:100%;padding:17px 0;
-  font-size:14px;font-weight:600;color:var(--tx);letter-spacing:-.02em;
-  cursor:pointer;text-align:left;background:none;border:none;
-  transition:color 100ms ease-out;
-}
-.fq:hover{color:var(--vi)}
-.fq.open{color:var(--vi)}
-.fi-icon{
-  font-family:var(--mono);font-size:16px;color:var(--vi);
-  flex-shrink:0;transition:transform 140ms ease-out;
-  width:16px;text-align:center;opacity:.6;
-}
-.fq.open .fi-icon{transform:rotate(45deg);opacity:1}
-.fa{
-  display:none;font-size:13px;color:var(--tx2);line-height:1.75;
-  padding-bottom:17px;max-width:600px;
-}
-.fa.open{display:block}
-
-/* ═══════════════════════════════════════
-   FINAL CTA — page tightens into action
-═══════════════════════════════════════ */
-#cta{
-  padding:72px 0 64px;
-  border-top:1px solid var(--ln);
-  position:relative;overflow:hidden;
-}
-/* violet pool — the page's strongest glow, saved for here */
-#cta::before{
-  content:'';
-  position:absolute;bottom:-100px;left:-60px;
-  width:600px;height:380px;
-  background:radial-gradient(ellipse,rgba(124,92,255,.11),transparent 60%);
-  pointer-events:none;
-}
-.cta-in{position:relative;z-index:1}
-.cta-tag{margin-bottom:16px}
-.cta-h{
-  font-size:clamp(30px,6.5vw,52px);font-weight:700;
-  letter-spacing:-.05em;color:var(--tx);line-height:1.04;margin-bottom:14px;
-}
-.cta-p{
-  font-size:16px;color:var(--tx2);line-height:1.7;
-  max-width:500px;margin-bottom:32px;
-}
-.cta-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-.cta-ph{
-  font-family:var(--mono);font-size:clamp(18px,5vw,28px);
-  font-weight:500;letter-spacing:.04em;color:var(--tx);
-  transition:color 100ms ease-out;
-}
-.cta-ph:hover{color:var(--vi)}
-.cta-cap{
-  font-family:var(--mono);font-size:10px;color:var(--tx3);
-  letter-spacing:.12em;text-transform:uppercase;
-}
-
-/* ═══════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════ */
-footer{padding:26px 0 44px;border-top:1px solid var(--ln)}
-.ft{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.ft-brand{
-  font-family:var(--mono);font-size:11px;color:var(--tx2);
-  letter-spacing:.08em;display:flex;align-items:center;gap:7px;margin-bottom:5px;
-}
-.ft-brand::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--vi);opacity:.7}
-.ft-meta{font-family:var(--mono);font-size:10px;color:var(--tx3);letter-spacing:.04em;line-height:1.8}
-.ft-links{display:flex;gap:18px;flex-wrap:wrap}
-.ft-links a{
-  font-family:var(--mono);font-size:10px;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);
-  transition:color 100ms ease-out;
-}
-.ft-links a:hover{color:var(--vi)}
-
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
-@media(min-width:640px){
-  .pf-grid{grid-template-columns:repeat(4,1fr)}
-  /* on desktop 4-col: remove bottom borders, adjust right borders */
-  .pf{border-bottom:none!important}
-  .pf:nth-child(odd){border-right:1px solid var(--ln)}
-  .pf:last-child{border-right:none}
-}
-@media(min-width:880px){
-  .nav-w{padding:0 24px;max-width:calc(var(--max) + 48px)}
-  .nav-sys{display:flex}
-  .nav-ph{display:block}
-  /* HERO ASYMMETRY: right column starts lower — creates visual tension */
-  .hero-g{grid-template-columns:1fr 390px;gap:48px;align-items:start}
-  .hero-right{padding-top:28px}/* intentional offset — not aligned to headline */
-  #hero{padding-top:88px;padding-bottom:72px}
-  .sec{padding:64px 0}
-  .sig-flow{display:block}
-}
-@media(min-width:1024px){
-  h1{font-size:68px}
-  h2{font-size:42px}
-}
-@media(max-width:480px){
-  .cmp-w{grid-template-columns:1fr}
-  .cmp-col:first-child{border-right:none;border-bottom:1px solid var(--ln)}
-  .hero-ctas,.cta-row{flex-direction:column;align-items:flex-start}
-}
+  :root {
+    --bg: #080A0F;
+    --bg-card: #0D1117;
+    --bg-card-hover: #131A24;
+    --cyan: #00D4FF;
+    --magenta: #FF2D8A;
+    --text: #F0F2F5;
+    --text-muted: #8892A0;
+    --border: rgba(255,255,255,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.08), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(255,45,138,0.06), transparent 50%);
+  }
+  .container { max-width: 640px; margin: 0 auto; padding: 80px 24px 64px; }
+  .hero { text-align: center; margin-bottom: 56px; }
+  .avatar-wrap {
+    width: 128px; height: 128px; margin: 0 auto 24px;
+    border-radius: 50%; padding: 3px;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    box-shadow: 0 0 50px rgba(0,212,255,0.25), 0 0 80px rgba(255,45,138,0.15);
+    position: relative;
+  }
+  .avatar-wrap::after {
+    content: ''; position: absolute; inset: -8px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    opacity: 0.15; filter: blur(20px); z-index: -1;
+  }
+  .avatar { width: 100%; height: 100%; border-radius: 50%; background: var(--bg); overflow: hidden; display: block; object-fit: cover; }
+  .avatar-fallback {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Instrument Serif', serif; font-size: 58px; color: var(--bg);
+  }
+  h1 { font-family: 'Instrument Serif', serif; font-size: 52px; line-height: 1.05; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .tagline { color: var(--text-muted); font-size: 16px; margin-bottom: 18px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .badge { display: inline-block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); padding: 5px 14px; border-radius: 100px; font-weight: 500; }
+  .section-label { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; padding-left: 4px; }
+  .stack { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
+  .link { display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; color: var(--text); text-decoration: none; transition: all 0.2s ease; }
+  .link:hover { background: var(--bg-card-hover); border-color: rgba(0,212,255,0.3); transform: translateY(-1px); }
+  .link .icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(0,212,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; flex-shrink: 0; }
+  .link .label { font-weight: 500; font-size: 15px; }
+  .link .sub { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+  .link.featured { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(255,45,138,0.08)); border-color: rgba(0,212,255,0.4); }
+  .link.featured .icon { background: rgba(255,45,138,0.15); }
+  .badge-new { margin-left: auto; font-size: 10px; letter-spacing: 0.1em; color: var(--magenta); background: rgba(255,45,138,0.12); padding: 3px 8px; border-radius: 100px; text-transform: uppercase; font-weight: 600; }
+  .quote { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: var(--text); text-align: center; margin: 48px 0 12px; padding: 0 16px; line-height: 1.35; }
+  .quote-attribution { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+  footer { text-align: center; padding-top: 32px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; }
+  footer .entity { font-size: 11px; letter-spacing: 0.05em; opacity: 0.7; margin-top: 8px; }
+  @media (max-width: 480px) {
+    .container { padding: 56px 18px 48px; }
+    h1 { font-size: 40px; }
+    .quote { font-size: 19px; }
+    .avatar-wrap { width: 112px; height: 112px; }
+  }
 </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav id="nav">
-  <div class="nav-w">
-    <a class="nav-brand" href="#">
-      <span class="ndot"></span>CodyKeegan.ai
-    </a>
-    <div class="nav-sys" id="ns">
-      <span class="sys-on">[ SYSTEM: ONLINE ]</span>
-      <span>[ LATENCY: 24MS ]</span>
-      <span id="ntime">[ TIME: --:--:-- ]</span>
+<div class="container">
+  <header class="hero">
+    <div class="avatar-wrap">
+      <img class="avatar" src="./avatar.jpg" alt="Cody Keegan" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <div class="avatar-fallback" style="display:none;">CK</div>
     </div>
-    <div class="nav-r">
-      <a class="nav-ph" href="tel:+15096405624">(509) 640-5624</a>
-      <a class="btn" href="tel:+15096405624">Call Now</a>
-    </div>
-  </div>
-</nav>
+    <h1>Cody Keegan</h1>
+    <p class="tagline">AI Sales Partner. Sales since 2003. Runs three businesses on AI.</p>
+    <span class="badge">Crazy Ways AI Gets Money</span>
+  </header>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="w">
-    <div class="hero-g">
-
-      <!-- Left: copy -->
+  <div class="section-label">The Show</div>
+  <div class="stack">
+    <a class="link featured" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
+      <div class="icon">&#9654;</div>
       <div>
-        <div class="eyebrow">Revenue Leak Diagnostic</div>
-        <h1>Stop losing jobs to missed calls, weak follow-up, and slow response.</h1>
-        <p class="hero-sub">I build AI-powered revenue systems for service businesses that answer faster, route cleaner, follow up automatically, and recover leads before they disappear.</p>
-        <ul class="blist">
-          <li>Answers 24/7 &mdash; no missed calls after hours</li>
-          <li>Follows up in minutes, not days</li>
-          <li>Captures every missed-call opportunity</li>
-          <li>Stops faster competitors from taking your jobs</li>
-        </ul>
-        <div class="hero-ctas">
-          <a class="btn" href="tel:+15096405624">Call the AI Sales Line &rarr;</a>
-          <a class="btn-ghost" href="#leak">See where revenue leaks</a>
-        </div>
-        <a class="hero-ph" href="tel:+15096405624">(509) 640-5624</a>
-        <p class="trust">Built for service businesses that cannot afford slow response,<br>dropped handoffs, or after-hours lead loss.</p>
+        <div class="label">Crazy Ways AI Gets Money</div>
+        <div class="sub">30 days of real AI workflows. TikTok daily.</div>
       </div>
-
-      <!-- Right: visual 1 (signal flow) + system panel -->
-      <div class="hero-right">
-
-        <!-- VISUAL 1: signal flow diagram -->
-        <div class="sig-flow">
-          <div class="sig-label">// Call intake signal path</div>
-          <div class="sig-nodes">
-            <div class="sig-node">
-              <div class="sig-dot sig-dot-dim">&#9742;</div>
-              <div class="sig-txt">CALL<br>IN</div>
-            </div>
-            <div class="sig-line"></div>
-            <div class="sig-node">
-              <div class="sig-dot active">AI</div>
-              <div class="sig-txt">ANSWERS</div>
-            </div>
-            <div class="sig-line"></div>
-            <div class="sig-node">
-              <div class="sig-dot active">&#10003;</div>
-              <div class="sig-txt">QUALIFIES</div>
-            </div>
-            <div class="sig-line"></div>
-            <div class="sig-node">
-              <div class="sig-dot active">&#8594;</div>
-              <div class="sig-txt">ROUTES</div>
-            </div>
-            <div class="sig-line te-line"></div>
-            <div class="sig-node">
-              <div class="sig-dot sig-dot-te">&#10003;</div>
-              <div class="sig-txt">BOOKED</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- System panel -->
-        <div class="sp">
-          <div class="sp-hdr">
-            <span class="sp-title">Revenue Intake</span>
-            <span class="sp-live">Live</span>
-          </div>
-          <div class="sp-row bad">
-            <div class="sp-ico">&times;</div>
-            <div class="sp-txt">
-              <div class="sp-top">
-                <span class="sp-nm">Missed Call &mdash; No System</span>
-                <span class="sp-ts">3 rings</span>
-              </div>
-              <div class="sp-desc">Lead calls. No answer. Lead moves on.</div>
-            </div>
-          </div>
-          <div class="sp-row ok" id="sr1">
-            <div class="sp-ico">&#8617;</div>
-            <div class="sp-txt">
-              <div class="sp-top">
-                <span class="sp-nm">Missed Call &mdash; Captured</span>
-                <span class="sp-ts">0:12s</span>
-              </div>
-              <div class="sp-desc">Text-back sent instantly. Lead re-engaged.</div>
-            </div>
-          </div>
-          <div class="sp-row ok" id="sr2">
-            <div class="sp-ico">&#8635;</div>
-            <div class="sp-txt">
-              <div class="sp-top">
-                <span class="sp-nm">Follow-Up Triggered</span>
-                <span class="sp-ts">auto</span>
-              </div>
-              <div class="sp-desc">Sequence fires. No human required.</div>
-            </div>
-          </div>
-          <div class="sp-row ok" id="sr3">
-            <div class="sp-ico">&#10003;</div>
-            <div class="sp-txt">
-              <div class="sp-top">
-                <span class="sp-nm">Lead Routed to CRM</span>
-                <span class="sp-ts">live</span>
-              </div>
-              <div class="sp-desc">Qualified and booked. Opportunity preserved.</div>
-            </div>
-          </div>
-          <div class="sp-met">
-            <div class="sp-m">
-              <div class="sp-mn" id="m1">0</div>
-              <div class="sp-ml">Calls Caught</div>
-            </div>
-            <div class="sp-m">
-              <div class="sp-mn" id="m2">0s</div>
-              <div class="sp-ml">Avg Response</div>
-            </div>
-            <div class="sp-m">
-              <div class="sp-mn" id="m3">0%</div>
-              <div class="sp-ml">Follow-Up Rate</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+      <span class="badge-new">Live</span>
+    </a>
   </div>
-</section>
 
-<!-- PROOF STRIP -->
-<div id="proof">
-  <div class="w">
-    <div class="pf-grid">
-      <div class="pf">
-        <div class="pf-n">100&times;</div>
-        <div class="pf-l">Conversion lift: 5 min vs. 30 min response</div>
-        <div class="pf-s">// Harvard Business Review</div>
+  <div class="section-label">Free Resources</div>
+  <div class="stack">
+    <a class="link" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener">
+      <div class="icon">&#9889;</div>
+      <div>
+        <div class="label">CLAUDE.md Brand Bible Template</div>
+        <div class="sub">Comment CLAUDE on any video — auto-DM in 60 seconds.</div>
       </div>
-      <div class="pf">
-        <div class="pf-n">62%</div>
-        <div class="pf-l">Of small business calls go unanswered</div>
-        <div class="pf-s">// Industry Research</div>
+    </a>
+    <a class="link" href="https://codykeegan.substack.com" target="_blank" rel="noopener">
+      <div class="icon">&#9993;</div>
+      <div>
+        <div class="label">The Newsletter</div>
+        <div class="sub">Long-form. Every Sunday. Free.</div>
       </div>
-      <div class="pf">
-        <div class="pf-n">8&times;</div>
-        <div class="pf-l">Avg touches needed &mdash; most stop at one</div>
-        <div class="pf-s">// HubSpot / IRC Sales</div>
-      </div>
-      <div class="pf">
-        <div class="pf-n">$75B</div>
-        <div class="pf-l">Lost annually from dropped handoffs</div>
-        <div class="pf-s">// NewVoiceMedia</div>
-      </div>
-    </div>
+    </a>
   </div>
+
+  <p class="quote">"Real AI. Real businesses. Real Tuesday morning. Here's what's happening."</p>
+  <p class="quote-attribution">— What every episode delivers</p>
+
+  <div class="section-label">Watch &amp; Follow</div>
+  <div class="stack">
+    <a class="link" href="https://tiktok.com/@codykeegan.ai" target="_blank" rel="noopener"><div class="icon">T</div><div><div class="label">TikTok</div><div class="sub">@codykeegan.ai — daily</div></div></a>
+    <a class="link" href="https://instagram.com/codykeegan.ai" target="_blank" rel="noopener"><div class="icon">I</div><div><div class="label">Instagram</div><div class="sub">@codykeegan.ai — Reels + Stories</div></div></a>
+    <a class="link" href="https://linkedin.com/in/codykeegan" target="_blank" rel="noopener"><div class="icon">L</div><div><div class="label">LinkedIn</div><div class="sub">Business-owner version of the show</div></div></a>
+    <a class="link" href="https://x.com/codykeegan_ai" target="_blank" rel="noopener"><div class="icon">X</div><div><div class="label">X / Twitter</div><div class="sub">Short, punchy, real time</div></div></a>
+    <a class="link" href="https://youtube.com/@codykeegan" target="_blank" rel="noopener"><div class="icon">Y</div><div><div class="label">YouTube</div><div class="sub">Shorts + long-form deep dives</div></div></a>
+    <a class="link" href="https://threads.net/@codykeegan.ai" target="_blank" rel="noopener"><div class="icon">@</div><div><div class="label">Threads</div><div class="sub">Same energy as X, more conversation</div></div></a>
+  </div>
+
+  <div class="section-label">Get In Touch</div>
+  <div class="stack">
+    <a class="link" href="mailto:cody@codykeegan.ai"><div class="icon">&#9993;</div><div><div class="label">Email</div><div class="sub">cody@codykeegan.ai</div></div></a>
+    <a class="link" href="https://linkedin.com/in/codykeegan" target="_blank" rel="noopener"><div class="icon">L</div><div><div class="label">LinkedIn DM</div><div class="sub">Best for business inquiries</div></div></a>
+  </div>
+
+  <footer>
+    <div>Built in Tucson. Lived on commission since 2003.</div>
+    <div class="entity">&copy; Darkhorse Traders LLC</div>
+  </footer>
 </div>
-
-<!-- LEAK DIAGNOSIS -->
-<section class="sec" id="leak">
-  <div class="w">
-    <div class="stag" style="color:var(--re)">// Diagnostic</div>
-    <h2>You do not have a lead problem.<br>You have a leak problem.</h2>
-    <p class="ssub">Calls go unanswered. Leads sit too long. Follow-up gets forgotten. Messages fall through the cracks. That is where the money goes.</p>
-    <div class="lrows">
-      <div class="lrow">
-        <div class="ln"><span class="lt">Leak</span><span class="lnum">01</span></div>
-        <div class="lb">
-          <div class="lname">Missed Calls</div>
-          <div class="ldesc">If nobody answers, the buyer keeps moving. They do not wait. The next number on their list picks up.</div>
-        </div>
-      </div>
-      <div class="lrow">
-        <div class="ln"><span class="lt">Leak</span><span class="lnum">02</span></div>
-        <div class="lb">
-          <div class="lname">Slow Response</div>
-          <div class="ldesc">Leads contacted in 5 minutes are 100&times; more likely to convert than those reached 30 minutes later. Most businesses respond in hours.</div>
-        </div>
-      </div>
-      <div class="lrow">
-        <div class="ln"><span class="lt">Leak</span><span class="lnum">03</span></div>
-        <div class="lb">
-          <div class="lname">Weak Follow-Up</div>
-          <div class="ldesc">Most leads are not dead. They are just not being chased. It takes 8 contacts on average to reach a prospect. Most businesses stop at one.</div>
-        </div>
-      </div>
-      <div class="lrow">
-        <div class="ln"><span class="lt">Leak</span><span class="lnum">04</span></div>
-        <div class="lb">
-          <div class="lname">Disconnected Tools</div>
-          <div class="ldesc">When calls, CRM, forms, and messages do not connect, revenue falls through the gap. Every disconnection is a place a lead can vanish permanently.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMPETITIVE THREAT -->
-<section class="sec">
-  <div class="w">
-    <div class="stag" style="color:var(--re)">// Competitive Reality</div>
-    <h2>Your competitor does not need to be better.<br>They need to be faster.</h2>
-    <p class="ssub" style="margin-bottom:28px">Service businesses are starting to use AI to answer calls faster, follow up instantly, and keep leads moving after hours. If you are still relying on manual response and staff memory, you are giving away speed &mdash; and speed wins jobs.</p>
-
-    <!-- VISUAL 2: speed timeline -->
-    <div class="speed-visual">
-      <div class="sv-label">// Response speed determines outcome</div>
-      <div class="sv-tracks">
-        <div class="sv-track">
-          <div class="sv-start">0 min</div>
-          <div class="sv-line win"></div>
-          <div class="sv-end win"><span class="sv-node win"></span>5 min &mdash; booked</div>
-        </div>
-        <div class="sv-track">
-          <div class="sv-start">0 min</div>
-          <div class="sv-line lose"></div>
-          <div class="sv-end lose"><span class="sv-node lose"></span>2 hrs &mdash; lost</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cmp-w" style="margin-top:20px">
-      <div class="cmp-col">
-        <div class="cmp-h bad">Without System</div>
-        <ul class="cmp-l bad">
-          <li>Call missed &mdash; no answer</li>
-          <li>Lead waits hours or days</li>
-          <li>Follow-up never sent</li>
-          <li>Job booked with a competitor</li>
-        </ul>
-      </div>
-      <div class="cmp-col">
-        <div class="cmp-h good">With System</div>
-        <ul class="cmp-l good">
-          <li>Call answered or captured instantly</li>
-          <li>Lead routed and texted in seconds</li>
-          <li>Follow-up fires automatically</li>
-          <li>Opportunity stays alive</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT I BUILD -->
-<section class="sec">
-  <div class="w">
-    <div class="stag" style="color:var(--tx3)">// Systems</div>
-    <h2>What I actually build</h2>
-    <p class="ssub">Not AI theater. Revenue systems built to answer faster, route smarter, follow up automatically, and stop businesses from bleeding money through human delay.</p>
-    <div class="mrows">
-      <div class="mrow">
-        <div class="mn">01</div>
-        <div class="mb">
-          <div class="mname">AI Voice + Call Handling</div>
-          <div class="mdesc">Answers inbound calls, qualifies leads, routes correctly, and captures missed-call opportunities instantly.</div>
-          <div class="mproof">// 62% of calls to small businesses go unanswered &mdash; this closes that gap</div>
-        </div>
-      </div>
-      <div class="mrow">
-        <div class="mn">02</div>
-        <div class="mb">
-          <div class="mname">Missed-Call Recovery</div>
-          <div class="mdesc">Instant text-back and follow-up sequence when a call is missed. The lead gets contacted before they find someone else.</div>
-          <div class="mproof">// First response in seconds, not hours</div>
-        </div>
-      </div>
-      <div class="mrow">
-        <div class="mn">03</div>
-        <div class="mb">
-          <div class="mname">CRM + Pipeline Routing</div>
-          <div class="mdesc">Gets every lead into the right place automatically. Nobody forgets the next step. No lead falls through a gap between tools.</div>
-          <div class="mproof">// 100&times; conversion lift when contacted within 5 minutes</div>
-        </div>
-      </div>
-      <div class="mrow">
-        <div class="mn">04</div>
-        <div class="mb">
-          <div class="mname">Follow-Up Automation</div>
-          <div class="mdesc">Texts, reminders, and reactivation flows that keep leads moving. Fires automatically. Does not require anyone to remember.</div>
-          <div class="mproof">// 44% of salespeople stop after one attempt &mdash; the system never does</div>
-        </div>
-      </div>
-      <div class="mrow">
-        <div class="mn">05</div>
-        <div class="mb">
-          <div class="mname">Lead Capture + Messaging Logic</div>
-          <div class="mdesc">Connects forms, calls, messages, and handoffs into one working system. Every lead captured. Every step tracked.</div>
-          <div class="mproof">// 91% of SMBs using AI automation report revenue increases</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="sec">
-  <div class="w">
-    <div class="stag" style="color:var(--tx3)">// Objections</div>
-    <h2>What owners usually ask</h2>
-    <div class="frows">
-      <div class="fi">
-        <button class="fq" onclick="tfaq(this)">We already have a CRM.<span class="fi-icon">+</span></button>
-        <div class="fa">Most CRMs store leads. They do not automatically fix missed calls, slow response, bad routing, or weak follow-up. A CRM with no intake or automation logic is a filing cabinet, not a revenue system.</div>
-      </div>
-      <div class="fi">
-        <button class="fq" onclick="tfaq(this)">My staff already handles this.<span class="fi-icon">+</span></button>
-        <div class="fa">If that were enough, the leaks would already be gone. Good people still miss things when the system is weak &mdash; especially after hours, during busy periods, or when someone is out. The system covers the gaps people cannot.</div>
-      </div>
-      <div class="fi">
-        <button class="fq" onclick="tfaq(this)">I do not want some giant AI project.<span class="fi-icon">+</span></button>
-        <div class="fa">Good. This is not that. This is practical revenue protection built around intake, follow-up, and handoff. The goal is to stop money from slipping through specific operational gaps &mdash; not to rebuild the business around technology.</div>
-      </div>
-      <div class="fi">
-        <button class="fq" onclick="tfaq(this)">We are not technical.<span class="fi-icon">+</span></button>
-        <div class="fa">You do not need to be. The point is to make the system work without creating more chaos. The build is done for you. You do not need to manage it, configure it, or understand how it works under the hood.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section id="cta">
-  <div class="w cta-in">
-    <div class="stag cta-tag" style="color:var(--vi)">// Action</div>
-    <h2 class="cta-h">If the leak is costing you jobs,<br>fix it now.</h2>
-    <p class="cta-p">Missed calls, weak follow-up, and disconnected tools do not fix themselves. The faster company usually wins. Call now and get a direct look at where revenue is slipping.</p>
-    <div class="cta-row">
-      <a class="btn" href="tel:+15096405624">Call the AI Sales Line &rarr;</a>
-      <a class="cta-ph" href="tel:+15096405624">(509) 640-5624</a>
-    </div>
-    <div class="cta-cap">// AI intake &mdash; live &mdash; routes immediately &mdash; free diagnostic</div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="w ft">
-    <div>
-      <div class="ft-brand">CodyKeegan.ai</div>
-      <div class="ft-meta">Revenue Recovery Systems for Service Businesses<br>&copy; 2026 All rights reserved</div>
-    </div>
-    <div class="ft-links">
-      <a href="tel:+15096405624">(509) 640-5624</a>
-      <a href="mailto:cody@darkhorsetraders.com">contact</a>
-      <a href="https://codykeegan.com">codykeegan.com</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-/* NAV CLOCK */
-function tick(){
-  var n=new Date(),p=function(v){return String(v).padStart(2,'0')};
-  var t='[ TIME: '+p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds())+' ]';
-  var el=document.getElementById('ntime');if(el)el.textContent=t;
-}
-tick();setInterval(tick,1000);
-
-/* METRIC COUNTERS */
-function count(el,target,sfx,dur){
-  var s=performance.now();
-  (function go(ts){
-    var p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);
-    el.textContent=Math.round(target*e)+sfx;
-    if(p<1)requestAnimationFrame(go);
-  })(s);
-}
-var mo=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    if(e.isIntersecting){
-      setTimeout(function(){count(document.getElementById('m1'),247,'',1100)},100);
-      setTimeout(function(){
-        var el=document.getElementById('m2'),v=0;
-        var iv=setInterval(function(){el.textContent=v+'s';v+=2;if(v>=18){el.textContent='18s';clearInterval(iv);}},60);
-      },220);
-      setTimeout(function(){count(document.getElementById('m3'),100,'%',1300)},380);
-      mo.disconnect();
-    }
-  });
-},{threshold:.7});
-var met=document.querySelector('.sp-met');
-if(met)mo.observe(met);
-
-/* FEED PULSE */
-var rows=[document.getElementById('sr1'),document.getElementById('sr2'),document.getElementById('sr3')];
-var ri=0;
-setInterval(function(){
-  rows.forEach(function(r){if(r)r.classList.remove('lit')});
-  if(rows[ri])rows[ri].classList.add('lit');
-  ri=(ri+1)%rows.length;
-},1800);
-
-/* FAQ */
-function tfaq(btn){
-  var open=btn.classList.contains('open');
-  document.querySelectorAll('.fq.open').forEach(function(q){
-    q.classList.remove('open');
-    var a=q.nextElementSibling;if(a)a.classList.remove('open');
-  });
-  if(!open){
-    btn.classList.add('open');
-    var a=btn.nextElementSibling;if(a)a.classList.add('open');
-  }
-}
-</script>
 </body>
 </html>
