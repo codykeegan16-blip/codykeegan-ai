@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Today's AI Workflows — Cody Keegan</title>
+<meta name="description" content="The AI workflows worth watching today. Fresh news, the operator angle, and the build that comes next. Updated daily." />
+<meta property="og:title" content="Today's AI Workflows — Cody Keegan" />
+<meta property="og:description" content="The AI workflows worth watching today. Fresh news, the operator angle, and the build that comes next." />
+<meta property="og:image" content="https://codykeegan.ai/avatar.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://codykeegan.ai/today/" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://codykeegan.ai/today/" />
+<link rel="icon" type="image/jpeg" href="/avatar.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Today's AI Workflows","url":"https://codykeegan.ai/today/","description":"Daily AI workflow opportunities scanned at 4 AM Tucson time. Bookmark this page.","datePublished":"2026-05-26","dateModified":"2026-05-26"}</script>
+<style>
+:root {
+  --bg: #FAF7F2; --bg-elev: #FFFFFF; --bg-hover: #F2EEE5;
+  --ink: #0A0A0A; --ink-soft: #2A2A2A; --ink-muted: #6B6B6B; --ink-faint: #A8A8A8;
+  --rule: #E5E0D5; --rule-soft: #EFEAE0;
+  --accent: #006A8E; --accent-soft: #E8F3F7;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', system-ui, sans-serif; line-height: 1.65; font-size: 17px; -webkit-font-smoothing: antialiased; }
+.container { max-width: 720px; margin: 0 auto; padding: 32px 28px 80px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 40px; }
+.topbar a.home { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
+.topbar a.home img { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--rule); }
+.topbar .show-link { color: var(--accent); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; text-decoration: none; }
+.topbar .show-link:hover { color: var(--ink); }
+.eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; }
+h1 { font-family: 'Instrument Serif', serif; font-size: 52px; line-height: 1.04; font-weight: 400; letter-spacing: -0.022em; margin-bottom: 18px; color: var(--ink); }
+.lede { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: var(--ink-soft); line-height: 1.45; margin-bottom: 28px; max-width: 600px; }
+.section-label { font-family: 'DM Sans'; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-muted); margin: 40px 0 18px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); font-weight: 600; }
+.cta { background: var(--bg-elev); border: 1px solid var(--rule); border-radius: 12px; padding: 28px 26px; margin: 32px 0; }
+.cta-heading { font-family: 'Instrument Serif', serif; font-size: 28px; color: var(--ink); margin-bottom: 8px; line-height: 1.2; }
+.cta-blurb { color: var(--ink-soft); font-size: 14px; margin-bottom: 16px; line-height: 1.55; }
+.cta-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.cta-input { flex: 1; min-width: 200px; background: var(--bg); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px; padding: 13px 14px; font: inherit; font-size: 14px; outline: none; }
+.cta-input:focus { border-color: var(--accent); }
+.cta-btn { background: var(--ink); color: white; border: none; border-radius: 8px; padding: 13px 22px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.cta-btn:hover { background: var(--accent); }
+.entry { display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: 20px; padding: 24px 6px; border-bottom: 1px solid var(--rule-soft); color: var(--ink); text-decoration: none; transition: padding-left 0.2s ease, background 0.15s ease; }
+.entry:hover { padding-left: 14px; background: var(--bg-hover); }
+.entry:first-of-type { border-top: 1px solid var(--rule); }
+.entry .meta { font-family: 'Instrument Serif', serif; font-size: 24px; color: var(--ink-faint); }
+.entry .label { font-size: 10px; letter-spacing: 0.2em; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+.entry .title { font-weight: 600; font-size: 17px; color: var(--ink); margin-bottom: 4px; }
+.entry .desc { color: var(--ink-muted); font-size: 14px; line-height: 1.45; }
+.entry .arrow { color: var(--ink-faint); font-size: 18px; }
+.entry:hover .arrow { color: var(--accent); }
+footer { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--rule); text-align: center; color: var(--ink-muted); font-size: 13px; line-height: 1.7; }
+footer .show-line { color: var(--ink); font-weight: 500; }
+footer .entity { font-size: 11px; letter-spacing: 0.08em; margin-top: 12px; color: var(--ink-faint); }
+@media (max-width: 480px) {
+  .container { padding: 24px 20px 60px; }
+  h1 { font-size: 38px; } .lede { font-size: 18px; }
+  .cta-form { flex-direction: column; }
+  .cta-btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="topbar">
+  <a class="home" href="/"><img src="/avatar.jpg" alt="Cody Keegan" /> codykeegan.ai</a>
+  <a class="show-link" href="https://tiktok.com/@codykeegan.ai">Crazy Ways AI Gets Money →</a>
+</div>
+
+<div class="eyebrow">Updated daily at 4 AM Tucson</div>
+<h1>Today's AI Workflows</h1>
+<p class="lede">The AI worth watching today. Fresh news. The operator angle. The build that comes next. Bookmark this page — it updates every morning at 4 AM.</p>
+
+<div class="section-label">Today's Scan</div>
+<div id="today-content" style="padding: 32px 0; color: var(--ink-muted); font-size: 15px; line-height: 1.7;">
+  <p><em>Today's opportunities are being scanned by the system at 4 AM Tucson time and will appear here automatically by morning. If you're seeing this message after 6 AM, refresh — the page updates daily.</em></p>
+  <p>Want the operator's angle the moment it drops? <a href="https://codykeeganai.substack.com/subscribe" style="color: var(--accent);">Subscribe to the newsletter</a> — same content lands in your inbox at 6 AM.</p>
+</div>
+
+<div class="cta">
+  <h3 class="cta-heading">Want this in your inbox at 6 AM?</h3>
+  <p class="cta-blurb">One short note every morning. New blueprint every Saturday. Free.</p>
+  <form class="cta-form" action="https://codykeeganai.substack.com/subscribe" method="get" target="_blank">
+    <input type="email" name="email" placeholder="your@email.com" required class="cta-input" />
+    <button type="submit" class="cta-btn">Subscribe Free</button>
+  </form>
+</div>
+
+<div class="section-label">Browse More</div>
+<a class="entry" href="/blueprints/">
+  <div class="meta">→</div>
+  <div><div class="label">The Library</div><div class="title">All AI Business Blueprints</div><div class="desc">Every published blueprint. Tools, math, paths. New one each Saturday.</div></div>
+  <div class="arrow">→</div>
+</a>
+<a class="entry" href="/tools/">
+  <div class="meta">→</div>
+  <div><div class="label">The Tools</div><div class="title">Should Be Illegal — AI Tool Reviews</div><div class="desc">The cool/weird AI tools the operator filter says actually work.</div></div>
+  <div class="arrow">→</div>
+</a>
+
+<footer>
+  <div>Built in Tucson. Lived on commission since 2003.</div>
+  <div class="show-line">A Darkhorse Traders LLC operation.</div>
+  <div class="entity">© Darkhorse Traders LLC</div>
+</footer>
+</div>
+</body></html>
