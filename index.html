@@ -287,6 +287,38 @@
   .paid-banner strong { font-weight: 700; }
   .paid-banner a { color: var(--accent); text-decoration: underline; }
 
+  /* === Cookie / tracking notice === */
+  .cookie-bar {
+    position: fixed; left: 16px; right: 16px; bottom: 16px;
+    background: var(--ink); color: #FFFFFF;
+    border-radius: 12px; padding: 16px 20px;
+    display: none; z-index: 999;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    font-size: 13px; line-height: 1.5;
+    max-width: 720px; margin: 0 auto;
+  }
+  .cookie-bar.visible { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .cookie-bar p { flex: 1 1 280px; margin: 0; color: #FFFFFF; }
+  .cookie-bar a { color: #6BB6D1; text-decoration: underline; }
+  .cookie-bar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .cookie-btn {
+    background: #FFFFFF; color: var(--ink); border: none;
+    padding: 9px 16px; border-radius: 6px; font-family: inherit;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .cookie-btn:hover { background: #F2EEE5; }
+  .cookie-btn-secondary {
+    background: transparent; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.3);
+  }
+  .cookie-btn-secondary:hover { border-color: #FFFFFF; }
+
+  /* Footer legal-nav links */
+  footer .legal-nav {
+    margin-top: 14px; font-size: 12px; color: var(--ink-muted);
+  }
+  footer .legal-nav a { color: var(--ink-muted); margin: 0 8px; text-decoration: underline; }
+  footer .legal-nav a:hover { color: var(--accent); }
+
   /* === EMAIL GATE MODAL (for specific PDF clicks) === */
   .gate-overlay {
     position: fixed; inset: 0;
@@ -519,6 +551,11 @@
     <div class="disclosure-block">
       <strong>Affiliate disclosure:</strong> Some links on this site and in the blueprints are paid affiliate links. If you click through and sign up or purchase, I may earn a commission at no extra cost to you. I only recommend tools I personally use or have verified pass the <a href="./disclosure.html">Operator Filter</a>. Read the <a href="./disclosure.html">full disclosure policy</a>.
     </div>
+    <div class="legal-nav">
+      <a href="./disclosure.html">Affiliate disclosure</a> &middot;
+      <a href="./privacy.html">Privacy policy</a> &middot;
+      <a href="./terms.html">Terms of service</a>
+    </div>
     <div class="entity">&copy; Darkhorse Traders LLC</div>
   </footer>
 
@@ -550,37 +587,4 @@
 <script>
   // Day ticker
   (function() {
-    var triggers = ['STEAL','PREDICT','COLD','CALLREVIEW','DESTROY','SCAN','REVERSE','JOBS','DOSSIER','CLONE','SIGNAL','PROPOSAL','NEWS','SHADOW','FILTER','BIDWAR','VULTURE','DEPART','ONEDAY','EVERYWHERE','MACHINE','INTEL','HIDDEN','PASSIVESALES','BODEYOGI','NUMBER','STACK','SYSTEM','READY','MONTH2'];
-    var launch = new Date(2026, 4, 14);
-    launch.setHours(0,0,0,0);
-    var today = new Date();
-    today.setHours(0,0,0,0);
-    var dayNum = Math.floor((today - launch) / 86400000) + 1;
-    var ticker = document.getElementById('day-ticker');
-    var text = document.getElementById('day-text');
-    if (dayNum >= 1 && dayNum <= 30) {
-      var word = triggers[dayNum - 1];
-      text.innerHTML = 'Day ' + dayNum + ' of 30 &nbsp;&middot;&nbsp; Today\'s word: ' + word;
-      ticker.classList.add('visible');
-    } else if (dayNum < 1) {
-      var days = Math.abs(dayNum - 1);
-      text.innerHTML = 'Show launches in ' + days + ' day' + (days === 1 ? '' : 's');
-      ticker.classList.add('visible');
-    } else {
-      text.innerHTML = '30 days complete &nbsp;&middot;&nbsp; Month 2 incoming';
-      ticker.classList.add('visible');
-    }
-  })();
-
-  // Hero capture form — show success state after submit
-  document.getElementById('capture-form').addEventListener('submit', function() {
-    setTimeout(function() {
-      document.getElementById('capture-form').style.display = 'none';
-      document.querySelector('.capture-fine').style.display = 'none';
-      document.getElementById('capture-success').classList.add('visible');
-    }, 200);
-  });
-
-  // Email gate modal (per-issue clicks)
-  function openGate(pdfUrl, magnetTitle, trigger) {
-    document.getElementById('g
+    var triggers = ['STEAL','PREDICT','COLD','CALLREVIEW','DESTROY','SCAN','REVERSE','JOBS','DOSSIER','CLONE','SIGNAL','PROP
