@@ -381,7 +381,7 @@
   </div>
   <p class="issues-intro">Five AI Business Blueprints. <strong>One email gets you all of them — plus the new one every Saturday.</strong> Or click any one below for instant access.</p>
   <div class="issues">
-    <button type="button" class="issue" onclick="openGate('./claude-template.pdf','Brand Bible Template','CLAUDE')">
+    <button type="button" class="issue" onclick="openGate('/blueprints/claude.html','Brand Bible Template','CLAUDE')">
       <div class="num">01</div>
       <div class="body">
         <div class="trigger">CLAUDE</div>
@@ -390,7 +390,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('./steal-prompt.pdf','Competitor Review Mining','STEAL')">
+    <button type="button" class="issue" onclick="openGate('/blueprints/steal.html','Competitor Review Mining','STEAL')">
       <div class="num">02</div>
       <div class="body">
         <div class="trigger">STEAL</div>
@@ -399,7 +399,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('./stack.pdf','The $144 Tool Stack','STACK')">
+    <button type="button" class="issue" onclick="openGate('/blueprints/stack.html','The $144 Tool Stack','STACK')">
       <div class="num">03</div>
       <div class="body">
         <div class="trigger">STACK</div>
@@ -408,7 +408,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('./system.pdf','The Full Architecture','SYSTEM')">
+    <button type="button" class="issue" onclick="openGate('/blueprints/system.html','The Full Architecture','SYSTEM')">
       <div class="num">04</div>
       <div class="body">
         <div class="trigger">SYSTEM</div>
@@ -417,7 +417,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('./restaurants-gone-wild.pdf','Restaurants Gone Wild','WILD')">
+    <button type="button" class="issue" onclick="openGate('/blueprints/wild.html','Restaurants Gone Wild','WILD')">
       <div class="num">05</div>
       <div class="body">
         <div class="trigger">WILD</div>
@@ -512,7 +512,7 @@
     </div>
     <div class="gate-success" id="gate-success">
       <div class="check">&#10003;</div>
-      <div class="msg">Sent. Check your email + the new tab for your file.</div>
+      <div class="msg">Got it. Taking you to the blueprint...</div>
       <div class="sub">Welcome to the list. New blueprint every week.</div>
     </div>
   </div>
@@ -569,15 +569,14 @@
   document.getElementById('gate-form').addEventListener('submit', function(e) {
     e.preventDefault();
     var email = document.getElementById('gate-email').value.trim();
-    var pdfUrl = document.getElementById('gate-pdf').value;
+    var targetUrl = document.getElementById('gate-pdf').value;
     var trigger = document.getElementById('gate-trigger').value;
     if (!email || email.indexOf('@') < 1) return;
     var subUrl = 'https://codykeeganai.substack.com/subscribe?email=' + encodeURIComponent(email) + '&utm_source=codykeegan_ai&utm_medium=gate&utm_campaign=' + encodeURIComponent(trigger);
     window.open(subUrl, '_blank');
-    window.open(pdfUrl, '_blank');
     document.getElementById('gate-form-wrap').style.display = 'none';
     document.getElementById('gate-success').style.display = 'block';
-    setTimeout(closeGate, 4000);
+    setTimeout(function() { window.location.href = targetUrl; }, 1200);
   });
 </script>
 </body>
