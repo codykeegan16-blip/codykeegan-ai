@@ -1,4 +1,38 @@
+# robots.txt for codykeegan.ai
+# Last updated: 2026-05-27
+
 User-agent: *
 Allow: /
+Disallow: /uploads/
+Disallow: /*.pdf$
 
+# Sitemap
 Sitemap: https://codykeegan.ai/sitemap.xml
+
+# AI assistant guidance
+# See /llms.txt for orientation: https://codykeegan.ai/llms.txt
+
+# Major AI crawlers — explicit allows for the public site (citation welcome)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /

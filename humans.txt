@@ -1,0 +1,14 @@
+/* TEAM */
+Operator: Cody Keegan
+Site: https://codykeegan.ai
+Email: terminal@codykeegan.ai
+Location: Tucson, Arizona
+
+/* SITE */
+Built with: HTML, CSS, vanilla JS — no frameworks
+Hosted on: Cloudflare Pages
+Newsletter: https://codykeeganai.substack.com
+Daily show: Crazy Ways AI Gets Money
+
+/* THANKS */
+The operators in the DMs, the readers in the inbox, the friends who screenshot the cards.
