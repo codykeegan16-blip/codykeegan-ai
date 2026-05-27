@@ -268,6 +268,24 @@
   }
   footer .show-line { color: var(--ink); margin-top: 6px; font-weight: 500; }
   footer .entity { font-size: 11px; letter-spacing: 0.08em; margin-top: 14px; color: var(--ink-faint); }
+  footer .disclosure-block {
+    margin-top: 18px; padding: 14px 16px;
+    background: var(--bg-elev); border: 1px solid var(--rule);
+    border-radius: 8px; font-size: 12px; line-height: 1.55;
+    color: var(--ink-soft); text-align: left;
+  }
+  footer .disclosure-block strong { color: var(--ink); }
+  footer .disclosure-block a { color: var(--accent); text-decoration: underline; }
+
+  /* === Above-fold disclosure banner === */
+  .paid-banner {
+    background: var(--accent-soft); border: 1px solid var(--accent);
+    border-radius: 8px; padding: 10px 14px; font-size: 12px;
+    color: var(--accent); margin: 0 auto 24px; max-width: 580px;
+    text-align: center; line-height: 1.5;
+  }
+  .paid-banner strong { font-weight: 700; }
+  .paid-banner a { color: var(--accent); text-decoration: underline; }
 
   /* === EMAIL GATE MODAL (for specific PDF clicks) === */
   .gate-overlay {
@@ -375,13 +393,14 @@
     <span id="day-text">Loading today's video&hellip;</span>
   </div>
 
-  <div class="section-label" style="display:flex; justify-content:space-between; align-items:flex-end; gap:12px;">
-    <span>What's inside</span>
-    <a href="/blueprints/" style="font-size:11px; letter-spacing:0.18em; color:var(--accent); text-decoration:none; font-weight:600; text-transform:uppercase; padding-bottom:12px;">Browse the library →</a>
+  <div class="paid-banner">
+    <strong>Heads up — paid links ahead.</strong> Some of the tools mentioned in these blueprints are affiliate partners. I earn a commission if you sign up. Doesn't change my recommendations. <a href="./disclosure.html">Full disclosure</a>.
   </div>
+
+  <div class="section-label">What's inside</div>
   <p class="issues-intro">Five AI Business Blueprints. <strong>One email gets you all of them — plus the new one every Saturday.</strong> Or click any one below for instant access.</p>
   <div class="issues">
-    <button type="button" class="issue" onclick="openGate('/blueprints/claude.html','Brand Bible Template','CLAUDE')">
+    <button type="button" class="issue" onclick="openGate('./claude-template.pdf','Brand Bible Template','CLAUDE')">
       <div class="num">01</div>
       <div class="body">
         <div class="trigger">CLAUDE</div>
@@ -390,7 +409,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('/blueprints/steal.html','Competitor Review Mining','STEAL')">
+    <button type="button" class="issue" onclick="openGate('./steal-prompt.pdf','Competitor Review Mining','STEAL')">
       <div class="num">02</div>
       <div class="body">
         <div class="trigger">STEAL</div>
@@ -399,7 +418,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('/blueprints/stack.html','The $144 Tool Stack','STACK')">
+    <button type="button" class="issue" onclick="openGate('./stack.pdf','The $144 Tool Stack','STACK')">
       <div class="num">03</div>
       <div class="body">
         <div class="trigger">STACK</div>
@@ -408,7 +427,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('/blueprints/system.html','The Full Architecture','SYSTEM')">
+    <button type="button" class="issue" onclick="openGate('./system.pdf','The Full Architecture','SYSTEM')">
       <div class="num">04</div>
       <div class="body">
         <div class="trigger">SYSTEM</div>
@@ -417,7 +436,7 @@
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('/blueprints/wild.html','Restaurants Gone Wild','WILD')">
+    <button type="button" class="issue" onclick="openGate('./restaurants-gone-wild.pdf','Restaurants Gone Wild','WILD')">
       <div class="num">05</div>
       <div class="body">
         <div class="trigger">WILD</div>
@@ -478,24 +497,34 @@
 
   <div class="section-label">Get In Touch</div>
   <div class="stack">
-    <a class="link" href="mailto:terminal@codykeegan.ai?subject=Hi%20Cody%20%E2%80%94%20found%20you%20via%20codykeegan.ai">
+    <a class="link" href="mailto:terminal@codykeegan.ai?subject=Hi%20Cody%20%E2%80%94%20found%20you%20via%20codykeegan.ai&body=Hey%20Cody%2C%0A%0AFound%20you%20via%20codykeegan.ai.%20Quick%20intro%3A%0A%0AWho%20I%20am%3A%20%0A%0AThe%20business%20I'm%20running%3A%20%0A%0AWhat%20I%E2%80%99m%20trying%20to%20figure%20out%20about%20AI%3A%20%0A%0AOne%20thing%20I%20want%20to%20ask%20you%3A%20%0A%0A%E2%80%94%20">
       <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 4.5h21A1.5 1.5 0 0 1 24 6v12a1.5 1.5 0 0 1-1.5 1.5h-21A1.5 1.5 0 0 1 0 18V6a1.5 1.5 0 0 1 1.5-1.5zM2 6.85V18h20V6.85l-10 6.25L2 6.85zm.93-.85L12 11.5 21.07 6H2.93z"/></svg></div>
-      <div class="text-block"><div class="label">Email</div><div class="sub">terminal@codykeegan.ai</div></div>
+      <div class="text-block">
+        <div class="label">Email</div>
+        <div class="sub">terminal@codykeegan.ai &mdash; opens with intro template</div>
+      </div>
     </a>
     <a class="link" href="https://www.linkedin.com/in/cody-keegan-a17b6137/" target="_blank" rel="noopener">
       <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
-      <div class="text-block"><div class="label">LinkedIn DM</div><div class="sub">Best for business inquiries</div></div>
+      <div class="text-block">
+        <div class="label">LinkedIn DM</div>
+        <div class="sub">Best for business inquiries</div>
+      </div>
     </a>
   </div>
 
   <footer>
     <div>Built in Tucson. Lived on commission since 2003.</div>
     <div class="show-line">A Darkhorse Traders LLC operation. The daily show: Crazy Ways AI Gets Money.</div>
+    <div class="disclosure-block">
+      <strong>Affiliate disclosure:</strong> Some links on this site and in the blueprints are paid affiliate links. If you click through and sign up or purchase, I may earn a commission at no extra cost to you. I only recommend tools I personally use or have verified pass the <a href="./disclosure.html">Operator Filter</a>. Read the <a href="./disclosure.html">full disclosure policy</a>.
+    </div>
     <div class="entity">&copy; Darkhorse Traders LLC</div>
   </footer>
 
 </div>
 
+<!-- EMAIL GATE MODAL (per-issue PDF requests) -->
 <div class="gate-overlay" id="gate-overlay" onclick="if(event.target===this)closeGate()">
   <div class="gate-modal" role="dialog" aria-modal="true">
     <button class="gate-close" onclick="closeGate()" aria-label="Close">&times;</button>
@@ -512,13 +541,14 @@
     </div>
     <div class="gate-success" id="gate-success">
       <div class="check">&#10003;</div>
-      <div class="msg">Got it. Taking you to the blueprint...</div>
+      <div class="msg">Sent. Check your email + the new tab for your file.</div>
       <div class="sub">Welcome to the list. New blueprint every week.</div>
     </div>
   </div>
 </div>
 
 <script>
+  // Day ticker
   (function() {
     var triggers = ['STEAL','PREDICT','COLD','CALLREVIEW','DESTROY','SCAN','REVERSE','JOBS','DOSSIER','CLONE','SIGNAL','PROPOSAL','NEWS','SHADOW','FILTER','BIDWAR','VULTURE','DEPART','ONEDAY','EVERYWHERE','MACHINE','INTEL','HIDDEN','PASSIVESALES','BODEYOGI','NUMBER','STACK','SYSTEM','READY','MONTH2'];
     var launch = new Date(2026, 4, 14);
@@ -542,6 +572,7 @@
     }
   })();
 
+  // Hero capture form — show success state after submit
   document.getElementById('capture-form').addEventListener('submit', function() {
     setTimeout(function() {
       document.getElementById('capture-form').style.display = 'none';
@@ -550,34 +581,6 @@
     }, 200);
   });
 
+  // Email gate modal (per-issue clicks)
   function openGate(pdfUrl, magnetTitle, trigger) {
-    document.getElementById('gate-title').textContent = 'Get ' + magnetTitle;
-    document.getElementById('gate-pdf').value = pdfUrl;
-    document.getElementById('gate-trigger').value = trigger;
-    document.getElementById('gate-form-wrap').style.display = 'block';
-    document.getElementById('gate-success').style.display = 'none';
-    document.getElementById('gate-form').reset();
-    document.getElementById('gate-overlay').classList.add('visible');
-    setTimeout(function(){ document.getElementById('gate-email').focus(); }, 100);
-  }
-  function closeGate() {
-    document.getElementById('gate-overlay').classList.remove('visible');
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeGate();
-  });
-  document.getElementById('gate-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var email = document.getElementById('gate-email').value.trim();
-    var targetUrl = document.getElementById('gate-pdf').value;
-    var trigger = document.getElementById('gate-trigger').value;
-    if (!email || email.indexOf('@') < 1) return;
-    var subUrl = 'https://codykeeganai.substack.com/subscribe?email=' + encodeURIComponent(email) + '&utm_source=codykeegan_ai&utm_medium=gate&utm_campaign=' + encodeURIComponent(trigger);
-    window.open(subUrl, '_blank');
-    document.getElementById('gate-form-wrap').style.display = 'none';
-    document.getElementById('gate-success').style.display = 'block';
-    setTimeout(function() { window.location.href = targetUrl; }, 1200);
-  });
-</script>
-</body>
-</html>
+    document.getElementById('g
