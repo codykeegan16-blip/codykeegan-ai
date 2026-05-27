@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MCP for Operators — What It Is, Why It Matters, How to Use It</title>
+<meta name="description" content="MCP (Model Context Protocol) explained in plain English for small business operators. What it is, why it matters, and three workflows you can build today." />
+<meta name="keywords" content="MCP, Model Context Protocol, MCP for small business, Anthropic MCP, AI agent MCP, MCP server, MCP tool calling" />
+<meta property="og:title" content="MCP for Operators — Plain English Guide" />
+<meta property="og:description" content="Model Context Protocol for people who run businesses, not write code." />
+<meta property="og:image" content="https://codykeegan.ai/avatar.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://codykeegan.ai/mcp/" />
+<link rel="canonical" href="https://codykeegan.ai/mcp/" />
+<link rel="icon" type="image/jpeg" href="/avatar.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"MCP for Operators — What It Is, Why It Matters, How to Use It","author":{"@type":"Person","name":"Cody Keegan","url":"https://codykeegan.ai"},"datePublished":"2026-05-27","dateModified":"2026-05-27","image":"https://codykeegan.ai/avatar.jpg","publisher":{"@type":"Organization","name":"Darkhorse Traders LLC","logo":{"@type":"ImageObject","url":"https://codykeegan.ai/avatar.jpg"}}}</script>
+<style>
+  :root{color-scheme:light;--bg:#FAF7F2;--bg-elev:#FFFFFF;--ink:#0A0A0A;--ink-soft:#2A2A2A;--ink-muted:#6B6B6B;--rule:#E5E0D5;--accent:#006A8E;--accent-soft:#E8F3F7;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased;}
+  .container{max-width:720px;margin:0 auto;padding:48px 28px 80px;}
+  a{color:var(--accent);}
+  .back{display:inline-block;color:var(--ink-muted);font-size:13px;text-decoration:none;margin-bottom:32px;}
+  h1{font-family:'Instrument Serif',serif;font-size:48px;line-height:1.04;font-weight:400;letter-spacing:-0.02em;margin-bottom:12px;}
+  .sub{color:var(--ink-muted);font-size:15px;margin-bottom:40px;}
+  h2{font-family:'Instrument Serif',serif;font-size:28px;line-height:1.18;font-weight:400;margin:38px 0 14px;letter-spacing:-0.01em;}
+  h3{font-size:18px;font-weight:600;margin:22px 0 10px;color:var(--ink);}
+  p{margin-bottom:16px;color:var(--ink-soft);}
+  ul,ol{margin:0 0 16px 22px;} li{margin-bottom:8px;color:var(--ink-soft);}
+  strong{color:var(--ink);font-weight:600;}
+  .callout{background:var(--accent-soft);border-left:3px solid var(--accent);padding:14px 18px;border-radius:6px;font-size:15px;margin:24px 0;color:var(--ink);}
+  .cta{background:var(--bg-elev);border:1px solid var(--rule);border-radius:12px;padding:28px 26px;margin:40px 0;}
+  .cta h3{font-family:'Instrument Serif',serif;font-size:24px;font-weight:400;margin-bottom:8px;color:var(--ink);}
+  .cta-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .cta-input{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--rule);border-radius:8px;padding:13px 14px;font:inherit;font-size:14px;outline:none;}
+  .cta-btn{background:var(--ink);color:white;border:none;border-radius:8px;padding:13px 22px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;}
+  .updated{font-size:12px;color:var(--ink-muted);margin-top:48px;padding-top:24px;border-top:1px solid var(--rule);}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px;}
+  th,td{padding:10px 12px;border-bottom:1px solid var(--rule);text-align:left;}
+  th{color:var(--ink-muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="/">&larr; Back to codykeegan.ai</a>
+  <h1>MCP for operators</h1>
+  <div class="sub">What it is, why it matters, and three workflows you can build today &middot; By Cody Keegan</div>
+
+  <div class="callout">
+    <strong>The short version:</strong> MCP is the standard way AI assistants connect to the apps you actually use — your CRM, your accounting, your calendar, your inbox. Before MCP, every connection was a custom integration. After MCP, an AI can talk to any tool that supports it without a developer.
+  </div>
+
+  <h2>What MCP actually is</h2>
+  <p>MCP stands for <strong>Model Context Protocol</strong>. Anthropic released it in late 2024 as an open standard. The idea: instead of every AI tool needing custom code to talk to every other tool, MCP gives them a shared language. Like USB-C for AI.</p>
+  <p>Before MCP, if you wanted an AI assistant to read your inbox, update your CRM, and post to your calendar, you needed three custom integrations &mdash; each one written by a developer or assembled in Zapier with a brittle chain of triggers. After MCP, the AI assistant calls each app directly through a shared interface. Same protocol. No custom code.</p>
+  <p>You don't need to know any of the technical details. You only need to know one thing: <strong>MCP is the reason your AI assistant can finally <em>do</em> things in your business, not just talk about them.</strong></p>
+
+  <h2>Why operators should care</h2>
+  <p>Here is the operator translation. Run through the Operator Filter:</p>
+  <ul>
+    <li><strong>Before MCP:</strong> Your AI assistant could write a follow-up email. You still had to copy it into Gmail and hit send.</li>
+    <li><strong>After MCP:</strong> Your AI assistant writes the email, schedules it for 9 AM tomorrow in Gmail, logs the touchpoint in HubSpot, and creates a task in your CRM if the lead doesn't reply &mdash; all in one prompt.</li>
+  </ul>
+  <p>That sounds small. It is not small. It is the difference between "AI as a writer" and "AI as an employee."</p>
+
+  <h2>Which apps support MCP right now</h2>
+  <p>The list is growing fast. As of May 2026, the operator-relevant ones include:</p>
+  <table>
+    <tr><th>App</th><th>What you can do</th></tr>
+    <tr><td>Google Workspace</td><td>Read inbox, draft and schedule emails, create calendar events, search Drive</td></tr>
+    <tr><td>HubSpot</td><td>Read and update contacts, deals, pipelines; log calls and notes</td></tr>
+    <tr><td>QuickBooks</td><td>Pull P&amp;L, reconcile transactions, flag discrepancies</td></tr>
+    <tr><td>PayPal &middot; Stripe &middot; Square</td><td>Pull recent sales, refund history, invoice status</td></tr>
+    <tr><td>Slack</td><td>Read channels, post messages, summarize threads</td></tr>
+    <tr><td>Notion &middot; Google Drive</td><td>Read and write documents, search the workspace</td></tr>
+    <tr><td>DocuSign</td><td>Send contracts, check signing status</td></tr>
+    <tr><td>GoHighLevel</td><td>Pull leads, update pipelines, trigger automations mid-call</td></tr>
+  </table>
+
+  <h2>Three workflows I'd build today using MCP</h2>
+
+  <h3>1. The end-of-day inbox triage</h3>
+  <p>Every evening, your AI assistant reads the day's inbox, drafts replies to anything that needs one, creates HubSpot tasks for leads that came in cold, and posts a one-line summary to your Slack saying "you have 4 replies waiting for approval &mdash; here's the gist of each."</p>
+  <p>Tools: Gmail MCP + HubSpot MCP + Slack MCP. Build time: under an hour. Cost: whatever your AI assistant subscription is. Operator value: 30-60 min/day reclaimed.</p>
+
+  <h3>2. The monthly close packet</h3>
+  <p>On the 1st of every month, your assistant reads QuickBooks, pulls the prior month's P&amp;L, reconciles it against PayPal and Stripe settlements, flags anything that doesn't match, writes a plain-English narrative explaining what changed, and emails the packet to your accountant.</p>
+  <p>Tools: QuickBooks MCP + PayPal MCP + Gmail MCP. Build time: a couple hours. Operator value: 2-4 hours/month, plus a much cleaner handoff to your CPA.</p>
+
+  <h3>3. The cold-call follow-up loop</h3>
+  <p>Voice agent (Vapi) takes the inbound call, qualifies the lead, books the appointment. After the call ends, MCP triggers: HubSpot logs the new deal, GoHighLevel kicks off the follow-up sequence, Google Calendar holds the slot, and Gmail queues the confirmation email. Zero human touch from ring to confirmation.</p>
+  <p>Tools: Vapi + GoHighLevel MCP + Gmail MCP + Calendar MCP. Build time: a long Saturday. Operator value: every missed call after hours captured cleanly.</p>
+
+  <div class="callout">
+    <strong>Operator Filter take:</strong> I've watched a hundred "AI is going to change everything" announcements over the years. Most of them didn't. MCP is the one I'd actually bet on, because it's solving a real plumbing problem: the integrations between apps were always the bottleneck. MCP isn't sexy. It's just where the money lane opens.
+  </div>
+
+  <h2>How to start using MCP</h2>
+  <ol>
+    <li><strong>Use an AI assistant that supports MCP.</strong> Claude (Anthropic), ChatGPT (with custom GPT integrations), Cursor, and most major coding assistants now do.</li>
+    <li><strong>Pick one app to connect first.</strong> Gmail or QuickBooks are the highest-leverage starts. Both have official MCP servers.</li>
+    <li><strong>Connect it through your assistant's settings.</strong> Most assistants have a "connect an app" or "add a connector" option. Authenticate. Done.</li>
+    <li><strong>Run one workflow.</strong> Don't try to automate everything on day one. Pick the most painful repetitive task in your business and build that single workflow. Iterate from there.</li>
+  </ol>
+
+  <h2>What MCP is not</h2>
+  <p><strong>MCP is not magic.</strong> It is a connection standard. The AI still needs to know what to do once connected. Garbage prompts produce garbage workflows.</p>
+  <p><strong>MCP is not free agency.</strong> The AI doesn't decide on its own to send 500 emails. It does what you tell it. Keep human-in-the-loop on anything that touches money, customers, or public posts.</p>
+  <p><strong>MCP is not finished.</strong> The standard is evolving fast. Tools that support it today might support it differently in six months. Build patterns, not custom code that breaks when an MCP server updates.</p>
+
+  <div class="cta">
+    <h3>The full blueprint with my live MCP stack</h3>
+    <p>I publish a new operator-flavored AI blueprint every Saturday. The next one is a complete MCP-driven workflow for a service business. Subscribers get it first.</p>
+    <form class="cta-form" action="https://codykeeganai.substack.com/subscribe" method="get" target="_blank">
+      <input type="email" name="email" class="cta-input" placeholder="your@email.com" required />
+      <button type="submit" class="cta-btn">Send me the blueprints &rarr;</button>
+    </form>
+  </div>
+
+  <h2>Related reading</h2>
+  <ul>
+    <li><a href="/glossary/">AI glossary for operators</a> &mdash; plain-English definitions of MCP, voice agent, multiagent orchestration, and the other terms you'll hear this year</li>
+    <li><a href="/blueprints/">All 5 free blueprints</a> &mdash; the operator-grade stacks I run live in my own businesses</li>
+    <li><a href="/today/">What's worth watching today</a> &mdash; daily AI news with the operator angle, updated every morning</li>
+  </ul>
+
+  <p class="updated">Last updated May 27, 2026 &middot; &copy; Darkhorse Traders LLC</p>
+</div>
+</body>
+</html>

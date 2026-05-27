@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cody Keegan — Today's AI Workflows</title>
+    <link>https://codykeegan.ai/today/</link>
+    <atom:link href="https://codykeegan.ai/today/feed.xml" rel="self" type="application/rss+xml" />
+    <description>The AI workflows worth watching today. Fresh news, the operator angle, and the build that comes next. Updated daily at 5:30 AM Tucson time.</description>
+    <language>en-us</language>
+    <copyright>Darkhorse Traders LLC</copyright>
+    <managingEditor>terminal@codykeegan.ai (Cody Keegan)</managingEditor>
+    <webMaster>terminal@codykeegan.ai (Cody Keegan)</webMaster>
+    <lastBuildDate>Tue, 27 May 2026 12:30:00 +0000</lastBuildDate>
+    <ttl>240</ttl>
+    <item>
+      <title>Today on codykeegan.ai/today/</title>
+      <link>https://codykeegan.ai/today/</link>
+      <guid isPermaLink="false">codykeegan-ai-today-2026-05-27</guid>
+      <pubDate>Tue, 27 May 2026 12:30:00 +0000</pubDate>
+      <description>The daily AI workflows page is updated every morning at 5:30 AM Tucson time. Visit the page to see today's edition.</description>
+    </item>
+  </channel>
+</rss>

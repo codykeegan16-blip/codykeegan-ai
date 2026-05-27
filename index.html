@@ -380,7 +380,105 @@
   .cookie-btn:hover { background: #F2EEE5; }
   .cookie-btn-secondary { background: transparent; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.3); }
   .cookie-btn-secondary:hover { border-color: #FFFFFF; }
+
+  /* === Upgrade additions === */
+  .today-strip {
+    display:flex; align-items:center; gap:12px;
+    padding: 12px 18px; margin: 0 auto 24px;
+    background: var(--bg-elev); border: 1px solid var(--rule); border-radius: 10px;
+    text-decoration:none; color: var(--ink); max-width: 580px;
+    font-size: 13px; transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .today-strip:hover { background: var(--bg-hover); border-color: var(--accent); }
+  .today-pulse {
+    display:inline-block; width:8px; height:8px; border-radius:50%;
+    background: var(--accent); animation: pulse 1.8s infinite; flex-shrink:0;
+  }
+  .today-label { flex:1; color: var(--ink-soft); }
+  .today-arrow { color: var(--ink-faint); font-size: 16px; }
+  .today-strip:hover .today-arrow { color: var(--accent); }
+
+  .surface-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    margin: 0 auto 40px; max-width: 580px;
+  }
+  @media (max-width: 540px) { .surface-row { grid-template-columns: 1fr; } }
+  .surface-card {
+    background: var(--bg-elev); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 16px 14px; text-decoration: none; color: var(--ink);
+    text-align: center; transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .surface-card:hover { border-color: var(--accent); background: var(--bg-hover); }
+  .surface-card .surface-title {
+    font-family: 'Instrument Serif', serif; font-size: 18px; line-height: 1.2;
+    margin-bottom: 4px; color: var(--ink);
+  }
+  .surface-card .surface-sub { font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
+
+  .day-sub {
+    display:block; font-size: 10px; color: var(--ink-muted);
+    letter-spacing: 0.16em; margin-top: 6px; text-transform: uppercase; font-weight: 600;
+  }
+
+  .card-link {
+    margin-top: 6px;
+  }
+  .card-link a {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; text-decoration: none;
+  }
+  .card-link a:hover { text-decoration: underline; }
+
+  .filter-explainer {
+    background: var(--bg-elev); border: 1px solid var(--rule); border-radius: 12px;
+    padding: 24px 26px; margin: 0 0 48px;
+  }
+  .filter-explainer .section-label { margin-bottom: 12px; padding-bottom: 0; border-bottom: none; }
+  .filter-explainer .filter-blurb { color: var(--ink-soft); font-size: 14px; line-height: 1.6; margin: 0; }
+  .filter-explainer .filter-blurb a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .filter-explainer .filter-blurb a:hover { text-decoration: underline; }
+
+  .testimonials { margin-bottom: 48px; }
+  .testimonial-placeholder {
+    background: var(--bg-elev); border: 1px dashed var(--rule); border-radius: 10px;
+    padding: 18px 20px; font-size: 13px; color: var(--ink-muted); line-height: 1.6;
+  }
+  .testimonial { background: var(--bg-elev); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; margin-bottom: 10px; }
+  .testimonial .quote { font-family: 'Instrument Serif', serif; font-size: 18px; line-height: 1.45; font-style: italic; color: var(--ink); margin-bottom: 8px; }
+  .testimonial .cite { font-size: 12px; color: var(--ink-muted); }
+
+  .faq-section { margin: 48px 0 32px; }
+  .faq-item {
+    border-bottom: 1px solid var(--rule-soft);
+    padding: 14px 6px;
+  }
+  .faq-item:first-of-type { border-top: 1px solid var(--rule); }
+  .faq-item summary {
+    font-weight: 600; font-size: 16px; color: var(--ink); cursor: pointer;
+    list-style: none; padding-right: 28px; position: relative;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 6px; top: -2px;
+    color: var(--accent); font-size: 22px; font-weight: 400;
+    transition: transform 0.2s ease;
+  }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item p { margin-top: 10px; color: var(--ink-soft); font-size: 14px; line-height: 1.6; }
+  .faq-item p a { color: var(--accent); }
+
+  .footer-capture {
+    background: var(--bg-elev); border: 1px solid var(--rule); border-radius: 12px;
+    padding: 24px 26px; margin: 32px 0 40px;
+  }
+  .footer-capture .section-label { margin-bottom: 8px; padding-bottom: 0; border-bottom: none; }
+  .footer-capture-intro { color: var(--ink-soft); font-size: 14px; margin-bottom: 14px; }
+  .capture-form-small { display: flex; gap: 8px; flex-wrap: wrap; }
+  .capture-form-small .capture-input { flex: 1; min-width: 200px; padding: 12px 14px; font-size: 14px; }
+  .capture-form-small .capture-btn { padding: 12px 18px; font-size: 14px; }
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://codykeegan.ai/#person","name":"Cody Keegan","url":"https://codykeegan.ai","image":"https://codykeegan.ai/avatar.jpg","jobTitle":"Operator + AI Workflow Builder","description":"Runs three businesses on AI. Shows operators where the money actually is.","sameAs":["https://tiktok.com/@codykeegan.ai","https://instagram.com/codykeegan.ai","https://x.com/codykeeganai","https://www.linkedin.com/in/cody-keegan-a17b6137/","https://www.youtube.com/@codykeeganai","https://www.threads.net/@ckeegan60"]},{"@type":"WebSite","@id":"https://codykeegan.ai/#website","url":"https://codykeegan.ai","name":"Cody Keegan — Crazy Ways AI Gets Money","publisher":{"@id":"https://codykeegan.ai/#person"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.google.com/search?q=site%3Acodykeegan.ai+{search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need to be technical to use what you teach?","acceptedAnswer":{"@type":"Answer","text":"No. Every blueprint on this site is built for operators who run businesses, not write code. If you can connect tools through point-and-click interfaces, you can build everything I publish."}},{"@type":"Question","name":"How much does it cost to start?","acceptedAnswer":{"@type":"Answer","text":"The newsletter is free. The 5 starter blueprints are free. The actual tool stack I use across my three businesses runs about $144 a month and is detailed in the STACK blueprint. Whether you use my affiliate links or sign up directly, the cost is the same."}},{"@type":"Question","name":"Is this for me if I run a service business?","acceptedAnswer":{"@type":"Answer","text":"Yes, especially. Service businesses (contractors, med spas, real estate, agencies, events) are where AI workflows print the most money right now. Capturing missed calls, qualifying leads, automating follow-up — that is the money lane."}},{"@type":"Question","name":"What is the catch?","acceptedAnswer":{"@type":"Answer","text":"Some links on the site are affiliate links — if you sign up for a tool through my link, I earn a commission at no extra cost to you. Doesn't change my recommendations and only applies to tools that pass the Operator Filter. Full disclosure is on the disclosure page."}},{"@type":"Question","name":"When does the Beta Room open?","acceptedAnswer":{"@type":"Answer","text":"The Beta Room — an operators-only community at $97 a month founding rate — opens when the newsletter crosses 500 subscribers. Subscribers get the announcement first. Founding members lock in the $97 rate for life."}}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Today on codykeegan.ai" href="/today/feed.xml" />
 </head>
 <body>
 <div class="container">
@@ -395,8 +493,8 @@
   </div>
 
   <header class="hero">
-    <h1>The AI playbook from inside three real businesses.</h1>
-    <p class="subhead"><strong>5 blueprints today. New one every week. Free.</strong><br>Tech people explain how AI works. I show where the money is.</p>
+    <h1>Tech people explain how AI works.<br>I show where the money is.</h1>
+    <p class="subhead"><strong>5 blueprints today. New one every week. Free.</strong><br>The AI playbook from inside three real businesses I actually run.</p>
   </header>
 
   <div class="capture">
@@ -416,9 +514,31 @@
     Sales since 2003<span class="dot">·</span>AARP Must Have Product 2019<span class="dot">·</span>Hundreds of events served<span class="dot">·</span>Six figures on Amazon, Etsy, eBay<span class="dot">·</span>Runs three businesses on AI
   </p>
 
+  <a href="/today/" class="today-strip" id="today-strip">
+    <span class="today-pulse"></span>
+    <span class="today-label" id="today-strip-text">Today on the site &mdash; updated this morning</span>
+    <span class="today-arrow">&rarr;</span>
+  </a>
+
+  <div class="surface-row">
+    <a href="https://tiktok.com/@codykeegan.ai" class="surface-card" target="_blank" rel="noopener">
+      <div class="surface-title">The Daily Show</div>
+      <div class="surface-sub">New AI workflow every weekday</div>
+    </a>
+    <a href="#issues" class="surface-card">
+      <div class="surface-title">5 Free Blueprints</div>
+      <div class="surface-sub">The systems behind real revenue</div>
+    </a>
+    <a href="/audit/" class="surface-card">
+      <div class="surface-title">$197 AI Audit</div>
+      <div class="surface-sub">90 minutes &middot; your stack, my eyes</div>
+    </a>
+  </div>
+
   <div class="day-ticker" id="day-ticker">
     <span class="pulse"></span>
     <span id="day-text">Loading today's video&hellip;</span>
+    <div class="day-sub">Currently building: The Beta Room &middot; $97/mo founding rate &middot; opens at 500 subscribers</div>
   </div>
 
   <div class="paid-banner">
@@ -429,54 +549,72 @@
     <span>What's inside</span>
     
   </div>
-  <p class="issues-intro">Five AI Business Blueprints. <strong>One email gets you all of them — plus the new one every Saturday.</strong> Or click any one below for instant access.</p>
-  <div class="issues">
-    <button type="button" class="issue" onclick="openGate('./claude-template.pdf','Brand Bible Template','CLAUDE')">
+  <p class="issues-intro">Five AI Business Blueprints. <strong>One email gets you all of them &mdash; plus the new one every Saturday.</strong> New here? Start with <a href="#issue-system">03 SYSTEM</a> &mdash; it ties everything together.</p>
+  <div class="issues" id="issues">
+    <button type="button" class="issue" onclick="openGate('./restaurants-gone-wild.pdf','Restaurants Gone Wild','WILD')">
       <div class="num">01</div>
       <div class="body">
-        <div class="trigger">CLAUDE</div>
-        <div class="title">Brand Bible Template</div>
-        <div class="desc">The file that makes AI sound like you, not generic slop.</div>
-      </div>
-      <div class="arrow">&rarr;</div>
-    </button>
-    <button type="button" class="issue" onclick="openGate('./steal-prompt.pdf','Competitor Review Mining','STEAL')">
-      <div class="num">02</div>
-      <div class="body">
-        <div class="trigger">STEAL</div>
-        <div class="title">Competitor Review Mining</div>
-        <div class="desc">Pull 5 sales-script patterns from 50 reviews in 4 minutes.</div>
+        <div class="trigger">WILD</div>
+        <div class="title">Restaurants Gone Wild</div>
+        <div class="desc">The faceless AI content empire model, applied to a new vertical.</div>
+        <div class="card-link"><a href="/blueprints/wild.html">Read the article &rarr;</a></div>
       </div>
       <div class="arrow">&rarr;</div>
     </button>
     <button type="button" class="issue" onclick="openGate('./stack.pdf','The $144 Tool Stack','STACK')">
-      <div class="num">03</div>
+      <div class="num">02</div>
       <div class="body">
         <div class="trigger">STACK</div>
         <div class="title">The $144 Tool Stack</div>
         <div class="desc">Every dollar of the AI stack that runs three businesses.</div>
+        <div class="card-link"><a href="/blueprints/stack.html">Read the article &rarr;</a></div>
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('./system.pdf','The Full Architecture','SYSTEM')">
-      <div class="num">04</div>
+    <button type="button" class="issue" id="issue-system" onclick="openGate('./system.pdf','The Full Architecture','SYSTEM')">
+      <div class="num">03</div>
       <div class="body">
         <div class="trigger">SYSTEM</div>
         <div class="title">The Full Architecture</div>
-        <div class="desc">How a comment becomes a closed deal without me touching it.</div>
+        <div class="desc">How a comment becomes a closed deal without me touching it. <strong>Start here if you are new.</strong></div>
+        <div class="card-link"><a href="/blueprints/system.html">Read the article &rarr;</a></div>
       </div>
       <div class="arrow">&rarr;</div>
     </button>
-    <button type="button" class="issue" onclick="openGate('./restaurants-gone-wild.pdf','Restaurants Gone Wild','WILD')">
+    <button type="button" class="issue" onclick="openGate('./steal-prompt.pdf','Competitor Review Mining','STEAL')">
+      <div class="num">04</div>
+      <div class="body">
+        <div class="trigger">STEAL</div>
+        <div class="title">Competitor Review Mining</div>
+        <div class="desc">Pull 5 sales-script patterns from 50 reviews in 4 minutes.</div>
+        <div class="card-link"><a href="/blueprints/steal.html">Read the article &rarr;</a></div>
+      </div>
+      <div class="arrow">&rarr;</div>
+    </button>
+    <button type="button" class="issue" onclick="openGate('./claude-template.pdf','Brand Bible Template','CLAUDE')">
       <div class="num">05</div>
       <div class="body">
-        <div class="trigger">WILD</div>
-        <div class="title">Restaurants Gone Wild</div>
-        <div class="desc">The faceless AI content empire model applied to a new vertical.</div>
+        <div class="trigger">CLAUDE</div>
+        <div class="title">Brand Bible Template</div>
+        <div class="desc">The file that makes AI sound like you, not generic slop.</div>
+        <div class="card-link"><a href="/blueprints/claude.html">Read the article &rarr;</a></div>
       </div>
       <div class="arrow">&rarr;</div>
     </button>
   </div>
+
+  <section class="filter-explainer">
+    <div class="section-label">The Operator Filter</div>
+    <p class="filter-blurb">Every tool on this site has to pass the Operator Filter &mdash; used live inside one of my three businesses (Celebrate in 360, Revenue Reclaimer, my real estate operation), or personally verified by direct testing. Not theory. Not demos. Real money. <a href="/about/">More on the Filter &rarr;</a></p>
+  </section>
+
+  <section class="testimonials" aria-label="Operator feedback">
+    <div class="section-label">What operators are saying</div>
+    <div class="testimonial-grid">
+      <!-- TODO: paste real quotes here once collected. Each block: <div class="testimonial"><p class="quote">"..."</p><p class="cite">— Name, Business</p></div> -->
+      <div class="testimonial-placeholder">Testimonials drop here as operators send them in. Got value from a blueprint? Email <a href="mailto:terminal@codykeegan.ai">terminal@codykeegan.ai</a> and I'll add yours.</div>
+    </div>
+  </section>
 
   <div class="section-label">The Show</div>
   <div class="stack">
@@ -538,6 +676,39 @@
     </a>
   </div>
 
+  <section class="faq-section">
+    <div class="section-label">Common questions</div>
+    <details class="faq-item">
+      <summary>Do I need to be technical?</summary>
+      <p>No. Every blueprint is built for operators who run businesses, not write code. If you can connect tools through point-and-click interfaces, you can build everything I publish.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How much does it cost to start?</summary>
+      <p>The newsletter is free. The 5 starter blueprints are free. The actual tool stack I use across my three businesses runs about $144 a month and is detailed in the STACK blueprint. Whether you use my affiliate links or sign up directly, the cost to you is the same.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is this for me if I run a service business?</summary>
+      <p>Yes, especially. Service businesses (contractors, med spas, real estate, agencies, events) are where AI workflows print the most money right now. Capturing missed calls, qualifying leads, automating follow-up &mdash; that is the money lane.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What is the catch?</summary>
+      <p>Some links on this site are affiliate links &mdash; if you sign up for a tool through my link, I earn a commission at no extra cost to you. Doesn't change my recommendations and only applies to tools that pass the Operator Filter. <a href="/disclosure.html">Full disclosure here</a>.</p>
+    </details>
+    <details class="faq-item">
+      <summary>When does the Beta Room open?</summary>
+      <p>The Beta Room &mdash; an operators-only community at $97 a month founding rate &mdash; opens when the newsletter crosses 500 subscribers. Subscribers get the announcement first. Founding members lock the $97 rate.</p>
+    </details>
+  </section>
+
+  <section class="footer-capture">
+    <div class="section-label">One more thing</div>
+    <p class="footer-capture-intro">The next blueprint drops Saturday. Get on the list.</p>
+    <form class="capture-form-small" action="https://codykeeganai.substack.com/subscribe" method="get" target="_blank">
+      <input type="email" name="email" class="capture-input" placeholder="your@email.com" required aria-label="Email address" />
+      <button type="submit" class="capture-btn">Subscribe &rarr;</button>
+    </form>
+  </section>
+
   <footer>
     <div>Built in Tucson. Lived on commission since 2003.</div>
     <div class="show-line">A Darkhorse Traders LLC operation. The daily show: Crazy Ways AI Gets Money.</div>
@@ -598,6 +769,24 @@
       text.innerHTML = '30 days complete &nbsp;&middot;&nbsp; Month 2 incoming';
       ticker.classList.add('visible');
     }
+  })();
+
+  // Live /today/ strip — pull the current headline from the daily page
+  (function() {
+    var stripText = document.getElementById('today-strip-text');
+    if (!stripText) return;
+    fetch('/today/', { cache: 'no-store' })
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var m = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+        if (m) {
+          var headline = m[1].replace(/<[^>]+>/g, '').trim();
+          if (headline && headline.length > 4) {
+            stripText.textContent = 'Today: ' + headline;
+          }
+        }
+      })
+      .catch(function() {});
   })();
 
   document.getElementById('capture-form').addEventListener('submit', function() {
