@@ -442,6 +442,20 @@
   .cookie-btn-secondary { background: transparent; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.3); }
   .cookie-btn-secondary:hover { border-color: #FFFFFF; }
 
+  /* === Building announcement line === */
+  .building-line {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; margin: 0 auto 28px;
+    max-width: 580px; font-size: 12px; color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+  .building-line strong { color: var(--ink); font-weight: 600; }
+  .building-dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+    animation: pulse 2.4s infinite;
+  }
+
   /* === Upgrade additions === */
   .today-strip {
     display:flex; align-items:center; gap:12px;
@@ -475,11 +489,6 @@
     margin-bottom: 4px; color: var(--ink);
   }
   .surface-card .surface-sub { font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
-
-  .day-sub {
-    display:block; font-size: 10px; color: var(--ink-muted);
-    letter-spacing: 0.16em; margin-top: 6px; text-transform: uppercase; font-weight: 600;
-  }
 
   .card-link {
     margin-top: 6px;
@@ -581,6 +590,11 @@
     <span class="today-arrow">&rarr;</span>
   </a>
 
+  <div class="building-line">
+    <span class="building-dot"></span>
+    <span>Currently building: <strong>The Beta Room</strong> &middot; $97/mo founding rate &middot; opens at 500 subscribers</span>
+  </div>
+
   <div class="surface-row">
     <a href="https://tiktok.com/@codykeegan.ai" class="surface-card" target="_blank" rel="noopener">
       <div class="surface-title">The Daily Show</div>
@@ -596,11 +610,7 @@
     </a>
   </div>
 
-  <div class="day-ticker" id="day-ticker">
-    <span class="pulse"></span>
-    <span id="day-text">Loading today's video&hellip;</span>
-    <div class="day-sub">Currently building: The Beta Room &middot; $97/mo founding rate &middot; opens at 500 subscribers</div>
-  </div>
+  
 
   <div class="paid-banner">
     <strong>Heads up — paid links ahead.</strong> Some of the tools mentioned in these blueprints are affiliate partners. I earn a commission if you sign up. Doesn't change my recommendations. <a href="./disclosure.html">Full disclosure</a>.
@@ -809,28 +819,6 @@
 </div>
 
 <script>
-  (function() {
-    var triggers = ['STEAL','PREDICT','COLD','CALLREVIEW','DESTROY','SCAN','REVERSE','JOBS','DOSSIER','CLONE','SIGNAL','PROPOSAL','NEWS','SHADOW','FILTER','BIDWAR','VULTURE','DEPART','ONEDAY','EVERYWHERE','MACHINE','INTEL','HIDDEN','PASSIVESALES','BODEYOGI','NUMBER','STACK','SYSTEM','READY','MONTH2'];
-    var launch = new Date(2026, 4, 14);
-    launch.setHours(0,0,0,0);
-    var today = new Date();
-    today.setHours(0,0,0,0);
-    var dayNum = Math.floor((today - launch) / 86400000) + 1;
-    var ticker = document.getElementById('day-ticker');
-    var text = document.getElementById('day-text');
-    if (dayNum >= 1 && dayNum <= 30) {
-      var word = triggers[dayNum - 1];
-      text.innerHTML = 'Day ' + dayNum + ' of 30 &nbsp;&middot;&nbsp; Today\'s word: ' + word;
-      ticker.classList.add('visible');
-    } else if (dayNum < 1) {
-      var days = Math.abs(dayNum - 1);
-      text.innerHTML = 'Show launches in ' + days + ' day' + (days === 1 ? '' : 's');
-      ticker.classList.add('visible');
-    } else {
-      text.innerHTML = '30 days complete &nbsp;&middot;&nbsp; Month 2 incoming';
-      ticker.classList.add('visible');
-    }
-  })();
 
   // Live /today/ strip — pull the current headline from the daily page
   (function() {
