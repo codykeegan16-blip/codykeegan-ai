@@ -11,6 +11,67 @@
 <meta property="og:url" content="https://codykeegan.ai" />
 <meta name="twitter:card" content="summary_large_image" />
 <title>Cody Keegan — I Show Where the Money Is</title>
+<script>
+  // Defensive gate handler — defined in <head> so it's available regardless of later parse issues.
+  // 2026-05-26: fix for live-site bug where openGate was undefined and the 5 blueprint cards on
+  // the homepage did nothing when clicked.
+  window.openGate = function(pdfUrl, magnetTitle, trigger) {
+    try {
+      var gt = document.getElementById('gate-title');
+      var gp = document.getElementById('gate-pdf');
+      var gtr = document.getElementById('gate-trigger');
+      var gfw = document.getElementById('gate-form-wrap');
+      var gs = document.getElementById('gate-success');
+      var gf = document.getElementById('gate-form');
+      var go = document.getElementById('gate-overlay');
+      var ge = document.getElementById('gate-email');
+      if (!go || !gt || !gp || !gtr || !gfw || !gs || !gf) {
+        // Modal not on page — fall back to opening the PDF directly.
+        window.open(pdfUrl, '_blank', 'noopener');
+        return;
+      }
+      gt.textContent = 'Get ' + magnetTitle;
+      gp.value = pdfUrl;
+      gtr.value = trigger;
+      gfw.style.display = 'block';
+      gs.style.display = 'none';
+      gf.reset();
+      go.classList.add('visible');
+      setTimeout(function(){ if (ge) ge.focus(); }, 100);
+    } catch (err) {
+      window.open(pdfUrl, '_blank', 'noopener');
+    }
+  };
+  window.closeGate = function() {
+    var go = document.getElementById('gate-overlay');
+    if (go) go.classList.remove('visible');
+  };
+  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') window.closeGate(); });
+    var gf = document.getElementById('gate-form');
+    if (gf && !gf.dataset.bound) {
+      gf.dataset.bound = '1';
+      gf.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var emailEl = document.getElementById('gate-email');
+        var pdfEl = document.getElementById('gate-pdf');
+        var trigEl = document.getElementById('gate-trigger');
+        var email = emailEl ? emailEl.value.trim() : '';
+        var targetUrl = pdfEl ? pdfEl.value : '';
+        var trigger = trigEl ? trigEl.value : '';
+        if (!email || email.indexOf('@') < 1) return;
+        var subUrl = 'https://codykeeganai.substack.com/subscribe?email=' + encodeURIComponent(email) + '&utm_source=codykeegan_ai&utm_medium=gate&utm_campaign=' + encodeURIComponent(trigger);
+        window.open(subUrl, '_blank');
+        var gfw = document.getElementById('gate-form-wrap');
+        var gs = document.getElementById('gate-success');
+        if (gfw) gfw.style.display = 'none';
+        if (gs) gs.style.display = 'block';
+        setTimeout(function() { window.location.href = targetUrl; }, 1200);
+      });
+    }
+  });
+</script>
+
 <link rel="icon" type="image/jpeg" href="./avatar.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
