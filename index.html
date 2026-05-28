@@ -519,11 +519,30 @@
   .capture-form-small .capture-input { flex: 1; min-width: 200px; padding: 12px 14px; font-size: 14px; }
   .capture-form-small .capture-btn { padding: 12px 18px; font-size: 14px; }
 </style>
-<!-- Google tag (gtag.js) -->
+<!-- Google Analytics 4 (G-ERES95DLH5) with Consent Mode v2 — respects /privacy.html cookie banner -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERES95DLH5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // Default: deny all storage until user accepts via cookie banner
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'wait_for_update': 500
+  });
+  // If user accepted in a prior session, restore granted state on this page load
+  try {
+    if (localStorage.getItem('ck_cookie_choice') === 'accept') {
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
+      });
+    }
+  } catch(e) {}
   gtag('js', new Date());
   gtag('config', 'G-ERES95DLH5');
 </script>
@@ -871,6 +890,24 @@
     } catch(e) { document.getElementById('cookie-bar').classList.add('visible'); }
     function setChoice(choice) {
       try { localStorage.setItem('ck_cookie_choice', choice); } catch(e) {}
+      // Update GA consent based on user choice
+      if (typeof gtag === 'function') {
+        if (choice === 'accept') {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'analytics_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted'
+          });
+        } else {
+          gtag('consent', 'update', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+          });
+        }
+      }
       document.getElementById('cookie-bar').classList.remove('visible');
     }
     var a = document.getElementById('cookie-accept');
